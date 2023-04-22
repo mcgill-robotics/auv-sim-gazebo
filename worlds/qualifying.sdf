@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <world name="quali">
+
+        <physics name="1ms" type="ode">
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1.0</real_time_factor>
+        </physics>
+        <plugin
+            filename="ignition-gazebo-physics-system"
+            name="ignition::gazebo::systems::Physics">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-user-commands-system"
+            name="ignition::gazebo::systems::UserCommands">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-scene-broadcaster-system"
+            name="ignition::gazebo::systems::SceneBroadcaster">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-contact-system"
+            name="ignition::gazebo::systems::Contact">
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-buoyancy-system"
+            name="ignition::gazebo::systems::Buoyancy">
+            <uniform_fluid_density>997</uniform_fluid_density>
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-particle-emitter2-system"
+            name="ignition::gazebo::systems::ParticleEmitter2">
+        </plugin>
+
+
+        <light type="directional" name="sun">
+            <cast_shadows>true</cast_shadows>
+            <pose>0 0 10 0 0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.9</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+        </light>
+
+
+        <include>
+            <uri>../assets/common/simple_pool/simple_pool.sdf</uri>
+            <pose>0 0 0 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>../assets/quali/gate/gate.sdf</uri>
+            <pose>-1 0 -1 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>../assets/quali/pole/pole.sdf</uri>
+            <pose>0 10 -5 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>../assets/robots/mbari_tethys/clarke.sdf</uri>
+            <pose>0.389 -3 -2.5 1.5708 1.5708 0</pose>
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster0_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster1_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster2_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster3_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster4_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster5_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster6_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster7_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+        </include>
+
+    </world>
+</sdf>
