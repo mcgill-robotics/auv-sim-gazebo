@@ -1,0 +1,3 @@
+<launch>
+    <node name="ign_gazebo_qualifying" pkg="auv-sim" type="qualifying.cpp" output="screen"></node>
+</launch>
