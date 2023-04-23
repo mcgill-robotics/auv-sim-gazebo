@@ -6,6 +6,13 @@
     <!-- Body -->
     <link name="base_link">
 
+      <!-- For more information about how to calculate the inertia values: 
+      https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
+      <!-- Assumptions for the inertia calculation:
+            - m = ? 
+            - r = ? 
+            - h = ? 
+      -->
       <inertial>
         <mass>147.8671</mass>
         <inertia>
@@ -37,13 +44,12 @@
       </visual>
     </link>
 
-    <!--Thruster0 -->
+    <!-- Thruster0 -->
     <link name="thruster0">
-
+      <!-- Forward = negative force -->
       <pose>0.2 -0.112 0 0 0 3.14159</pose>
 
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -75,13 +81,12 @@
 
     </link>
 
-    <!--Thruster1 -->
+    <!-- Thruster1 -->
     <link name="thruster1">  
-
+      <!-- Forward = positive force -->
       <pose>0.2 0.112 0 0 0 3.14159</pose>
     
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -113,13 +118,12 @@
 
       </link>
 
-    <!--Thruster2 -->
+    <!-- Thruster2 -->
     <link name="thruster2">
-
-      <pose>0.2 0 -0.4475 -1.5708 0 0</pose>
+      <!-- Forward = negative force -->
+      <pose>0.2 0 -0.447 -1.5708 0 0</pose>
     
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -152,13 +156,12 @@
     </link>
 
 
-    <!--Thruster3 -->
+    <!-- Thruster3 -->
     <link name="thruster3">      
-      
+      <!-- Forward = positive force -->
       <pose>0.2 0 0.4475 1.5708 0 0</pose>
       
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -191,13 +194,12 @@
     </link>
 
 
-    <!--Thruster4 -->
+    <!-- Thruster4 -->
     <link name="thruster4">
-            
+      <!-- Forward = positive force -->      
       <pose>0.2 -0.112 0.4475 0 -1.5708 0</pose>
       
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -232,11 +234,10 @@
 
     <!--Thruster5 -->
     <link name="thruster5">
-      
+      <!-- Forward = positive force -->
       <pose>0.2 0.112 0.4475 0 -1.5708 0</pose>
 
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -270,11 +271,10 @@
 
     <!--Thruster6 -->
     <link name="thruster6">
-      
+      <!-- Forward = positive force -->
       <pose>0.2 0.112 -0.4475 0 -1.5708 0</pose>
 
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -309,11 +309,10 @@
 
     <!--Thruster7 -->
     <link name="thruster7">      
-      
+      <!-- Forward = positive force -->
       <pose>0.2 -0.112 -0.4475 0 -1.5708 0</pose>
 
       <inertial>
-        <pose>0 0 0 0 0 0</pose>
         <mass>0.09</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
@@ -345,12 +344,14 @@
 
     </link>
 
+    <!-- Joints -->
+
     <joint name="thruster0_joint" type="fixed">
       <pose>0 0 0 0 0 0</pose>
       <parent>base_link</parent>
       <child>thruster0</child>
       <axis>
-        <xyz>1 0 0</xyz>
+        <xyz>-1 0 0</xyz>
         <limit>
           <lower>-1e+12</lower>
           <upper>1e+12</upper>
@@ -472,7 +473,7 @@
         <joint_name>thruster0_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -481,7 +482,7 @@
         <joint_name>thruster1_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -490,7 +491,7 @@
         <joint_name>thruster2_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -499,7 +500,7 @@
         <joint_name>thruster3_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -508,7 +509,7 @@
         <joint_name>thruster4_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -517,7 +518,7 @@
         <joint_name>thruster5_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -526,7 +527,7 @@
         <joint_name>thruster6_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     <plugin
         filename="ignition-gazebo-thruster-system"
@@ -535,7 +536,7 @@
         <joint_name>thruster7_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.05</propeller_diameter>
     </plugin>
     
     <plugin
