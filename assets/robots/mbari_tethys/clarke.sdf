@@ -9,9 +9,9 @@
       <!-- For more information about how to calculate the inertia values: 
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
       <!-- Assumptions for the inertia calculation:
-            - m = ? 
-            - r = ? 
-            - h = ? 
+            - m = 30 => this is wrong
+            - r = 0.2 => this is wrong
+            - h = 0.778 
       -->
       <inertial>
         <mass>147.8671</mass>
