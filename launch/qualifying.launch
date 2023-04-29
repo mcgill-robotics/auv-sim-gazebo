@@ -1,0 +1,10 @@
+<launch>
+    <node name="thruster0" pkg="simulator" type="quali.py" output="screen"></node>
+    <node name="test_bridge" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/test@std_msgs/String@ignition.msgs.StringMsg">
+    </node>
+    <node
+	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
+	    args="$(find auv-sim)/worlds/qualifying.sdf">
+    </node>
+</launch>
