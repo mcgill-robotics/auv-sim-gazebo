@@ -1,0 +1,267 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <world name="quali">
+
+        <physics name="1ms" type="ode">
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1.0</real_time_factor>
+        </physics>
+        <plugin
+            filename="ignition-gazebo-physics-system"
+            name="ignition::gazebo::systems::Physics">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-user-commands-system"
+            name="ignition::gazebo::systems::UserCommands">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-scene-broadcaster-system"
+            name="ignition::gazebo::systems::SceneBroadcaster">
+        </plugin>
+        <plugin
+            filename="ignition-gazebo-contact-system"
+            name="ignition::gazebo::systems::Contact">
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-buoyancy-system"
+            name="ignition::gazebo::systems::Buoyancy">
+            <uniform_fluid_density>997</uniform_fluid_density>
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-particle-emitter2-system"
+            name="ignition::gazebo::systems::ParticleEmitter2">
+        </plugin>
+
+        <plugin
+            filename="ignition-gazebo-scene-broadcaster-system"
+            name="ignition::gazebo::systems::SceneBroadcaster">
+        </plugin>
+
+        <scene>
+            <ambient>1.0 1.0 1.0</ambient>
+            <background>0.8 0.8 0.8</background>
+            <grid>true</grid>
+        </scene>
+
+        <gui fullscreen="0">
+
+            <!-- 3D scene -->
+            <plugin filename="MinimalScene" name="3D View">
+                <ignition-gui>
+                    <title>3D View</title>
+                    <property type="bool" key="showTitleBar">false</property>
+                    <property type="string" key="state">docked</property>
+                </ignition-gui>
+
+                <engine>ogre2</engine>
+                <scene>scene</scene>
+                <ambient_light>0.4 0.4 0.4</ambient_light>
+                <background_color>0.8 0.8 0.8</background_color>
+                <camera_pose>-6 0 6 0 0.5 0</camera_pose>
+            </plugin>
+
+            <!-- Plugins that add functionality to the scene -->
+            <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
+                <ignition-gui>
+                    <property key="state" type="string">floating</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="showTitleBar" type="bool">false</property>
+                </ignition-gui>
+            </plugin>
+
+            <plugin filename="GzSceneManager" name="Scene Manager">
+                <ignition-gui>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
+                </ignition-gui>
+            </plugin>
+
+            <plugin filename="InteractiveViewControl" name="Interactive view control">
+                <ignition-gui>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
+                </ignition-gui>
+            </plugin>
+
+            <plugin filename="CameraTracking" name="Camera Tracking">
+                <ignition-gui>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
+                </ignition-gui>
+            </plugin>
+
+            <!-- World control -->
+            <plugin filename="WorldControl" name="World control">
+                <ignition-gui>
+                    <title>World control</title>
+                    <property type="bool" key="showTitleBar">false</property>
+                    <property type="bool" key="resizable">false</property>
+                    <property type="double" key="height">72</property>
+                    <property type="double" key="width">121</property>
+                    <property type="double" key="z">1</property>
+                    <property type="string" key="state">floating</property>
+                    <anchors target="3D View">
+                        <line own="left" target="left"/>
+                        <line own="bottom" target="bottom"/>
+                    </anchors>
+                </ignition-gui>
+
+                <play_pause>true</play_pause>
+                <step>true</step>
+                <start_paused>true</start_paused>
+                <use_event>true</use_event>
+
+            </plugin>
+            
+            <!-- Image display (from cameras) -->
+            <plugin filename="ImageDisplay" name="Image Display">
+                <ignition-gui>
+                    <property key="state" type="string">docked</property>
+                </ignition-gui>
+            </plugin>
+
+            <!-- Component Inspector -->
+            <plugin filename="ComponentInspector" name="Component inspector">
+                <ignition-gui>
+                    <property type="string" key="state">docked</property>
+                </ignition-gui>
+            </plugin>
+
+            <!-- Entity tree -->
+            <plugin filename="EntityTree" name="Entity tree">
+                <ignition-gui>
+                    <property type="string" key="state">docked</property>
+                </ignition-gui>
+            </plugin>
+        </gui>
+
+
+        <light type="directional" name="sun">
+            <cast_shadows>true</cast_shadows>
+            <pose>0 0 10 0 0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.9</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+        </light>
+
+
+        <include>
+            <!-- NEED TO CHANGE THE PATH - sorry, I still nee to fix this -->
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/common/simple_pool/simple_pool.sdf</uri>
+            <pose>0 0 0 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/quali/gate/gate.sdf</uri>
+            <pose>-1 0 -1 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/quali/pole/pole.sdf</uri>
+            <pose>0 10 -5 0 0 0</pose>
+        </include>
+
+        <include>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/clarke.sdf</uri>
+            <pose>0.389 -3 -2.5 1.5708 1.5708 0</pose>
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster0_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster1_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster2_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster3_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster4_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster5_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster6_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+
+            <plugin
+                filename="ignition-gazebo-thruster-system"
+                name="ignition::gazebo::systems::Thruster">
+                <namespace>clarke</namespace>
+                <joint_name>thruster7_joint</joint_name> 
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.2</propeller_diameter>
+            </plugin>
+        </include>
+
+    </world>
+</sdf>
