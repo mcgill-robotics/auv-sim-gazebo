@@ -43,6 +43,7 @@
         </geometry>
       </visual>
 
+      <!-- IMU sensor -->
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
         <update_rate>7</update_rate> <!-- updates/second - might have to change -->
@@ -50,26 +51,93 @@
         <topic>imu</topic>
       </sensor>
 
+      <!-- Down camera -->
       <sensor name="down_camera" type="camera">
         <!-- note: the type used is RGB_INT8, but I believe there is an option to change
              if needed (something like <format>??????</format>)-->
         <horizontal_fov>1.047</horizontal_fov> <!-- not actual value -->
         <update_rate>30.0</update_rate>
         <visualize>true</visualize>
-        <topic>down_camera</topic>
+        <topic>down_cam</topic>
         <always_on>1</always_on>
         <image>
           <width>800</width>
           <height>800</height>
-          <!-- <format>R8G8B8</format> - still need to check the format -->
         </image>
         <!-- should we add noise? -->
+        <!--
         <noise>
           <type>gaussian</type>
           <mean>0.0</mean>
           <stddev>0.007</stddev>
         </noise>
+        -->
       </sensor>
+
+      <!-- Front cameras (stereo) 
+      <sensor type="multicamera" name="stereo_camera">
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+        <camera name="left">
+          <pose>0 -0.056 -0.447 0 0 3.14159</pose>
+          <horizontal_fov>1.047</horizontal_fov>
+          <update_rate>30.0</update_rate>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>RGB_INT8</format>
+          </image>
+          
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <camera name="right">
+          <pose>0 0.056 -0.447 0 0 3.14159</pose>
+          <horizontal_fov>1.047</horizontal_fov>
+          <update_rate>30.0</update_rate>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>RGB_INT8</format>
+          </image>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+      </sensor>
+      -->
+
+      <sensor type="camera" name="right">
+        <update_rate>30.0</update_rate>
+        <always_on>true</always_on>
+        <ignition_frame_id>camera_link_optical</ignition_frame_id>
+        <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
+        <topic>stereo_camera/right/image_raw</topic>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+            <width>800</width>
+            <height>800</height>
+        </image>
+      </sensor>
+      
+      <sensor type="camera" name="left">
+        <update_rate>30.0</update_rate>
+        <always_on>true</always_on>
+        <ignition_frame_id>camera_link_optical</ignition_frame_id>
+        <pose>0 -0.2 -0.447 3.13159 1.570795 0</pose>
+        <topic>stereo_camera/left/image_raw</topic>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+            <width>800</width>
+            <height>800</height>
+        </image>
+      </sensor>
+
     </link>
 
     <!-- Thruster0 -->
@@ -494,6 +562,17 @@
       </axis>
     </joint>
 
+    <plugin 
+        filename="libignition-gazebo-imu-system.so"
+        name="ignition::gazebo::systems::Imu">
+    </plugin>
+
+    <plugin
+        filename="libignition-gazebo-sensors-system.so"
+        name="ignition::gazebo::systems::Sensors">
+        <render_engine>ogre</render_engine>
+    </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -503,6 +582,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -512,6 +592,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+    
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -521,6 +602,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -530,6 +612,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -539,6 +622,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -548,6 +632,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">
@@ -557,6 +642,7 @@
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
+
     <plugin
         filename="ignition-gazebo-thruster-system"
         name="ignition::gazebo::systems::Thruster">

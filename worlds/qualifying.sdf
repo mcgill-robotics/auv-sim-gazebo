@@ -34,17 +34,6 @@
             name="ignition::gazebo::systems::ParticleEmitter2">
         </plugin>
 
-        <plugin 
-            filename="libignition-gazebo-imu-system.so"
-            name="ignition::gazebo::systems::Imu">
-        </plugin>
-
-        <plugin
-            filename="libignition-gazebo-sensors-system"
-            name="ignition::gazebo::systems::Sensors">
-            <render_engine>ogre</render_engine>
-        </plugin>
-
         <plugin
             filename="ignition-gazebo-scene-broadcaster-system"
             name="ignition::gazebo::systems::SceneBroadcaster">
@@ -132,8 +121,6 @@
                 <use_event>true</use_event>
 
             </plugin>
-
-            
             
             <!-- Image display (from cameras) -->
             <plugin filename="ImageDisplay" name="Image Display">
