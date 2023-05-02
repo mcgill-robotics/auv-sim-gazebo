@@ -74,67 +74,32 @@
         -->
       </sensor>
 
-      <!-- Front cameras (stereo) 
-      <sensor type="multicamera" name="stereo_camera">
+      <!-- Front cameras -->
+      <sensor type="camera" name="left">
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <camera name="left">
-          <pose>0 -0.056 -0.447 0 0 3.14159</pose>
-          <horizontal_fov>1.047</horizontal_fov>
-          <update_rate>30.0</update_rate>
-          <image>
-            <width>800</width>
-            <height>800</height>
-            <format>RGB_INT8</format>
-          </image>
-          
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-        <camera name="right">
-          <pose>0 0.056 -0.447 0 0 3.14159</pose>
-          <horizontal_fov>1.047</horizontal_fov>
-          <update_rate>30.0</update_rate>
-          <image>
-            <width>800</width>
-            <height>800</height>
-            <format>RGB_INT8</format>
-          </image>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-      </sensor>
-      -->
-
-      <sensor type="camera" name="right">
-        <update_rate>30.0</update_rate>
-        <always_on>true</always_on>
-        <ignition_frame_id>camera_link_optical</ignition_frame_id>
-        <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
-        <topic>stereo_camera/right/image_raw</topic>
+        <topic>left_cam</topic>
+        <pose>0 -0.2 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
+        <update_rate>30.0</update_rate>
         <image>
-            <width>800</width>
-            <height>800</height>
+          <width>800</width>
+          <height>800</height>
+          <format>B8G8R8</format>
         </image>
       </sensor>
-      
-      <sensor type="camera" name="left">
-        <update_rate>30.0</update_rate>
-        <always_on>true</always_on>
-        <ignition_frame_id>camera_link_optical</ignition_frame_id>
-        <pose>0 -0.2 -0.447 3.13159 1.570795 0</pose>
-        <topic>stereo_camera/left/image_raw</topic>
+
+      <sensor type="camera" name="right">
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+        <topic>right_cam</topic>
+        <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
+        <update_rate>30.0</update_rate>
         <image>
-            <width>800</width>
-            <height>800</height>
+          <width>800</width>
+          <height>800</height>
+          <format>B8G8R8</format>
         </image>
       </sensor>
 
@@ -570,7 +535,7 @@
     <plugin
         filename="libignition-gazebo-sensors-system.so"
         name="ignition::gazebo::systems::Sensors">
-        <render_engine>ogre</render_engine>
+        <render_engine>ogre2</render_engine>
     </plugin>
 
     <plugin

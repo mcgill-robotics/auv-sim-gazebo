@@ -50,9 +50,9 @@
             <!-- 3D scene -->
             <plugin filename="MinimalScene" name="3D View">
                 <ignition-gui>
-                <title>3D View</title>
-                <property type="bool" key="showTitleBar">false</property>
-                <property type="string" key="state">docked</property>
+                    <title>3D View</title>
+                    <property type="bool" key="showTitleBar">false</property>
+                    <property type="string" key="state">docked</property>
                 </ignition-gui>
 
                 <engine>ogre2</engine>
@@ -65,54 +65,57 @@
             <!-- Plugins that add functionality to the scene -->
             <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
                 <ignition-gui>
-                <property key="state" type="string">floating</property>
-                <property key="width" type="double">5</property>
-                <property key="height" type="double">5</property>
-                <property key="showTitleBar" type="bool">false</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="showTitleBar" type="bool">false</property>
                 </ignition-gui>
             </plugin>
+
             <plugin filename="GzSceneManager" name="Scene Manager">
                 <ignition-gui>
-                <property key="resizable" type="bool">false</property>
-                <property key="width" type="double">5</property>
-                <property key="height" type="double">5</property>
-                <property key="state" type="string">floating</property>
-                <property key="showTitleBar" type="bool">false</property>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
                 </ignition-gui>
             </plugin>
+
             <plugin filename="InteractiveViewControl" name="Interactive view control">
                 <ignition-gui>
-                <property key="resizable" type="bool">false</property>
-                <property key="width" type="double">5</property>
-                <property key="height" type="double">5</property>
-                <property key="state" type="string">floating</property>
-                <property key="showTitleBar" type="bool">false</property>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
                 </ignition-gui>
             </plugin>
+
             <plugin filename="CameraTracking" name="Camera Tracking">
                 <ignition-gui>
-                <property key="resizable" type="bool">false</property>
-                <property key="width" type="double">5</property>
-                <property key="height" type="double">5</property>
-                <property key="state" type="string">floating</property>
-                <property key="showTitleBar" type="bool">false</property>
+                    <property key="resizable" type="bool">false</property>
+                    <property key="width" type="double">5</property>
+                    <property key="height" type="double">5</property>
+                    <property key="state" type="string">floating</property>
+                    <property key="showTitleBar" type="bool">false</property>
                 </ignition-gui>
             </plugin>
+
             <!-- World control -->
             <plugin filename="WorldControl" name="World control">
                 <ignition-gui>
-                <title>World control</title>
-                <property type="bool" key="showTitleBar">false</property>
-                <property type="bool" key="resizable">false</property>
-                <property type="double" key="height">72</property>
-                <property type="double" key="width">121</property>
-                <property type="double" key="z">1</property>
-
-                <property type="string" key="state">floating</property>
-                <anchors target="3D View">
-                    <line own="left" target="left"/>
-                    <line own="bottom" target="bottom"/>
-                </anchors>
+                    <title>World control</title>
+                    <property type="bool" key="showTitleBar">false</property>
+                    <property type="bool" key="resizable">false</property>
+                    <property type="double" key="height">72</property>
+                    <property type="double" key="width">121</property>
+                    <property type="double" key="z">1</property>
+                    <property type="string" key="state">floating</property>
+                    <anchors target="3D View">
+                        <line own="left" target="left"/>
+                        <line own="bottom" target="bottom"/>
+                    </anchors>
                 </ignition-gui>
 
                 <play_pause>true</play_pause>
@@ -132,14 +135,14 @@
             <!-- Component Inspector -->
             <plugin filename="ComponentInspector" name="Component inspector">
                 <ignition-gui>
-                <property type="string" key="state">docked</property>
+                    <property type="string" key="state">docked</property>
                 </ignition-gui>
             </plugin>
 
             <!-- Entity tree -->
             <plugin filename="EntityTree" name="Entity tree">
                 <ignition-gui>
-                <property type="string" key="state">docked</property>
+                    <property type="string" key="state">docked</property>
                 </ignition-gui>
             </plugin>
         </gui>
