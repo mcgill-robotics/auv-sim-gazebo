@@ -45,7 +45,7 @@ def wrench_to_thrust(w):
      
     pubt0.publish(Float64(converted_w[0]))
     pubt1.publish(Float64(converted_w[1]))
-    pubt2.publish(Float64(converted_w[2]))
+    pubt2.publish(Float64(converted_w[2]) * -1.0)
     pubt3.publish(Float64(converted_w[3]))
     pubt4.publish(Float64(converted_w[4]))
     pubt5.publish(Float64(converted_w[5]))
