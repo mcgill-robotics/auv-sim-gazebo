@@ -310,7 +310,7 @@ create thruster plugin.
   
 This class provides hydrodynamic behaviour for underwater vehicles It is based of Fossen's equations described in "Guidance and Control of Ocean Vehicles". The class should be used together with the buoyancy plugin to help simulate behaviour of maritime vehicles. Hydrodynamics refers to the behaviour of bodies in water. It includes forces like linear and quadratic drag, buoyancy (not provided by this plugin), etc.
   
-If you would like to learn more about the values used, I recommend looking at [this page]("https://gazebosim.org/api/gazebo/5.1/classignition_1_1gazebo_1_1systems_1_1Hydrodynamics.html#details" System Parameters).
+If you would like to learn more about the values used, I recommend looking at [this page](https://gazebosim.org/api/gazebo/5.1/classignition_1_1gazebo_1_1systems_1_1Hydrodynamics.html#details).
 
 ## Finale
 This is the end of the description. Good work and good luck!
