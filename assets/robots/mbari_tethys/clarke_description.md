@@ -17,7 +17,7 @@ please feel free to change it (just ask someone to double-check the changes you 
 > be used to represent any kind of data in a structured format, making it useful for a wide range of applications.
 
 ## Let's look at the code
-#### Config
+### Config
 ```
 <?xml version="1.0"?>
 <sdf version="1.9">
@@ -25,7 +25,7 @@ please feel free to change it (just ask someone to double-check the changes you 
 At the beginning of each sdf file, you need to specify the version number. Make sure that all sdf files used in the same simulation have the same version.
 The xml declaration is optional but recommended. 
 
-#### Model
+### Model
 ```
 <model name="clarke">
 </model>
@@ -37,7 +37,7 @@ gazebo absolutely sucks, the last thing you need is to throw more fuel in the fi
 
 Important: An SDFormat file can consist of just a model. A world can contain many models (if you don't know what worlds are yet, think of it as the world inside the simulation).
 
-#### Link
+### Link
 ```
 <link name="base_link">
 </link>
@@ -51,7 +51,7 @@ For Clarke, we decided to have a link for the main body and an additional link f
 To see all the possible physical properties you can assign to a link, I recommend checking the official
 [SDFormat Specification website](http://sdformat.org/spec?ver=1.9&elem=link "Link Specifications").
 
-#### Inertial
+### Inertial
 ```
 <inertial>
   <mass>147.8671</mass>
@@ -71,7 +71,7 @@ is, I would recommend [this](https://en.wikipedia.org/wiki/Moment_of_inertia# "M
 should look into [inertia tensor](https://en.wikipedia.org/wiki/Moment_of_inertia#Inertia_tensor "Inertia Tensor Wiki"). Note that we only enter six out of nine matrix values 
 because the matrix is symmetrical.
 
-#### Collision
+### Collision
 ```
 <collision name="main_body_collision">
   <geometry>
@@ -87,7 +87,7 @@ pose, geometry, and surface. For Clarke, we didn't include the pose tag because 
 these values mean, the first three numbers are (x, y, z) and the last three (roll, pitch, yaw), and the default measurement units are meters and radians. The geometry is simply the 
 shape. There are multiple [options for the types of shapes](http://sdformat.org/spec?ver=1.9&elem=geometry "<geometry> Specifications"), such as box, cylinder, capsule, etc.
 
-#### Visual
+### Visual
 ```
 <visual name="visual">
   <geometry>
@@ -102,7 +102,7 @@ A visual element is used to visualize parts of a link. Since this is a simple ob
 to the functionality of the simulation, so I won't waste a lot of time on it. However, it does look better when you put a little bit more "life" into the sim. Up to you.
 Here is the [specifications](http://sdformat.org/spec?ver=1.9&elem=visual "bro, are you sure?... might as well do a fashion week event at this point") if you want to learn more.
 
-#### IMU sensor
+### IMU sensor
 ```
 <sensor name="imu_sensor" type="imu">
   <always_on>1</always_on>
@@ -132,7 +132,7 @@ just for debugging if needed.
 
 I highly recommend checking this [github page](https://github.com/gazebosim/docs/blob/master/dome/sensors.md "IMU Sensor") for more examples.
 
-#### Cameras
+### Cameras
 We can also add cameras to the model and visualize it in the GUI. It's really cool to see from the perspective of the model. Anyway, we have three cameras in total: one below and two front.
 ```
 <sensor name="down_camera" type="camera">
@@ -177,7 +177,7 @@ Now we are done with the main body!
 
 Note that the main body was just one link. Since we want each thruster to be its own physical object, we will add seven links in total (one for each thruster).
 
-#### Thrusters
+### Thrusters
 
 ```
 <link name="thruster0">
@@ -220,7 +220,7 @@ responsible for moving back and forwards. To learn how the positioning works, I 
 
 Becareful with the rotations: since the visual of the thruster is uniform, it is impossible to visually notice if the thruster is pointing in the right direction. Make sure to test if applying a positive force makes Clarke move as expected, and the reverse when the force is negative.
 
-#### Joints
+### Joints
 
 ```
 <joint name="thruster0_joint" type="fixed">
@@ -259,7 +259,7 @@ Clarke's foundation is the maind body, and the thrusters are attached to the mai
 
 <!-- TODO: <axis> -->
   
-####  Plugins
+###  Plugins
   
 I have aready disucessed the IMU and camera plugins, so I'll skip those.
 
