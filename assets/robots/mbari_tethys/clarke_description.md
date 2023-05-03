@@ -158,8 +158,102 @@ unique about it in the specific context.
 * `<noise>` this tag is up to you. Noise is sampled independently per pixel on each frame. That pixel's noise value is added to each of its color channels, 
 which at that point lie in the range [0,1]. I would say it makes the model a bit more realistic, but if you set the values too high, it becomes a headache.
 
+The plugin for cameras is: 
+```
+<plugin
+    filename="libignition-gazebo-sensors-system.so"
+    name="ignition::gazebo::systems::Sensors">
+    <render_engine>ogre2</render_engine>
+</plugin>
+```
+Note there is an additional tag compared to the IMU. The `<render_engine>` tag specifies which engine we use to render the camera POV and display in the GUI. I can learn how
+to display on the GUI in the worlds description.
 
+Now we are done with the main body!
 
+![giphy](https://user-images.githubusercontent.com/83185972/235943629-328e2af0-eae1-4350-8c21-0656bc8abe3c.gif)
+
+Note that the main body was just one link. Since we want each thruster to be its own physical object, we will add seven links in total (one for each thruster).
+
+#### Thrusters
+
+```
+<link name="thruster0">
+  <pose>0.2 -0.112 0 0 0 3.14159</pose>
+
+  <inertial>
+    <mass>0.09</mass>
+    <inertia>
+      <ixx>0.000143971303</ixx>
+      <ixy>0.000000000008</ixy>
+      <ixz>-0.000000000224</ixz>
+      <iyy>0.000140915448</iyy>
+      <iyz>-0.000025236433</iyz>
+      <izz>0.000033571862</izz>
+    </inertia>
+  </inertial>
+
+  <collision name="collision">
+    <geometry>
+      <cylinder>
+        <radius>0.05</radius>
+        <length>0.05</length>
+      </cylinder>
+    </geometry>
+  </collision>
+
+  <visual name= "visual">
+    <geometry>
+      <cylinder>
+        <radius>0.05</radius>
+        <length>0.05</length>
+      </cylinder>
+    </geometry>
+  </visual>
+
+</link>
+```
+All the thrusters links have the same format, considering they are the same thing. The only part that changes is how they are positioned. The thruster 0 is the one on the middle-left part of Clarke, 
+responsible for moving back and forwards. To learn how the positioning works, I recommend just playing around with the values and seeing where the thruster will be. 
+
+Becareful with the rotations: since the visual of the thruster is uniform, it is impossible to visually notice if the thruster is pointing in the right direction. Make sure to test if applying a positive force makes Clarke move as expected, and the reverse when the force is negative.
+
+#### Joints
+
+```
+<joint name="thruster0_joint" type="fixed">
+  <pose>0 0 0 0 0 0</pose>
+  <parent>base_link</parent>
+  <child>thruster0</child>
+  <axis>
+    <xyz>-1 0 0</xyz>
+    <limit>
+      <lower>-1e+12</lower>
+      <upper>1e+12</upper>
+      <effort>-1</effort>
+      <velocity>-1</velocity>
+    </limit>
+  </axis>
+</joint>
+```
+After adding the objects, we then need to physically connect them. Joints are responsible for make that connection. You can think of it as a joint in the human body: the part of the body where two or more
+bones meet to allow movement. More formally,
+
+> A joint connects two links with kinematic and dynamic properties. By default, the pose of a joint is expressed in the child link frame.
+
+The type of the joint is very important and it specifies the physics of the interaction between the two parts. It must be one of the followin:
+1) continuous - a hinge joint that rotates on a single axis with a continuous range of motion.
+2) revolute - a hinge joint that rotates on a single axis with a fixed range of motion.
+3) gearbox - geared revolute joints. 
+4) revolute2 - same as two revolute joints connected in series.
+5) prismatic - a sliding joint that slides along an axis with a limited range specified by upper and lower limits. 
+6) ball - a ball and socket joint.
+7) screw - a single degree of freedom joint with coupled sliding and rotational motion.
+8) universal - like a ball joint, but constrains one degree of freedom.
+9) fixed - a joint with zero degrees of freedom that rigidly connects two links.
+
+For the <parent> and <child> tags represent the relationship between the two parts. You can think of the parent being the foundation of the relationship and the child being the attached part (e.g., the 
+Clarke's foundation is the maind body, and the thrusters are attached to the main body).
 
 
 
