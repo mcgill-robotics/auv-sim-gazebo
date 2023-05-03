@@ -3,6 +3,8 @@
 This file is an in-depth description of how the Clarke model works. I'll go line by line/block by block, explaining what it is for. If something is missing or incorrect, 
 please feel free to change it (just ask someone to double-check the changes you made).
 
+![first](https://user-images.githubusercontent.com/83185972/236066187-643f4b8f-2050-4c65-8eea-91277cbcf4f2.gif)
+
 ## For context 
 1) Why SDF?
 > SDFormat (Simulation Description Format), sometimes abbreviated as SDF, is an XML format that describes objects and environments for robot simulators, 
@@ -241,7 +243,7 @@ bones meet to allow movement. More formally,
 
 > A joint connects two links with kinematic and dynamic properties. By default, the pose of a joint is expressed in the child link frame.
 
-The type of the joint is very important and it specifies the physics of the interaction between the two parts. It must be one of the followin:
+The type of the joint is very important and it specifies the physics of the interaction between the two parts. It must be one of the following:
 1) continuous - a hinge joint that rotates on a single axis with a continuous range of motion.
 2) revolute - a hinge joint that rotates on a single axis with a fixed range of motion.
 3) gearbox - geared revolute joints. 
@@ -255,5 +257,72 @@ The type of the joint is very important and it specifies the physics of the inte
 For the <parent> and <child> tags represent the relationship between the two parts. You can think of the parent being the foundation of the relationship and the child being the attached part (e.g., the 
 Clarke's foundation is the maind body, and the thrusters are attached to the main body).
 
+<!-- TODO: <axis> -->
+  
+####  Plugins
+  
+I have aready disucessed the IMU and camera plugins, so I'll skip those.
 
+We should first define what a plugin is:
+  
+> A plugin is a dynamically loaded chunk of code. It can exist as a child of world, model, and sensor. 
+> Every plugin requires <filename> and <name>. <filename> is the name of the shared library to load. <name> is the name of the plugin.
+  
+```
+<plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>clarke</namespace>
+      <joint_name>thruster0_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.05</propeller_diameter>
+  </plugin>
+``` 
+The first plugin is thruster system. This class provides a class that simulates a maritime thruster for boats and underwater vehicles. It uses the equations described in Fossen's "Guidance and Control of Ocean Vehicles" in page 246. This plugin takes in force in Newtons and applies it to the thruster. It also calculates the theoretical RPM of the blades and spins them at that RPM. For each thruster joint, we need to
+create thruster plugin.
+  
+```
+<plugin
+    filename="ignition-gazebo-hydrodynamics-system"
+    name="ignition::gazebo::systems::Hydrodynamics">
+    <link_name>base_link</link_name>
+    <xDotU>-4.876161</xDotU>
+    <yDotV>-126.324739</yDotV>
+    <zDotW>-126.324739</zDotW>
+    <kDotP>0</kDotP>
+    <mDotQ>-33.46</mDotQ>
+    <nDotR>-33.46</nDotR>
+    <xUU>-6.2282</xUU>
+    <xU>0</xU>
+    <yVV>-601.27</yVV>
+    <yV>0</yV>
+    <zWW>-601.27</zWW>
+    <zW>0</zW>
+    <kPP>-0.1916</kPP>
+    <kP>0</kP>
+    <mQQ>-632.698957</mQQ>
+    <mQ>0</mQ>
+    <nRR>-632.698957</nRR>
+    <nR>0</nR>
+</plugin>    
+```
+  
+This class provides hydrodynamic behaviour for underwater vehicles It is based of Fossen's equations described in "Guidance and Control of Ocean Vehicles". The class should be used together with the buoyancy plugin to help simulate behaviour of maritime vehicles. Hydrodynamics refers to the behaviour of bodies in water. It includes forces like linear and quadratic drag, buoyancy (not provided by this plugin), etc.
+  
+If you would like to learn more about the values used, I recommend looking at [this page]("https://gazebosim.org/api/gazebo/5.1/classignition_1_1gazebo_1_1systems_1_1Hydrodynamics.html#details" System Parameters).
 
+## Finale
+This is the end of the description. Good work and good luck!
+  
+![last](https://user-images.githubusercontent.com/83185972/236066298-fada03d3-824a-4ebf-91bf-c787068fa3af.gif)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
