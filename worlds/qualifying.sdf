@@ -34,11 +34,6 @@
             name="ignition::gazebo::systems::ParticleEmitter2">
         </plugin>
 
-        <plugin
-            filename="ignition-gazebo-scene-broadcaster-system"
-            name="ignition::gazebo::systems::SceneBroadcaster">
-        </plugin>
-
         <scene>
             <ambient>1.0 1.0 1.0</ambient>
             <background>0.8 0.8 0.8</background>
