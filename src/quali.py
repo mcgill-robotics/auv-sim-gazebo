@@ -25,8 +25,6 @@ T = np.matrix(
 #matrix transformation wrench -> thrust 
 T_inv = np.linalg.pinv(T) 
 """--------------------------------------------------"""
-rospy.sleep(7.0)
-
 
 def wrench_to_thrust(w):
     '''
