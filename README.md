@@ -18,46 +18,33 @@ Follow Ignition Gazebo Fortress [installation instructions](https://gazebosim.or
 
 Install the `ros_ign_bridge` package from source
 
-	cd <AUV-2020>/catkin_ws
+	cd <AUV-202?>/catkin_ws
 	git submodule update
 	export IGNITION_VERSION=fortress
 	rosdep install -r --from-paths src -i -y --rosdistro noetic
 	source /opt/ros/noetic/setup.bash
-	catkin build simulation
+	catkin build auv-sim
 
 
 ### Running
 
-Run gazebo simulation of quali task with Tethys AUV
+Run gazebo simulation of quali task with Clarke AUV
 
-	cd <AUV-2020>/catkin_ws/src/simulation/worlds/
-	ign gazebo quali.sdf
-	
-To interface with gazebo using ROS:
-
-	roscore &
-	rosrun simulation test_tethys.py &
-	rosrun ros_ign_bridge parameter_bridge \ 
-	/model/tethys/joint/propeller_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double &
-
+	cd <AUV-202?>/catkin_ws/src
+	roslaunch auv-sim qualifying.sdf
 
 ### Usage
 
 In the GUI, you should see a pole, gate and AUV models. Click the play button in the bottom left to 
 run/pause the simulation. In a new tab you can publish commands to the model through the command line.
 
-Control the propellor of the Tethys to make it go forward/backwards (you should see the propellor spin):
+The numbering of thrusters is according to the following image:
 
-	ign topic -t /model/tethys/joint/propeller_joint/cmd_pos -m ignition.msgs.Double -p 'data: -31'
+<img width="222" alt="image" src="https://user-images.githubusercontent.com/83185972/236106771-894ab445-7db5-4287-8394-e3180e5db214.png">
 
-Control the vertical fins to affect the yaw of the Tethys while moving. 
+Control the thruster 0 of Clarke to make it go forward/backwards:
 
-	ign topic -t /model/tethys/joint/vertical_fins_joint/0/cmd_pos -m ignition.msgs.Double -p 'data: -0.17'
-
-Control the horizontal fins to affect the pitch of the Tethys while moving. 
-
-	ign topic -t /model/tethys/joint/horizontal_fins_joint/0/cmd_pos -m ignition.msgs.Double -p 'data: -0.20'
-
+	ign topic -t /model/clarke/joint/thruster0_joint/cmd_pos -m ignition.msgs.Double -p 'data: 31'
 
 ### Known Issues
 
