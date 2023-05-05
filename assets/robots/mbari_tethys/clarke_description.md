@@ -168,8 +168,9 @@ The plugin for cameras is:
     <render_engine>ogre2</render_engine>
 </plugin>
 ```
-Note there is an additional tag compared to the IMU. The `<render_engine>` tag specifies which engine we use to render the camera POV and display in the GUI. I can learn how
-to display on the GUI in the worlds description.
+Note there is an additional tag compared to the IMU. The `<render_engine>` tag specifies which engine we use to render the camera POV and display in the GUI. I can learn how to display on the GUI in the worlds description.
+
+EDIT: We now have a depth camera instead of two regular cameras. However, the way to set it up is pretty much the same; just change the type.
 
 Now we are done with the main body!
 
