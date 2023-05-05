@@ -1,19 +1,43 @@
 <launch>
-    <node name="thruster0" pkg="auv-sim" type="quali.py" output="screen"></node>
-    <node name="test_bridge" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster0_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster1_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster2_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster3_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster4_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster5_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster6_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              /model/clarke/joint/thruster7_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double
-              
-              /imu@sensor_msgs/Imu@ignition.msgs.IMU">
-    </node>
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
 	    args="$(find auv-sim)/worlds/qualifying.sdf">
+    </node>
+
+    <node name="bridge_thruster0" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster0_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+              
+           <!--   /imu@sensor_msgs/Imu@ignition.msgs.IMU -->
+    <node name="bridge_thruster1" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster1_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster2" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster2_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster3" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster3_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster4" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster4_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster5" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster5_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster6" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster6_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node name="bridge_thruster7" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/model/clarke/joint/thruster7_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
+    </node>
+
+    <node 
+        name="quali_py" pkg="auv-sim" type="quali.py" output="screen">
     </node>
 </launch>

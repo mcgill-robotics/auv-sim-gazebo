@@ -277,7 +277,7 @@
     <!-- Thruster4 -->
     <link name="thruster4">
       <!-- Forward = positive force -->      
-      <pose>0.2 -0.112 0.4475 0 -1.5708 0</pose>
+      <pose>0.2 -0.112 0.4475 0 1.5708 0</pose>
       
       <inertial>
         <mass>0.09</mass>
@@ -390,7 +390,7 @@
     <!--Thruster7 -->
     <link name="thruster7">      
       <!-- Forward = positive force -->
-      <pose>0.2 -0.112 -0.4475 0 -1.5708 0</pose>
+      <pose>0.2 -0.112 -0.4475 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.09</mass>
