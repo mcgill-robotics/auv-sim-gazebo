@@ -50,18 +50,6 @@ def wrench_to_thrust(w):
     pubt6.publish(Float64(converted_w[6]))
     pubt7.publish(Float64(converted_w[7]))
 
-    """
-    tf = ThrusterForces()
-    tf.SURGE_PORT = converted_w[0]
-    tf.SURGE_STAR = converted_w[1]
-    tf.SWAY_BOW = converted_w[2]
-    tf.SWAY_STERN = converted_w[3]
-    tf.HEAVE_BOW_PORT = converted_w[4]
-    tf.HEAVE_BOW_STAR = converted_w[5]
-    tf.HEAVE_STERN_STAR = converted_w[6]
-    tf.HEAVE_STERN_PORT = converted_w[7]
-    """
-
     
     
 
@@ -69,7 +57,6 @@ def wrench_to_thrust(w):
 if __name__ == '__main__':
 
     rospy.init_node('thrusters')
-    subt = rospy.Subscriber('/effort', Wrench, wrench_to_thrust)
     pubt0 = rospy.Publisher('/model/clarke/joint/thruster0_joint/cmd_pos', Float64, queue_size=50)
     pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=50)
     pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=50)
@@ -78,4 +65,5 @@ if __name__ == '__main__':
     pubt5 = rospy.Publisher('/model/clarke/joint/thruster5_joint/cmd_pos', Float64, queue_size=50)
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=50)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=50)
+    subt = rospy.Subscriber('/effort', Wrench, wrench_to_thrust)
     

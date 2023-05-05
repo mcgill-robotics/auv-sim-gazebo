@@ -75,6 +75,7 @@
       </sensor>
 
       <!-- Front cameras -->
+      <!-- 
       <sensor type="camera" name="left">
         <always_on>1</always_on>
         <visualize>true</visualize>
@@ -96,6 +97,26 @@
         <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
         <update_rate>30.0</update_rate>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>B8G8R8</format>
+        </image>
+      </sensor>
+      -->
+
+      <!-- Depth camera -->
+      <sensor type="depth_camera" name="depth_camera">
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+        <topic>depth_cam</topic>
+        <pose>0 0 -0.447 3.13159 1.570795 0</pose>
+        <horizontal_fov>1.047</horizontal_fov>
+        <update_rate>30.0</update_rate>
+        <clip>
+          <near>0.02</near>
+          <far>10</far>
+        </clip>
         <image>
           <width>800</width>
           <height>800</height>
