@@ -67,15 +67,13 @@ if __name__ == '__main__':
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     while True:
-        pubt1.publish(100.0)
-        pubt0.publish(100.0)
-        #pubt6.publish(100.0)
-        #pubt7.publish(100.0)
+        pubt1.publish(50.0)
+        pubt0.publish(50.0)
 
-        #pubt4.publish(-50.0)
-        #pubt5.publish(-50.0)
-        #pubt6.publish(-50.0)
-        #pubt7.publish(-50.0)
+        pubt4.publish(100.0)
+        pubt5.publish(100.0)
+        pubt6.publish(100.0)
+        pubt7.publish(100.0)
 
         time.sleep(1)
 

@@ -142,7 +142,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -151,12 +151,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
       
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -200,7 +200,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -209,12 +209,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -261,7 +261,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -270,12 +270,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -320,7 +320,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -329,12 +329,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -379,7 +379,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -388,12 +388,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -438,7 +438,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -447,12 +447,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -497,7 +497,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -506,12 +506,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -556,7 +556,7 @@
         </inertia>
       </inertial>
 
-      <!--
+      
       <collision name="collision">
         <geometry>
           <cylinder>
@@ -565,12 +565,12 @@
           </cylinder>
         </geometry>
       </collision>
-      -->
+     
 
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>meshes/tethys.dae</uri>
+            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
