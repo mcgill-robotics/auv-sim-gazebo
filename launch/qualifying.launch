@@ -8,7 +8,6 @@
         args="/model/clarke/joint/thruster0_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
     </node>
               
-           <!--   /imu@sensor_msgs/Imu@ignition.msgs.IMU -->
     <node name="bridge_thruster1" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/model/clarke/joint/thruster1_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
     </node>
@@ -37,6 +36,18 @@
         args="/model/clarke/joint/thruster7_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
     </node>
 
+    <node name="bridge_imu" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/imu@sensor_msgs/Imu@ignition.msgs.IMU">
+    </node>
+
+    <!-- <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/depth_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+    </node>
+
+    <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+    </node> -->
+    	
     <node 
         name="quali_py" pkg="auv-sim" type="quali.py" output="screen">
     </node>

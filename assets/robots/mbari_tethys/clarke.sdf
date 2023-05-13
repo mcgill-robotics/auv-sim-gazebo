@@ -13,6 +13,7 @@
             - r = 0.2 => this is wrong
             - h = 0.778 
       -->
+      <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
       <inertial>
         <mass>147.8671</mass>
         <inertia>
@@ -27,10 +28,13 @@
 
       <collision name="main_body_collision">
         <geometry>
-          <cylinder>
+          <!-- <cylinder>
             <radius>0.2</radius>
             <length>0.788</length>
-          </cylinder>
+          </cylinder> -->
+          <box>
+            <size>0.4 0.4 1</size>
+          </box>
         </geometry>
       </collision>
 
@@ -143,14 +147,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
       
       <visual name= "visual">
@@ -201,14 +205,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -262,14 +266,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -321,14 +325,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -380,14 +384,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -439,14 +443,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -498,14 +502,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
@@ -557,14 +561,14 @@
       </inertial>
 
       
-      <collision name="collision">
+      <!-- <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
             <length>0.05</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
      
 
       <visual name= "visual">
