@@ -2,7 +2,7 @@
 
 import rospy
 from std_msgs.msg import Float64
-from sensor_msgs.msg import Imu, Image
+from sensor_msgs.msg import Imu
 from geometry_msgs.msg import Wrench
 import time 
 import numpy as np
@@ -66,12 +66,6 @@ def callback_thrusters(data):
     pubt5.publish(converted_w[5])
     pubt6.publish(converted_w[6])
     pubt7.publish(converted_w[7])
-
-def callback_depth_cam(data):
-    pass
-
-def callback_down_cam(data):
-    pass
 
 def callback_imu_dvl(data):
     p = data[0]
