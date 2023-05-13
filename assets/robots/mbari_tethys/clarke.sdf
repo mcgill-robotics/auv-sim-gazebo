@@ -8,12 +8,8 @@
 
       <!-- For more information about how to calculate the inertia values: 
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
-      <!-- Assumptions for the inertia calculation:
-            - m = 30 => this is wrong
-            - r = 0.2 => this is wrong
-            - h = 0.778 
-      -->
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
+
       <inertial>
         <mass>147.8671</mass>
         <inertia>
@@ -33,7 +29,8 @@
             <length>0.788</length>
           </cylinder> -->
           <box>
-            <size>0.4 0.4 1</size>
+            <!-- needs to be measured -->
+            <size>0.4 0.4 1</size> 
           </box>
         </geometry>
       </collision>
@@ -57,62 +54,23 @@
 
       <!-- Down camera -->
       <sensor name="down_camera" type="camera">
-        <!-- note: the type used is RGB_INT8, but I believe there is an option to change
-             if needed (something like <format>??????</format>)-->
-        <horizontal_fov>1.047</horizontal_fov> <!-- not actual value -->
+        <horizontal_fov>1.047</horizontal_fov> 
         <update_rate>30.0</update_rate>
         <visualize>true</visualize>
+        <!-- choose topic that has the same name as the ROS topic -->
         <topic>down_cam</topic>
         <always_on>1</always_on>
         <image>
           <width>800</width>
           <height>800</height>
         </image>
-        <!-- should we add noise? -->
-        <!--
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-        -->
       </sensor>
-
-      <!-- Front cameras -->
-      <!-- 
-      <sensor type="camera" name="left">
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-        <topic>left_cam</topic>
-        <pose>0 -0.2 -0.447 3.13159 1.570795 0</pose>
-        <horizontal_fov>1.047</horizontal_fov>
-        <update_rate>30.0</update_rate>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>B8G8R8</format>
-        </image>
-      </sensor>
-
-      <sensor type="camera" name="right">
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-        <topic>right_cam</topic>
-        <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
-        <horizontal_fov>1.047</horizontal_fov>
-        <update_rate>30.0</update_rate>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>B8G8R8</format>
-        </image>
-      </sensor>
-      -->
 
       <!-- Depth camera -->
       <sensor type="depth_camera" name="depth_camera">
         <always_on>1</always_on>
         <visualize>true</visualize>
+        <!-- choose topic that has the same name as the ROS topic -->
         <topic>depth_cam</topic>
         <pose>0 0 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
@@ -202,18 +160,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -263,18 +210,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -324,17 +260,6 @@
         </inertia>
       </inertial>
 
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
-
       <visual name= "visual">
         <geometry>
           <mesh>
@@ -382,17 +307,6 @@
           <izz>0.000033571862</izz>
         </inertia>
       </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
 
       <visual name= "visual">
         <geometry>
@@ -442,17 +356,6 @@
         </inertia>
       </inertial>
 
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
-
       <visual name= "visual">
         <geometry>
           <mesh>
@@ -499,18 +402,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -558,18 +450,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -724,7 +605,7 @@
     <plugin
         filename="libignition-gazebo-sensors-system.so"
         name="ignition::gazebo::systems::Sensors">
-        <render_engine>ogre2</render_engine>
+        <render_engine>ogre</render_engine>
     </plugin>
 
     <plugin
@@ -806,8 +687,6 @@
         <fluid_density>997</fluid_density>
         <propeller_diameter>0.05</propeller_diameter>
     </plugin>
-
-    
     
     <plugin
         filename="ignition-gazebo-hydrodynamics-system"
