@@ -2,57 +2,38 @@
 
 import rospy
 from std_msgs.msg import Float64
-import time
-#from geometry_msgs.msg import Wrench
+from sensor_msgs.msg import Imu
+import time 
 import numpy as np
-#from auv_msgs.msg import ThrusterForces
+from tf import transformations
 
 
-d = 0.224 #m
-D_1 = 0.895 #m
-D_2 = 0.778 #m
+# def update_euler(self):
+#         q = self.q_auv
+#         q = np.array([q.x, q.y, q.z, q.w])
+        
+#         theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
+#         theta_y = transformations.euler_from_quaternion(q, 'ryxz')[0]
+#         theta_z = transformations.euler_from_quaternion(q, 'rzyx')[0]
 
-#Matrix representation of the system of equations representing the thrust to wrench conversion
-#Ex: Force_X = (1)Surge_Port_Thruster + (1)Surge_Starboard_Thrust
-T = np.matrix(
-        [[1., 1., 0., 0., 0., 0., 0., 0.],
-        [0., 0., 1., -1., 0., 0., 0., 0.],
-        [0., 0., 0., 0., -1., -1., -1., -1.],
-        [0., 0., 0., 0., -d/2, d/2, d/2, -d/2],
-        [0., 0., 0., 0., -D_2/2, -D_2/2, D_2/2, D_2/2],
-        [-d/2, d/2, D_1/2, D_1/2, 0., 0., 0., 0.]]
-        )
+#         angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
 
-#matrix transformation wrench -> thrust 
-T_inv = np.linalg.pinv(T) 
-"""--------------------------------------------------"""
+#         for i in range(3):
+#             if angles[i] - self.euler[i] > ANGLE_CHANGE_TOL:
+#                 self.euler[i] = angles[i] - 360
+#             elif self.euler[i] - angles[i] > ANGLE_CHANGE_TOL:
+#                 self.euler[i] = angles[i] + 360
+#             else:
+#                 self.euler[i] = angles[i]
 
-def wrench_to_thrust(w):
-    '''
-    A callback function that maps a Wrench into a force produced by T200 thruster at 14V (N)
-    '''
-    a = np.array(
-            [[w.force.x],
-            [w.force.y],
-            [w.force.z],
-            [w.torque.x],
-            [w.torque.y],
-            [w.torque.z]]
-            )
 
-    converted_w = np.matmul(T_inv, a) 
-     
-    pubt0.publish(Float64(converted_w[0]))
-    pubt1.publish(Float64(converted_w[1]))
-    pubt2.publish(Float64(converted_w[2]) * -1.0)
-    pubt3.publish(Float64(converted_w[3]))
-    pubt4.publish(Float64(converted_w[4]))
-    pubt5.publish(Float64(converted_w[5]))
-    pubt6.publish(Float64(converted_w[6]))
-    pubt7.publish(Float64(converted_w[7]))
-
-    
-    
+def callback_imu(data):
+     pub_state_x.publish(data)
+     pub_state_y.publish(data)
+     pub_state_z.publish(data)
+     pub_state_theta_x.publish(data)
+     pub_state_theta_y.publish(data)
+     pub_state_theta_z.publish(data)
 
 
 if __name__ == '__main__':
@@ -66,16 +47,23 @@ if __name__ == '__main__':
     pubt5 = rospy.Publisher('/model/clarke/joint/thruster5_joint/cmd_pos', Float64, queue_size=1)
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
+    pub_state_x = rospy.Publisher('/state_x', Float64, queue_size=1)
+    pub_state_y = rospy.Publisher('/state_y', Float64, queue_size=1)
+    pub_state_z = rospy.Publisher('/state_z', Float64, queue_size=1)
+    pub_state_theta_x = rospy.Publisher('/state_theta_x', Float64, queue_size=1)
+    pub_state_theta_y = rospy.Publisher('/state_theta_y', Float64, queue_size=1)
+    pub_state_theta_z = rospy.Publisher('/state_theta_z', Float64, queue_size=1)
+
+    sub_imu = rospy.Subscriber('/imu', Imu, callback_imu)
+    # pub_depth_cam = rospy.Publisher('/[Front camera topic]', Sensor_msgs/msg/Image, queue_size=1)
+    # sub_depth_cam = rospy.Subscriber('/depth_cam', Sensor_msgs/msg/Image, queue_size=1)
     while True:
         pubt1.publish(50.0)
         pubt0.publish(50.0)
 
-        pubt4.publish(100.0)
-        pubt5.publish(100.0)
-        pubt6.publish(100.0)
-        pubt7.publish(100.0)
+        #pubt4.publish(50.0)
+        #pubt5.publish(50.0)
+        #pubt6.publish(50.0)
+        #pubt7.publish(50.0)
 
-        time.sleep(1)
-
-    subt = rospy.Subscriber('/effort', Wrench, wrench_to_thrust)
-    
+        time.sleep(1)    

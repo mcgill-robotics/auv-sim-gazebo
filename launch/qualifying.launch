@@ -40,15 +40,20 @@
         args="/imu@sensor_msgs/Imu@ignition.msgs.IMU">
     </node>
 
-    <!-- <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+    <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/depth_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
     </node>
 
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
-    </node> -->
-    	
+    </node> 
+
+    <!-- <remap from="/imu" to="/imu_data"/> -->
+    <!-- <remap from="depth_cam" to=""/>
+    <remap from="down_cam" to=""/> -->
+ 
     <node 
         name="quali_py" pkg="auv-sim" type="quali.py" output="screen">
     </node>
+
 </launch>

@@ -10,6 +10,9 @@ find_package(catkin REQUIRED COMPONENTS
 	ros_ign_bridge
 	ros_ign_gazebo
 	gazebo_ros
+	std_msgs
+	sensor_msgs
+	tf
 )
 
 catkin_package(	CATKIN_DEPENDS 
@@ -18,5 +21,8 @@ catkin_package(	CATKIN_DEPENDS
 	ros_ign_bridge
 	ros_ign_gazebo
 	gazebo_ros
+	std_msgs
+	sensor_msgs
+	tf
 )
 
