@@ -68,7 +68,7 @@ def callback_thrusters(data):
     pubt7.publish(converted_w[7])
 
 def callback_imu_dvl(data):
-    p = data[0]
+    p = data.orientation
     q = np.array([p.x, p.y, p.z, p.w])
     theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
     theta_y = transformations.euler_from_quaternion(q, 'rxyz')[0]
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     
-    sub_effort = rospy.Subcriber('/effort', Wrench, callback_thrusters)
+    sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
     
     while True:
         pubt1.publish(50.0)
