@@ -41,7 +41,7 @@
     </node>
 
     <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/depth_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+        args="/vision/depth_map@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
     </node>
 
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"

@@ -9,24 +9,6 @@ import numpy as np
 from tf import transformations
 
 
-# def update_euler(self):
-#         q = self.q_auv
-#         q = np.array([q.x, q.y, q.z, q.w])
-        
-#         theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
-#         theta_y = transformations.euler_from_quaternion(q, 'ryxz')[0]
-#         theta_z = transformations.euler_from_quaternion(q, 'rzyx')[0]
-
-#         angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
-
-#         for i in range(3):
-#             if angles[i] - self.euler[i] > ANGLE_CHANGE_TOL:
-#                 self.euler[i] = angles[i] - 360
-#             elif self.euler[i] - angles[i] > ANGLE_CHANGE_TOL:
-#                 self.euler[i] = angles[i] + 360
-#             else:
-#                 self.euler[i] = angles[i]
-
 d = 0.224 #m
 D_1 = 0.895 #m
 D_2 = 0.778 #m
@@ -108,14 +90,14 @@ if __name__ == '__main__':
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
-    
+
     while True:
-        pubt1.publish(50.0)
         pubt0.publish(50.0)
-
-        #pubt4.publish(50.0)
-        #pubt5.publish(50.0)
-        #pubt6.publish(50.0)
-        #pubt7.publish(50.0)
-
-        time.sleep(1)    
+        pubt1.publish(50.0)
+        rospy.sleep(1)
+        pubt4.publish(100.0)
+        pubt5.publish(100.0)
+        pubt6.publish(100.0)
+        pubt7.publish(100.0)
+        
+           

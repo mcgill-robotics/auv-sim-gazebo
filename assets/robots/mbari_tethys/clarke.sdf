@@ -24,14 +24,13 @@
 
       <collision name="main_body_collision">
         <geometry>
-          <!-- <cylinder>
+          <cylinder>
             <radius>0.2</radius>
             <length>0.788</length>
-          </cylinder> -->
-          <box>
-            <!-- needs to be measured -->
+          </cylinder>
+          <!-- <box>
             <size>0.4 0.4 1</size> 
-          </box>
+          </box> -->
         </geometry>
       </collision>
 
@@ -71,7 +70,7 @@
         <always_on>1</always_on>
         <visualize>true</visualize>
         <!-- choose topic that has the same name as the ROS topic -->
-        <topic>depth_cam</topic>
+        <topic>vision/depth_map</topic>
         <pose>0 0 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
         <update_rate>30.0</update_rate>
