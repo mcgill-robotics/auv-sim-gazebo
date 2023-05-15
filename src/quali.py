@@ -62,6 +62,9 @@ def callback_imu_dvl(data):
     pub_state_theta_y.publish(theta_y)
     pub_state_theta_z.publish(theta_z)
 
+    pub_dvl_x.publish(p.x)
+    pub_dvl_y.publis(p.y)
+
 
 if __name__ == '__main__':
 
@@ -75,7 +78,8 @@ if __name__ == '__main__':
     pub_state_theta_y = rospy.Publisher('/state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('/state_theta_z', Float64, queue_size=1)
 
-    # pub_dvl = rospy.Publisher('', pass, queue_size=1)
+    pub_dvl_x = rospy.Publisher('/[sometopic_x]', Float64, queue_size=1)
+    pub_dvl_y = rospy.Publisher('/[sometpoic_y]', Float64, queue_size=1)
 
     sub_imu = rospy.Subscriber('/imu', Imu, callback_imu_dvl)
 
