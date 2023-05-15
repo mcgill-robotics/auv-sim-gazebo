@@ -65,7 +65,7 @@ def callback_imu_dvl(data):
 
 if __name__ == '__main__':
 
-    rospy.init_node('thrusters')
+    rospy.init_node('bridge')
 
     # IMU + DVL
     pub_state_x = rospy.Publisher('/state_x', Float64, queue_size=1)
@@ -91,13 +91,15 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
 
+    count = 0
     while True:
-        pubt0.publish(50.0)
-        pubt1.publish(50.0)
-        rospy.sleep(1)
-        pubt4.publish(100.0)
-        pubt5.publish(100.0)
-        pubt6.publish(100.0)
-        pubt7.publish(100.0)
+        pubt0.publish(100.0)
+        pubt1.publish(100.0)
+        if count % 2 == 0:
+            pubt4.publish(100.0)
+            pubt5.publish(100.0)
+            pubt6.publish(100.0)
+            pubt7.publish(100.0)
+        count += 1
         
            
