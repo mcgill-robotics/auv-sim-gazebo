@@ -8,12 +8,8 @@
 
       <!-- For more information about how to calculate the inertia values: 
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
-      <!-- Assumptions for the inertia calculation:
-            - m = 30 => this is wrong
-            - r = 0.2 => this is wrong
-            - h = 0.778 
-      -->
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
+
       <inertial>
         <mass>147.8671</mass>
         <inertia>
@@ -28,13 +24,11 @@
 
       <collision name="main_body_collision">
         <geometry>
-          <!-- <cylinder>
+          <cylinder>
+            <!-- <radius>0.112</radius> -->
             <radius>0.2</radius>
             <length>0.788</length>
-          </cylinder> -->
-          <box>
-            <size>0.4 0.4 1</size>
-          </box>
+          </cylinder>
         </geometry>
       </collision>
 
@@ -50,70 +44,31 @@
       <!-- IMU sensor -->
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
-        <update_rate>7</update_rate> <!-- updates/second - might have to change -->
+        <update_rate>7</update_rate>
         <visualize>true</visualize>
         <topic>imu</topic>
       </sensor>
 
       <!-- Down camera -->
       <sensor name="down_camera" type="camera">
-        <!-- note: the type used is RGB_INT8, but I believe there is an option to change
-             if needed (something like <format>??????</format>)-->
-        <horizontal_fov>1.047</horizontal_fov> <!-- not actual value -->
+        <horizontal_fov>1.047</horizontal_fov> 
         <update_rate>30.0</update_rate>
         <visualize>true</visualize>
+        <!-- choose topic that has the same name as the ROS topic -->
         <topic>down_cam</topic>
         <always_on>1</always_on>
         <image>
           <width>800</width>
           <height>800</height>
         </image>
-        <!-- should we add noise? -->
-        <!--
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-        -->
       </sensor>
-
-      <!-- Front cameras -->
-      <!-- 
-      <sensor type="camera" name="left">
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-        <topic>left_cam</topic>
-        <pose>0 -0.2 -0.447 3.13159 1.570795 0</pose>
-        <horizontal_fov>1.047</horizontal_fov>
-        <update_rate>30.0</update_rate>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>B8G8R8</format>
-        </image>
-      </sensor>
-
-      <sensor type="camera" name="right">
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-        <topic>right_cam</topic>
-        <pose>0 0.2 -0.447 3.13159 1.570795 0</pose>
-        <horizontal_fov>1.047</horizontal_fov>
-        <update_rate>30.0</update_rate>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>B8G8R8</format>
-        </image>
-      </sensor>
-      -->
 
       <!-- Depth camera -->
       <sensor type="depth_camera" name="depth_camera">
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <topic>depth_cam</topic>
+        <!-- choose topic that has the same name as the ROS topic -->
+        <topic>vision/depth_map</topic>
         <pose>0 0 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
         <update_rate>30.0</update_rate>
@@ -132,7 +87,7 @@
 
     <!-- Thruster0 -->
     <link name="thruster0">
-      <pose>0.2 -0.212 1.447 0 1.5708 0</pose>
+      <pose>0.112 -0.112 1.394 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -144,18 +99,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
       
       <visual name= "visual">
         <geometry>
@@ -190,7 +134,7 @@
 
     <!-- Thruster1 -->
     <link name="thruster1">  
-      <pose>0.2 0.212 1.447 0 1.5708 0</pose>
+      <pose>0.112 0.112 1.394 0 1.5708 0</pose>
     
       <inertial>
         <mass>0.2</mass>
@@ -202,18 +146,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -251,10 +184,10 @@
     <!-- Thruster2 -->
     <link name="thruster2">
       <!-- Forward = negative force -->
-      <pose>0.2 1.447 -0.4475 0 0 -1.5708</pose>
+      <pose>0.112 1.447 -0.394 0 0 -1.5708</pose>
 
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -263,18 +196,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -310,10 +232,10 @@
 
     <!-- Thruster3 -->
     <link name="thruster3">      
-      <pose>0.2 1.447 0.4475 0 0 -1.5708</pose>
+      <pose>0.112 1.447 0.394 0 0 -1.5708</pose>
       
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -323,17 +245,6 @@
           <izz>0.000033571862</izz>
         </inertia>
       </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
 
       <visual name= "visual">
         <geometry>
@@ -369,10 +280,10 @@
 
     <!-- Thruster4 -->
     <link name="thruster4">
-      <pose>1.647 -0.2 0.4475 0 3.14159 0</pose>
+      <pose>1.55 -0.112 0.394 0 3.14159 0</pose>
       
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -382,17 +293,6 @@
           <izz>0.000033571862</izz>
         </inertia>
       </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
 
       <visual name= "visual">
         <geometry>
@@ -409,7 +309,6 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-            
               <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
               <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
               <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
@@ -428,10 +327,10 @@
 
     <!--Thruster5 -->
     <link name="thruster5">
-      <pose>1.647 0.2 0.4475 0 3.14159 0</pose>
+      <pose>1.55 0.112 0.394 0 3.14159 0</pose>
       
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -441,17 +340,6 @@
           <izz>0.000033571862</izz>
         </inertia>
       </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
 
       <visual name= "visual">
         <geometry>
@@ -468,7 +356,6 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-            
               <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
               <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
               <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
@@ -487,10 +374,10 @@
 
     <!--Thruster6 -->
     <link name="thruster6">
-      <pose>1.647 0.2 -0.4475 0 3.14159 0</pose>
+      <pose>1.55 0.112 -0.394 0 3.14159 0</pose>
       
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -499,18 +386,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -527,7 +403,6 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-            
               <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
               <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
               <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
@@ -546,10 +421,10 @@
 
     <!--Thruster7 -->
     <link name="thruster7">      
-      <pose>1.647 -0.2 -0.4475 0 3.14159 0</pose>
+      <pose>1.55 -0.112 -0.394 0 3.14159 0</pose>
       
       <inertial>
-        <mass>0.09</mass>
+        <mass>0.2</mass>
         <inertia>
           <ixx>0.000143971303</ixx>
           <ixy>0.000000000008</ixy>
@@ -558,18 +433,7 @@
           <iyz>-0.000025236433</iyz>
           <izz>0.000033571862</izz>
         </inertia>
-      </inertial>
-
-      
-      <!-- <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>0.05</length>
-          </cylinder>
-        </geometry>
-      </collision> -->
-     
+      </inertial>     
 
       <visual name= "visual">
         <geometry>
@@ -724,7 +588,7 @@
     <plugin
         filename="libignition-gazebo-sensors-system.so"
         name="ignition::gazebo::systems::Sensors">
-        <render_engine>ogre2</render_engine>
+        <render_engine>ogre</render_engine>
     </plugin>
 
     <plugin
@@ -734,7 +598,7 @@
         <joint_name>thruster0_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -744,7 +608,7 @@
         <joint_name>thruster1_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -754,7 +618,7 @@
         <joint_name>thruster2_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -764,7 +628,7 @@
         <joint_name>thruster3_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -774,7 +638,7 @@
         <joint_name>thruster4_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -784,7 +648,7 @@
         <joint_name>thruster5_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -794,7 +658,7 @@
         <joint_name>thruster6_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
 
     <plugin
@@ -804,10 +668,8 @@
         <joint_name>thruster7_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.05</propeller_diameter>
+        <propeller_diameter>0.14</propeller_diameter>
     </plugin>
-
-    
     
     <plugin
         filename="ignition-gazebo-hydrodynamics-system"
