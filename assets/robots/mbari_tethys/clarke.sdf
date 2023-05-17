@@ -22,12 +22,22 @@
         </inertia>
       </inertial>
 
+      <!-- <mass>23.9</mass>
+        <inertia>
+          <ixx>1.57463955</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.36491894</iyy>
+          <iyz>0</iyz>
+          <izz>2.36491894</izz>
+        </inertia> -->
+
       <collision name="main_body_collision">
         <geometry>
           <cylinder>
             <!-- <radius>0.112</radius> -->
-            <radius>0.2</radius>
-            <length>0.788</length>
+            <radius>0.363</radius>
+            <length>0.89</length>
           </cylinder>
         </geometry>
       </collision>
@@ -35,8 +45,8 @@
       <visual name="visual">
         <geometry>
           <cylinder>
-            <radius>0.2</radius>
-            <length>0.788</length>
+            <radius>0.363</radius>
+            <length>0.89</length>
           </cylinder>
         </geometry>
       </visual>
@@ -87,7 +97,7 @@
 
     <!-- Thruster0 -->
     <link name="thruster0">
-      <pose>0.112 -0.112 1.394 0 1.5708 0</pose>
+      <pose>0.363 -0.363 1.445 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -134,7 +144,7 @@
 
     <!-- Thruster1 -->
     <link name="thruster1">  
-      <pose>0.112 0.112 1.394 0 1.5708 0</pose>
+      <pose>0.363 0.363 1.445 0 1.5708 0</pose>
     
       <inertial>
         <mass>0.2</mass>
@@ -184,7 +194,7 @@
     <!-- Thruster2 -->
     <link name="thruster2">
       <!-- Forward = negative force -->
-      <pose>0.112 1.447 -0.394 0 0 -1.5708</pose>
+      <pose>0.363 1.447 -0.445 0 0 -1.5708</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -232,7 +242,7 @@
 
     <!-- Thruster3 -->
     <link name="thruster3">      
-      <pose>0.112 1.447 0.394 0 0 -1.5708</pose>
+      <pose>0 1.447 0.445 0 0 -1.5708</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -280,7 +290,7 @@
 
     <!-- Thruster4 -->
     <link name="thruster4">
-      <pose>1.55 -0.112 0.394 0 3.14159 0</pose>
+      <pose>1.808 -0.363 0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -327,7 +337,7 @@
 
     <!--Thruster5 -->
     <link name="thruster5">
-      <pose>1.55 0.112 0.394 0 3.14159 0</pose>
+      <pose>1.808 0.363 0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -374,7 +384,7 @@
 
     <!--Thruster6 -->
     <link name="thruster6">
-      <pose>1.55 0.112 -0.394 0 3.14159 0</pose>
+      <pose>1.808 0.363 -0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -421,7 +431,7 @@
 
     <!--Thruster7 -->
     <link name="thruster7">      
-      <pose>1.55 -0.112 -0.394 0 3.14159 0</pose>
+      <pose>1.808 -0.363 -0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -598,7 +608,7 @@
         <joint_name>thruster0_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -608,7 +618,7 @@
         <joint_name>thruster1_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -618,7 +628,7 @@
         <joint_name>thruster2_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -628,7 +638,7 @@
         <joint_name>thruster3_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -638,7 +648,7 @@
         <joint_name>thruster4_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -648,7 +658,7 @@
         <joint_name>thruster5_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -658,7 +668,7 @@
         <joint_name>thruster6_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -668,7 +678,8 @@
         <joint_name>thruster7_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.14</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>
+        <!-- 0.09 -->
     </plugin>
     
     <plugin
