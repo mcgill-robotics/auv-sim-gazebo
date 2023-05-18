@@ -62,6 +62,9 @@ def callback_imu_dvl(data):
     pub_state_theta_y.publish(theta_y)
     pub_state_theta_z.publish(theta_z)
 
+    # pub_dvl_x.publish(p.x)
+    # pub_dvl_y.publish(p.y)
+
 
 if __name__ == '__main__':
 
@@ -75,9 +78,8 @@ if __name__ == '__main__':
     pub_state_theta_y = rospy.Publisher('/state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('/state_theta_z', Float64, queue_size=1)
 
-    # pub_acceleration_x = rospy.Publisher('/[tbd_x]', Float64, queue_size=1)
-    # pub_acceleration_y = rospy.Publisher('/[tbd_y]', Float64, queue_size=1)
-    # pub_acceleration_z = rospy.Publisher('/[tbd_z]', Float64, queue_size=1)
+    # pub_dvl_x = rospy.Publisher('/[sometopic_x]', Float64, queue_size=1)
+    # pub_dvl_y = rospy.Publisher('/[sometpoic_y]', Float64, queue_size=1)
 
     sub_imu = rospy.Subscriber('/imu', Imu, callback_imu_dvl)
 
@@ -93,15 +95,17 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
 
-    count = 0
+    counter = 0
     while True:
-        pubt0.publish(50.0)
-        pubt1.publish(50.0)
-        if count % 2 == 0:
-            pubt4.publish(50.0)
-            pubt5.publish(50.0)
-            pubt6.publish(50.0)
-            pubt7.publish(50.0)
-        count += 1
-        
-           
+        # if counter % 2 == 0:
+        pubt0.publish(300.0)
+        pubt1.publish(300.0)
+            # counter = 1
+        # else:
+        #     pubt0.publish(-300.0)
+        #     pubt1.publish(-300.0)
+        #     counter = 0
+        pubt4.publish(-550.0)
+        pubt5.publish(-550.0)
+        pubt6.publish(-550.0)
+        pubt7.publish(-550.0)
