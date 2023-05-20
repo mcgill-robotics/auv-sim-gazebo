@@ -22,22 +22,36 @@
         </inertia>
       </inertial>
 
-      <!-- <mass>23.9</mass>
+      <!-- <inertial>
+        <mass>23.9</mass>
         <inertia>
-          <ixx>1.57463955</ixx>
+          <ixx>0.131197238</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>2.36491894</iyy>
+          <iyy>0.687511353</iyy>
           <iyz>0</iyz>
-          <izz>2.36491894</izz>
-        </inertia> -->
+          <izz>0.687511353</izz>
+        </inertia> 
+      </inertial>  -->
+
+      <!-- <inertial>
+        <mass>23.9</mass>
+        <inertia>
+          <ixx>0.687671018276762402088772845953</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.687671018276762402088772845953</iyy>
+          <iyz>0</iyz>
+          <izz>0.12979634464751958224543080939948</izz>
+        </inertia> 
+      </inertial>  -->
+        
 
       <collision name="main_body_collision">
         <geometry>
           <cylinder>
-            <!-- <radius>0.112</radius> -->
-            <radius>0.363</radius>
-            <length>0.89</length>
+            <radius>0.10478</radius>
+            <length>0.5588</length>
           </cylinder>
         </geometry>
       </collision>
@@ -45,8 +59,8 @@
       <visual name="visual">
         <geometry>
           <cylinder>
-            <radius>0.363</radius>
-            <length>0.89</length>
+            <radius>0.10478</radius>
+            <length>0.5588</length>
           </cylinder>
         </geometry>
       </visual>
@@ -62,7 +76,7 @@
       <!-- Down camera -->
       <sensor name="down_camera" type="camera">
         <horizontal_fov>1.047</horizontal_fov> 
-        <update_rate>30.0</update_rate>
+        <update_rate>10.0</update_rate>
         <visualize>true</visualize>
         <!-- choose topic that has the same name as the ROS topic -->
         <topic>down_cam</topic>
@@ -77,11 +91,10 @@
       <sensor type="depth_camera" name="depth_camera">
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <!-- choose topic that has the same name as the ROS topic -->
         <topic>vision/depth_map</topic>
         <pose>0 0 -0.447 3.13159 1.570795 0</pose>
         <horizontal_fov>1.047</horizontal_fov>
-        <update_rate>30.0</update_rate>
+        <update_rate>10.0</update_rate>
         <clip>
           <near>0.02</near>
           <far>10</far>
@@ -97,7 +110,7 @@
 
     <!-- Thruster0 -->
     <link name="thruster0">
-      <pose>0.363 -0.363 1.445 0 1.5708 0</pose>
+      <pose>0 -0.363 1.445 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -144,7 +157,7 @@
 
     <!-- Thruster1 -->
     <link name="thruster1">  
-      <pose>0.363 0.363 1.445 0 1.5708 0</pose>
+      <pose>0 0.363 1.445 0 1.5708 0</pose>
     
       <inertial>
         <mass>0.2</mass>
@@ -194,7 +207,7 @@
     <!-- Thruster2 -->
     <link name="thruster2">
       <!-- Forward = negative force -->
-      <pose>0.363 1.447 -0.445 0 0 -1.5708</pose>
+      <pose>0 1.447 -0.445 0 0 -1.5708</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -290,7 +303,7 @@
 
     <!-- Thruster4 -->
     <link name="thruster4">
-      <pose>1.808 -0.363 0.445 0 3.14159 0</pose>
+      <pose>1.408 -0.363 0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -337,7 +350,7 @@
 
     <!--Thruster5 -->
     <link name="thruster5">
-      <pose>1.808 0.363 0.445 0 3.14159 0</pose>
+      <pose>1.408 0.363 0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -384,7 +397,7 @@
 
     <!--Thruster6 -->
     <link name="thruster6">
-      <pose>1.808 0.363 -0.445 0 3.14159 0</pose>
+      <pose>1.408 0.363 -0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -431,7 +444,7 @@
 
     <!--Thruster7 -->
     <link name="thruster7">      
-      <pose>1.808 -0.363 -0.445 0 3.14159 0</pose>
+      <pose>1.408 -0.363 -0.445 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -608,7 +621,7 @@
         <joint_name>thruster0_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -618,7 +631,7 @@
         <joint_name>thruster1_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -628,7 +641,7 @@
         <joint_name>thruster2_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -638,7 +651,7 @@
         <joint_name>thruster3_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -648,7 +661,7 @@
         <joint_name>thruster4_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -658,7 +671,7 @@
         <joint_name>thruster5_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -668,7 +681,7 @@
         <joint_name>thruster6_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
     </plugin>
 
     <plugin
@@ -678,7 +691,7 @@
         <joint_name>thruster7_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>2.2</propeller_diameter>
         <!-- 0.09 -->
     </plugin>
     
