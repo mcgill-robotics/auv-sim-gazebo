@@ -158,22 +158,26 @@
         </light>
 
         <include>
-            <uri>model://assets/common/simple_pool/simple_pool.sdf</uri>
+            <!-- <uri>model://assets/common/simple_pool/simple_pool.sdf</uri> -->
+            <uri>assets/common/simple_pool/simple_pool.sdf</uri>
             <pose>0 0 0 0 0 0</pose>
         </include>
 
         <include>
-            <uri>model://assets/quali/gate/gate.sdf</uri>
+            <!-- <uri>model://assets/quali/gate/gate.sdf</uri> -->
+            <uri>assets/quali/gate/gate.sdf</uri>
             <pose>-1 0 -1 0 0 0</pose>
         </include>
 
         <include>
-            <uri>model://assets/quali/pole/pole.sdf</uri>
+            <!-- <uri>model://assets/quali/pole/pole.sdf</uri> -->
+            <uri>assets/quali/pole/pole.sdf</uri>
             <pose>0 10 -5 0 0 0</pose>
         </include>
 
         <include>
-            <uri>model://assets/robots/mbari_tethys/clarke.sdf</uri>
+            <!-- <uri>model://assets/robots/mbari_tethys/clarke.sdf</uri> -->
+            <uri>assets/robots/mbari_tethys/clarke.sdf</uri>
             <pose>0.389 -3 -2.5 1.5708 1.5708 0</pose>
         </include>
 

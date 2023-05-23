@@ -98,7 +98,7 @@
 
     <!-- Thruster0 -->
     <link name="thruster0">
-      <pose>0 -0.363 1.445 0 1.5708 0</pose>
+      <pose>0 -0.20638 1.445 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -153,7 +153,7 @@
 
     <!-- Thruster1 -->
     <link name="thruster1">  
-      <pose>0 0.363 1.445 0 1.5708 0</pose>
+      <pose>0 0.20638 1.445 0 1.5708 0</pose>
     
       <inertial>
         <mass>0.2</mass>
@@ -211,7 +211,7 @@
     <!-- Thruster2 -->
     <link name="thruster2">
       <!-- Forward = negative force -->
-      <pose>0 1.447 -0.445 0 0 -1.5708</pose>
+      <pose>0 1.31048 -0.4191 0 0 -1.5708</pose> 
 
       <inertial>
         <mass>0.2</mass>
@@ -267,7 +267,7 @@
 
     <!-- Thruster3 -->
     <link name="thruster3">      
-      <pose>0 1.447 0.445 0 0 -1.5708</pose>
+      <pose>0 1.31048 0.4191 0 0 -1.5708</pose>
       
       <inertial>
         <mass>0.2</mass>

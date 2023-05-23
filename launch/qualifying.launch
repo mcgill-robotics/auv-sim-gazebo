@@ -1,6 +1,7 @@
 <launch>
     <node
-        name="set_ign_path" pkg="auv-sim" type="set_path.sh" output="screen">
+        name="set_ign_path" pkg="auv-sim" type="set_path.sh" output="screen"
+        args="-hold -e bash -c 'set_path.sh'">
     </node>
 
     <node
