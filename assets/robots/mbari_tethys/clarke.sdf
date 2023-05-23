@@ -10,7 +10,7 @@
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
 
-      <inertial>
+      <!-- <inertial>
         <mass>147.8671</mass>
         <inertia>
           <ixx>3.000000</ixx>
@@ -20,31 +20,19 @@
           <iyz>0</iyz>
           <izz>41.980233</izz>
         </inertia>
-      </inertial>
+      </inertial> -->
 
-      <!-- <inertial>
+      <inertial>
         <mass>23.9</mass>
         <inertia>
-          <ixx>0.131197238</ixx>
+          <ixx>0.109495779</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.687511353</iyy>
+          <iyy>1.545069459</iyy>
           <iyz>0</iyz>
-          <izz>0.687511353</izz>
-        </inertia> 
-      </inertial>  -->
-
-      <!-- <inertial>
-        <mass>23.9</mass>
-        <inertia>
-          <ixx>0.687671018276762402088772845953</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.687671018276762402088772845953</iyy>
-          <iyz>0</iyz>
-          <izz>0.12979634464751958224543080939948</izz>
-        </inertia> 
-      </inertial>  -->
+          <izz>1.545069459</izz>
+        </inertia>
+      </inertial> 
         
 
       <collision name="main_body_collision">
@@ -135,7 +123,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -147,16 +135,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -190,7 +178,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -203,16 +191,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
 
@@ -248,7 +236,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -261,16 +249,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -304,7 +292,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -317,16 +305,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -360,7 +348,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -372,16 +360,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -415,7 +403,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -427,16 +415,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -470,7 +458,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -482,16 +470,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -525,7 +513,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -538,16 +526,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>/home/felps/AUV-2023/catkin_ws/src/auv-sim/assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
+            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
+            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -759,7 +747,7 @@
         <!-- 0.09 -->
     </plugin>
     
-    <plugin
+    <!-- <plugin
         filename="ignition-gazebo-hydrodynamics-system"
         name="ignition::gazebo::systems::Hydrodynamics">
         <link_name>base_link</link_name>
@@ -781,7 +769,80 @@
         <mQ>0</mQ>
         <nRR>-632.698957</nRR>
         <nR>0</nR>
-    </plugin>    
+    </plugin>  -->
+
+    <!-- 
+      Xdotu = -2.171640047
+      Ydotv = Zdotw = -20.12043854
+      Kdotp = 0
+      Ndotr = Ndotq = -0.898652566
+     -->
+
+
+    <!-- <plugin
+        filename="ignition-gazebo-hydrodynamics-system"
+        name="ignition::gazebo::systems::Hydrodynamics">
+        <link_name>base_link</link_name>
+        <xDotU>-4.876161</xDotU>
+        <yDotV>-126.324739</yDotV>
+        <zDotW>-126.324739</zDotW>
+        <kDotP>0</kDotP>
+        <mDotQ>-33.46</mDotQ>
+        <nDotR>-33.46</nDotR>
+        <xUU>0</xUU>
+        <xU>0</xU>
+        <yVV>0</yVV>
+        <yV>0</yV>
+        <zWW>0</zWW>
+        <zW>0</zW>
+        <kPP>0</kPP>
+        <kP>0</kP>
+        <mQQ>0</mQQ>
+        <mQ>0</mQ>
+        <nRR>0</nRR>
+        <nR>0</nR>
+    </plugin>      -->
+
+    <!-- <plugin
+          filename="ignition-gazebo-lift-drag-system"
+          name="ignition::gazebo::systems::LiftDrag">
+              <air_density>1000</air_density>
+              <cla>4.13</cla>
+              <cla_stall>-1.1</cla_stall>
+              <cda>0.2</cda>
+              <cda_stall>0.03</cda_stall>
+              <alpha_stall>0.17</alpha_stall>
+              <a0>0</a0>
+              <area>0.0244</area>
+              <upward>0 1 0</upward>
+              <forward>1 0 0</forward>
+              <link_name>vertical_fins</link_name>
+              <cp>0 0 0</cp>
+          </plugin> -->
+
+    <!-- <plugin
+        filename="ignition-gazebo-hydrodynamics-system"
+        name="ignition::gazebo::systems::Hydrodynamics">
+        <link_name>base_link</link_name>
+        <xDotU>-2.171640047</xDotU>
+        <yDotV>-20.12043854</yDotV>
+        <zDotW>-20.12043854</zDotW>
+        <kDotP>0</kDotP>
+        <mDotQ>-0.898652566</mDotQ>
+        <nDotR>-0.898652566</nDotR>
+        <xUU>0</xUU>
+        <xU>0</xU>
+        <yVV>0</yVV>
+        <yV>0</yV>
+        <zWW>0</zWW>
+        <zW>0</zW>
+        <kPP>0</kPP>
+        <kP>0</kP>
+        <mQQ>0</mQQ>
+        <mQ>0</mQ>
+        <nRR>0</nRR>
+        <nR>0</nR>
+    </plugin>  -->
 
   </model>
 </sdf>

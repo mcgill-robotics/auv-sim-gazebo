@@ -1,5 +1,9 @@
 <launch>
     <node
+        name="set_ign_path" pkg="auv-sim" type="set_path.sh" output="screen">
+    </node>
+
+    <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
 	    args="$(find auv-sim)/worlds/qualifying.sdf">
     </node>
