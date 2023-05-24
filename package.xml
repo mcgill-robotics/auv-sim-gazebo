@@ -30,20 +30,6 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>python3-numpy</exec_depend>
-  <exec_depend>tf</exec_depend>
-
-  <export>
-    <!-- The ${prefix}/.. means to add the parent of your package directory 
-    to the model path, which should usually be the workspace itself. 
-    So then you can reference all packages from that workspace. 
-    The following links are what I'm using
-    https://github.com/ROBOTIS-GIT/turtlebot3_simulations/tree/master/turtlebot3_gazebo 
-    https://github.com/gazebosim/sdformat/issues/1234
-    https://classic.gazebosim.org/tutorials?tut=components&cat=get_started
-    -->
-    <!-- NOT WORKING -->
-    <gazebo_ros gazebo_model_path="${prefix}/assets/assets/common/simple_pool"/>
-  </export>
-  
+  <exec_depend>tf</exec_depend>  
 
 </package>

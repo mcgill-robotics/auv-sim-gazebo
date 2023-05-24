@@ -95,19 +95,16 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
 
-    counter = 0
     while True:
-        if counter % 2 == 0:
-            pubt0.publish(300.0)
-            pubt1.publish(300.0)
-            counter = 1
-        else:
-            pubt0.publish(-300.0)
-            pubt1.publish(-300.0)
-            counter = 0
-        pubt4.publish(-550.0)
-        pubt5.publish(-550.0)
-        pubt6.publish(-550.0)
-        pubt7.publish(-550.0)
+        # pubt0.publish(10.0)
+        # pubt1.publish(10.0)
+        # pubt4.publish(325.0)
+        # pubt5.publish(325.0)
+        # pubt6.publish(325.0)
+        # pubt7.publish(325.0)
+        pubt4.publish(10.0)
+        pubt5.publish(10.0)
+        pubt6.publish(10.0)
+        pubt7.publish(10.0)
         
            
