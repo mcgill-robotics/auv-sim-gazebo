@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>simulation</name>
+  <name>auv-sim</name>
   <version>0.1.0</version>
   <description>
       Package to run gazebo simulation of AUV

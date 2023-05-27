@@ -5,7 +5,7 @@
 	  </node>
 
 	<node 
-	    name="test_tethys" pkg="simulation" type="test_tethys.py" respawn="false" output="screen" />
+	    name="test_tethys" pkg="auv-sim" type="test_tethys.py" respawn="false" output="screen" />
 
 	<node
 	    name="$(anon ros_ign_bridge)" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
