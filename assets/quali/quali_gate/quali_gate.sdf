@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <model name="quali_gate">
+        <static>true</static>
+        <link name="quali_gate">
+            <visual name="quali_gate_visual">
+                <geometry>
+                    <mesh>
+                        <uri>quali_gate.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="quali_gate_visual">
+                <geometry>
+                    <mesh>
+                        <uri>quali_gate.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+    </model>
+</sdf>

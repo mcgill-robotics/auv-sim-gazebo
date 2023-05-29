@@ -10,6 +10,9 @@
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
 
+      <pose>0.389 -3 -2.5 1.5708 1.5708 0</pose>
+      <!-- <pose>0.389 -3 -2.5 0 0 0</pose> -->
+
       <!-- <inertial>
         <mass>147.8671</mass>
         <inertia>
@@ -36,9 +39,10 @@
         
 
       <collision name="main_body_collision">
+        <pose>0 0 0 1.5708 1.5708 1.5708</pose>
         <geometry>
           <cylinder>
-            <radius>0.10478</radius>
+            <radius>0.1111</radius>
             <length>0.5588</length>
           </cylinder>
         </geometry>
@@ -47,9 +51,12 @@
       <visual name="visual">
         <geometry>
           <cylinder>
-            <radius>0.10478</radius>
+            <radius>0.1111</radius>
             <length>0.5588</length>
           </cylinder>
+          <!-- <mesh>
+            <uri>meshes/clarke.dae</uri>
+          </mesh> -->
         </geometry>
       </visual>
 
@@ -98,7 +105,7 @@
 
     <!-- Thruster0 -->
     <link name="thruster0">
-      <pose>0 -0.20638 1.445 0 1.5708 0</pose>
+      <pose relative_to="base_link">0 -0.2127 1.445 0 1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -123,7 +130,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -135,16 +142,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -153,7 +160,7 @@
 
     <!-- Thruster1 -->
     <link name="thruster1">  
-      <pose>0 0.20638 1.445 0 1.5708 0</pose>
+      <pose relative_to="base_link">0 0.2127 1.445 0 1.5708 0</pose>
     
       <inertial>
         <mass>0.2</mass>
@@ -178,7 +185,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -191,16 +198,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
 
@@ -211,7 +218,7 @@
     <!-- Thruster2 -->
     <link name="thruster2">
       <!-- Forward = negative force -->
-      <pose>0 1.31048 -0.4191 0 0 -1.5708</pose> 
+      <pose relative_to="base_link">0 -1.52636 -0.4191 0 0 1.5708</pose> 
 
       <inertial>
         <mass>0.2</mass>
@@ -236,7 +243,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -249,16 +256,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -267,7 +274,7 @@
 
     <!-- Thruster3 -->
     <link name="thruster3">      
-      <pose>0 1.52004 0.4191 0 0 -1.5708</pose>
+      <pose relative_to="base_link">0 1.52636 0.4191 0 0 -1.5708</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -292,7 +299,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -305,16 +312,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -323,7 +330,7 @@
 
     <!-- Thruster4 -->
     <link name="thruster4">
-      <pose>1.408 -0.20638 0.2794 0 3.14159 0</pose>
+      <pose relative_to="base_link">1.408 -0.2127 0.2794 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -348,7 +355,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -360,16 +367,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -378,7 +385,7 @@
 
     <!--Thruster5 -->
     <link name="thruster5">
-      <pose>1.408 0.20638 0.2794 0 3.14159 0</pose>
+      <pose relative_to="base_link">1.408 0.2127 0.2794 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -403,7 +410,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -415,16 +422,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -433,7 +440,7 @@
 
     <!--Thruster6 -->
     <link name="thruster6">
-      <pose>1.408 0.20638 -0.2794 0 3.14159 0</pose>
+      <pose relative_to="base_link">1.408 0.2127 -0.2794 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -458,7 +465,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -470,16 +477,16 @@
           <specular>1.0 1.0 1.0</specular>
           <pbr>
             <metal>
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -488,7 +495,7 @@
 
     <!--Thruster7 -->
     <link name="thruster7">      
-      <pose>1.408 -0.20638 -0.2794 0 3.14159 0</pose>
+      <pose relative_to="base_link">1.408 -0.2127 -0.2794 0 3.14159 0</pose>
       
       <inertial>
         <mass>0.2</mass>
@@ -513,7 +520,7 @@
       <visual name= "visual">
         <geometry>
           <mesh>
-            <uri>model://assets/robots/mbari_tethys/meshes/tethys.dae</uri>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
             <submesh>
               <name>Prop</name>
               <center>false</center>
@@ -526,16 +533,16 @@
           <pbr>
             <metal>
             
-              <albedo_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/robots/mbari_tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
             </metal>
           </pbr>
           <script>
-            <uri>model://assets/robots/mbari_tethys/materials/scripts/</uri>
-            <uri>model://assets/robots/mbari_tethys/materials/textures/</uri>
-            <name>model://assets/robots/mbari_tethys/tethys/Tethys_Diffuse</name>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
       </visual>
@@ -820,29 +827,29 @@
               <cp>0 0 0</cp>
           </plugin> -->
 
-    <!-- <plugin
+    <plugin
         filename="ignition-gazebo-hydrodynamics-system"
         name="ignition::gazebo::systems::Hydrodynamics">
         <link_name>base_link</link_name>
-        <xDotU>-2.171640047</xDotU>
-        <yDotV>-20.12043854</yDotV>
-        <zDotW>-20.12043854</zDotW>
+        <xDotU>-4.539392551483312</xDotU>
+        <yDotV>-14.66149641650603</yDotV>
+        <zDotW>-14.66149641650603</zDotW>
         <kDotP>0</kDotP>
-        <mDotQ>-0.898652566</mDotQ>
-        <nDotR>-0.898652566</nDotR>
-        <xUU>0</xUU>
-        <xU>0</xU>
-        <yVV>0</yVV>
-        <yV>0</yV>
-        <zWW>0</zWW>
-        <zW>0</zW>
-        <kPP>0</kPP>
-        <kP>0</kP>
-        <mQQ>0</mQQ>
-        <mQ>0</mQ>
+        <mDotQ>-0.10720067499949107</mDotQ>
+        <nDotR>-0.10720067499949107</nDotR>
+        <xUU>-0</xUU>
+        <xU>-1</xU>
+        <yVV>-0</yVV>
+        <yV>-100</yV>
+        <zWW>-0</zWW>
+        <zW>-100</zW>
+        <kPP>-0</kPP>
+        <kP>-0</kP>
+        <mQQ>-0.05</mQQ>
+        <mQ>-100</mQ>
         <nRR>0</nRR>
-        <nR>0</nR>
-    </plugin>  -->
+        <nR>-100</nR>
+    </plugin> 
 
   </model>
 </sdf>

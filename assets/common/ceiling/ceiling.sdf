@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <model name="ceiling">
+        <static>true</static>
+        <link name="ceiling_link">
+            <visual name="ceiling_visual">
+                <transparency>0.8</transparency>
+                <geometry>
+                    <mesh>
+                        <uri>ceiling.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="ceiling_collision">
+                <geometry>
+                    <mesh>
+                        <uri>ceiling.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+    </model>
+</sdf>

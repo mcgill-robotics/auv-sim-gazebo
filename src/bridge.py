@@ -143,13 +143,14 @@ if __name__ == '__main__':
     pub_theta_y_pid.publish(0)
 
     while True:
+        pass
         # pubt0.publish(10.0)
         # pubt1.publish(10.0)
-        pubt2.publish(10.0)
+        # pubt2.publish(10.0)
         # pubt3.publish(10.0)
-        pubt4.publish(-3.0)
-        pubt5.publish(-3.0)
-        pubt6.publish(-3.0)
-        pubt7.publish(-3.0)
+        pubt4.publish(10.0)
+        pubt5.publish(10.0)
+        pubt6.publish(10.0)
+        pubt7.publish(10.0)
         
            
