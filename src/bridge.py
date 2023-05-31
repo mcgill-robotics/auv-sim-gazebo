@@ -60,28 +60,37 @@ def callback_pose(data):
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
     # print(clarke_poses)
-    pub_state_x.publish(clarke_position.x)
-    pub_state_y.publish(clarke_position.y)
-    pub_state_z.publish(clarke_position.z)
+    pub_state_x.publish(clarke_position.x + 0.389)
+    pub_state_y.publish(clarke_position.y - 3)
+    pub_state_z.publish(clarke_position.z - 2.5)
 
-    q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
-    theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
-    theta_y = transformations.euler_from_quaternion(q, 'rxyz')[0]
-    theta_z = transformations.euler_from_quaternion(q, 'rxyz')[0]
+    q = np.array([clarke_orientation.w, clarke_orientation.x, clarke_orientation.y, clarke_orientation.z])
+    euler = transformations.euler_from_quaternion(q, 'rxyz')
+
+    theta_z = euler[0]
+    theta_y = euler[1]
+    theta_x = euler[2]
 
     angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
+    # angles = np.array([theta_x, theta_y, theta_z])
+    # for i in range(3):
+    #         if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
+    #             euler[i] = angles[i] - 360
+    #         elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
+    #             euler[i] = angles[i] + 360
+    #         else:
+    #             euler[i] = angles[i]
+    
+    print("Quaternion:")
+    print(q)
+    print("Euler")
+    print(angles)
 
-    for i in range(3):
-            if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
-                euler[i] = angles[i] - 360
-            elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
-                euler[i] = angles[i] + 360
-            else:
-                euler[i] = angles[i]
+    print("##################\n")
 
-    pub_state_theta_x.publish(euler[0])
-    pub_state_theta_y.publish(euler[1])
-    pub_state_theta_z.publish(euler[2])
+    pub_state_theta_x.publish(angles[0])
+    pub_state_theta_y.publish(angles[1])
+    pub_state_theta_z.publish(angles[2])
 
 def callback_imu_dvl(data):
     p = data.orientation
@@ -105,12 +114,12 @@ if __name__ == '__main__':
     rospy.init_node('bridge')
 
     # IMU + DVL
-    pub_state_x = rospy.Publisher('/state_x', Float64, queue_size=1)
-    pub_state_y = rospy.Publisher('/state_y', Float64, queue_size=1)
-    pub_state_z = rospy.Publisher('/state_z', Float64, queue_size=1)
-    pub_state_theta_x = rospy.Publisher('/state_theta_x', Float64, queue_size=1)
-    pub_state_theta_y = rospy.Publisher('/state_theta_y', Float64, queue_size=1)
-    pub_state_theta_z = rospy.Publisher('/state_theta_z', Float64, queue_size=1)
+    pub_state_x = rospy.Publisher('state_x', Float64, queue_size=1)
+    pub_state_y = rospy.Publisher('state_y', Float64, queue_size=1)
+    pub_state_z = rospy.Publisher('state_z', Float64, queue_size=1)
+    pub_state_theta_x = rospy.Publisher('state_theta_x', Float64, queue_size=1)
+    pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
+    pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
 
     pub_z_pid = rospy.Publisher('z_setpoint_adjusted', Float64, queue_size=50)
     pub_theta_x_pid = rospy.Publisher('theta_x_setpoint_adjusted', Float64, queue_size=50)
@@ -137,20 +146,17 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
 
-    rospy.sleep(2)
-    pub_z_pid.publish(-1)
-    pub_theta_x_pid.publish(0)
-    pub_theta_y_pid.publish(0)
+    rospy.spin()
 
     while True:
-        pass
+        # break
         # pubt0.publish(10.0)
         # pubt1.publish(10.0)
         # pubt2.publish(10.0)
         # pubt3.publish(10.0)
-        pubt4.publish(10.0)
-        pubt5.publish(10.0)
-        pubt6.publish(10.0)
-        pubt7.publish(10.0)
+        pubt4.publish(20.0)
+        pubt5.publish(20.0)
+        # pubt6.publish(10.0)
+        # pubt7.publish(10.0)
         
            

@@ -6,6 +6,10 @@
         <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(env HOME)/AUV-2023/catkin_ws/src/auv-sim"/>
     </node>
 
+    <node name="pose" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/world/quali/dynamic_pose/info@geometry_msgs/PoseArray@ignition.msgs.Pose_V">
+    </node>
+
     <node name="bridge_thruster0" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/model/clarke/joint/thruster0_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
     </node>
