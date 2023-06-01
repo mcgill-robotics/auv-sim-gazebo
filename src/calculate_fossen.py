@@ -2,8 +2,11 @@
 
 import math
 
-a = 0.5588
-b = 0.10478
+r = 0.1111
+h = 0.59274
+
+a = h / 2
+b = r
 m = 23.9
 
 e = 1 - math.pow(b/a,2)
@@ -27,9 +30,23 @@ b_squared_plus_a_squared = math.pow(b,2) + math.pow(a,2)
 nr = (-m/5)*( math.pow(b_squared_minus_a_squared,2) * (a0 - b0) ) / (2*(b_squared_minus_a_squared) + b_squared_plus_a_squared*(b0-a0))
 mq = nr
 
-print("Xu : ", xu)
-print("\nyv: ", yu)
-print("\nzw: ", zw)
-print("\nkp : ", 0)
-print("\nnr: ", nr)
-print("\nmq: ", mq)
+
+r_squared = math.pow(r,2)
+h_squared = math.pow(h,2)
+ixx = m * r_squared / 2
+iyy = m * (3 * r_squared + h_squared) / 12
+izz = iyy
+
+print("Moment of inertia matrix:\n")
+print("ixx: ", ixx)
+print("iyy: ", iyy)
+print("izz:, ", izz)
+
+
+print("\nAdded mass values:\n")
+print("XdotU: ", xu)
+print("\nYdotV: ", yu)
+print("\nZdotW: ", zw)
+print("\nKdotP : ", 0)
+print("\nNdotR: ", nr)
+print("\nMdotQ: ", mq)
