@@ -60,9 +60,9 @@ def callback_pose(data):
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
     # print(clarke_poses)
-    pub_state_x.publish(clarke_position.x + 0.389)
-    pub_state_y.publish(clarke_position.y - 3)
-    pub_state_z.publish(clarke_position.z - 2.5)
+    pub_state_x.publish(clarke_position.x)
+    pub_state_y.publish(clarke_position.y)
+    pub_state_z.publish(clarke_position.z)
 
     q = np.array([clarke_orientation.w, clarke_orientation.x, clarke_orientation.y, clarke_orientation.z])
     euler = transformations.euler_from_quaternion(q, 'rxyz')
@@ -72,12 +72,20 @@ def callback_pose(data):
     theta_x = euler[2]
 
     angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
-    
+
     for i in range(3):
-        if angles[i] > 0:
-            angles[i] = angles[i] + 180
-        else:
-            angles[i] = 180 + angles[i]
+            if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] - 360
+            elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] + 360
+            else:
+                euler[i] = angles[i]
+    
+    # for i in range(3):
+    #     if angles[i] > 0:
+    #         angles[i] = angles[i] + 180
+    #     else:
+    #         angles[i] = 180 + angles[i]
 
     pub_state_theta_x.publish(angles[0])
     pub_state_theta_y.publish(angles[1])
@@ -112,6 +120,8 @@ if __name__ == '__main__':
     pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
 
+    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=50)
+    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=50)
     pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=50)
     pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=50)
     pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=50)
@@ -139,10 +149,12 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)
 
     while True:
-        pub_z_pid.publish(-2.5)
-        pub_theta_z_pid.publish(0.0)
-        pub_theta_x_pid.publish(0.0)
-        pub_theta_y_pid.publish(0)
+        # pub_y_pid.publish(0.0)
+        pub_z_pid.publish(0.0)
+        pub_x_pid.publish(-1.0)
+        # pub_theta_z_pid.publish(0.0)
+        # pub_theta_x_pid.publish(0.0)
+        # pub_theta_y_pid.publish(0.0)
         rate.sleep()
         # break
         # pubt0.publish(50.0)
