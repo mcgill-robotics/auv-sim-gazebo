@@ -50,10 +50,10 @@ def callback_thrusters(data):
     pubt1.publish(converted_w[1])
     pubt2.publish(converted_w[2])
     pubt3.publish(converted_w[3])
-    pubt4.publish(converted_w[4])
-    pubt5.publish(converted_w[5])
-    pubt6.publish(converted_w[6])
-    pubt7.publish(converted_w[7])
+    pubt4.publish(-converted_w[4])
+    pubt5.publish(-converted_w[5])
+    pubt6.publish(-converted_w[6])
+    pubt7.publish(-converted_w[7])
 
 def callback_pose(data):
     clarke_poses = data.poses[0]
@@ -72,21 +72,12 @@ def callback_pose(data):
     theta_x = euler[2]
 
     angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
-    # angles = np.array([theta_x, theta_y, theta_z])
-    # for i in range(3):
-    #         if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
-    #             euler[i] = angles[i] - 360
-    #         elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
-    #             euler[i] = angles[i] + 360
-    #         else:
-    #             euler[i] = angles[i]
     
-    print("Quaternion:")
-    print(q)
-    print("Euler")
-    print(angles)
-
-    print("##################\n")
+    for i in range(3):
+        if angles[i] > 0:
+            angles[i] = angles[i] + 180
+        else:
+            angles[i] = 180 + angles[i]
 
     pub_state_theta_x.publish(angles[0])
     pub_state_theta_y.publish(angles[1])
@@ -121,17 +112,16 @@ if __name__ == '__main__':
     pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
 
-    pub_z_pid = rospy.Publisher('z_setpoint_adjusted', Float64, queue_size=50)
-    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint_adjusted', Float64, queue_size=50)
-    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint_adjusted', Float64, queue_size=50)
-    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint_adjusted', Float64, queue_size=50)    
+    pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=50)
+    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=50)
+    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=50)
+    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=50)    
 
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
 
 
     # pub_dvl_x = rospy.Publisher('/[sometopic_x]', Float64, queue_size=1)
     # pub_dvl_y = rospy.Publisher('/[sometpoic_y]', Float64, queue_size=1)
-
     # sub_imu = rospy.Subscriber('/imu', Imu, callback_imu_dvl)
 
     # Thrusters
@@ -144,19 +134,24 @@ if __name__ == '__main__':
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     
-    sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)
+    sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
-    rospy.spin()
+    rate = rospy.Rate(10)
 
     while True:
+        pub_z_pid.publish(-2.5)
+        pub_theta_z_pid.publish(0.0)
+        pub_theta_x_pid.publish(0.0)
+        pub_theta_y_pid.publish(0)
+        rate.sleep()
         # break
-        # pubt0.publish(10.0)
-        # pubt1.publish(10.0)
+        # pubt0.publish(50.0)
+        # pubt1.publish(50.0)
         # pubt2.publish(10.0)
         # pubt3.publish(10.0)
-        pubt4.publish(20.0)
-        pubt5.publish(20.0)
-        # pubt6.publish(10.0)
-        # pubt7.publish(10.0)
+        # pubt4.publish(20.0)
+        # pubt5.publish(20.0)
+        # pubt6.publish(20.0)
+        # pubt7.publish(20.0)
         
            

@@ -3,11 +3,11 @@
 import math
 
 r = 0.1111
-h = 0.59274
+h = 0.5588
 
 a = h / 2
 b = r
-m = 23.9
+m = 22.3
 
 e = 1 - math.pow(b/a,2)
 
