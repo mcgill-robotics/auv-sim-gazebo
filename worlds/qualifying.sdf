@@ -161,10 +161,10 @@
             <pose>0 0 0 0 0 0</pose>
         </include>
 
-        <include>
+        <!-- <include>
             <uri>assets/common/ceiling/ceiling.sdf</uri>
             <pose>0 0 0.5 0 0 0</pose>
-        </include>
+        </include> -->
 
         <include>
             <uri>assets/quali/quali_gate/quali_gate.sdf</uri>
@@ -178,7 +178,7 @@
 
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>0 -3 0 0 0 0</pose>
+            <pose>0.5 -3 0 0 0 0</pose>
         </include>
 
     </world>

@@ -13,17 +13,17 @@ DEG_PER_RAD = 180/np.pi
 ANGLE_CHANGE_TOL = 90 
 euler = np.array([0.0, 0.0, 0.0])
 
-d = 0.284 #m
+d = 0.2222 #m
 hypot = math.sqrt(math.pow(0.672/2,2) + math.pow(0.258/2,2)) #m
-D_2 = 0.571 #m
+D_2 = 0.5588 #m
 
 T = np.matrix(
-        [[-1., -1., 0., 0., 0., 0., 0., 0.],
-        [0., 0., 1., -1., 0., 0., 0., 0.],
-        [0., 0., 0., 0., -1., -1., -1., -1.],
-        [0., 0., 0., 0., -d/2, d/2, d/2, -d/2],
-        [0., 0., 0., 0., -D_2/2, -D_2/2, D_2/2, D_2/2],
-        [d/2, -d/2, hypot, hypot, 0., 0., 0., 0.]]
+        [[-1.,  -1.,   0.,    0.,    0.,       0.,    0.,   0.],
+        [  0.,   0.,   1.,   -1.,    0.,       0.,    0.,   0.],
+        [  0.,   0.,   0.,    0.,   -1.,      -1.,   -1.,  -1.],
+        [  0.,   0.,   0.,    0.,   -d/2,     d/2,   d/2,  -d/2],
+        [  0.,   0.,   0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
+        [  d/2, -d/2, hypot, hypot,  0.,       0.,    0.,   0.]]
         )
 
 # forces produced by T200 thruster at 14V (N)
@@ -32,6 +32,8 @@ MAX_FWD_FORCE = 4.52*9.81*THRUST_LIMIT
 MAX_BKWD_FORCE = -3.52*9.81*THRUST_LIMIT
 
 T_inv = np.linalg.pinv(T)
+
+euler = np.array([0.0, 0.0, 0.0])
 
 
 def callback_thrusters(data):
@@ -46,9 +48,9 @@ def callback_thrusters(data):
 
     converted_w = np.matmul(T_inv, a) 
 
-    pubt0.publish(converted_w[0])
-    pubt1.publish(converted_w[1])
-    pubt2.publish(converted_w[2])
+    pubt0.publish(-converted_w[0])
+    pubt1.publish(-converted_w[1])
+    pubt2.publish(-converted_w[2])
     pubt3.publish(converted_w[3])
     pubt4.publish(-converted_w[4])
     pubt5.publish(-converted_w[5])
@@ -56,39 +58,57 @@ def callback_thrusters(data):
     pubt7.publish(-converted_w[7])
 
 def callback_pose(data):
+    global euler
     clarke_poses = data.poses[0]
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
     # print(clarke_poses)
-    pub_state_x.publish(clarke_position.x + 0.389)
-    pub_state_y.publish(clarke_position.y - 3)
-    pub_state_z.publish(clarke_position.z - 2.5)
+    pub_state_x.publish(clarke_position.x)
+    pub_state_y.publish(clarke_position.y)
+    pub_state_z.publish(clarke_position.z)
+    # print("Pose: ")
+    # print("State x = ", clarke_position.x)
+    # print("State y = ", clarke_position.y)
+    # print("State z = ", clarke_position.z)
+    # print("<====>")
 
-    q = np.array([clarke_orientation.w, clarke_orientation.x, clarke_orientation.y, clarke_orientation.z])
-    euler = transformations.euler_from_quaternion(q, 'rxyz')
-
-    theta_z = euler[0]
-    theta_y = euler[1]
-    theta_x = euler[2]
+    q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
+    theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
+    theta_y = transformations.euler_from_quaternion(q, 'ryxz')[0]
+    theta_z = transformations.euler_from_quaternion(q, 'rzyx')[0]
 
     angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
-    
-    for i in range(3):
-        if angles[i] > 0:
-            angles[i] = angles[i] + 180
-        else:
-            angles[i] = 180 + angles[i]
 
-    pub_state_theta_x.publish(angles[0])
-    pub_state_theta_y.publish(angles[1])
-    pub_state_theta_z.publish(angles[2])
+    for i in range(3):
+            if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] - 360
+            elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] + 360
+            else:
+                euler[i] = angles[i]
+
+    # DESRIPTION [from initial position]: 
+    # 1. Yaw: right = neg / left = pos, up to |180|
+    # 2. Roll: right = pos / left = neg
+    # 3. Pitch: 
+
+    # print("Angles: ")
+    # print("Theta x = ", angles[0]) # Pitch
+    # print("Theta y = ", angles[1]) # Roll
+    # print("Theta z = ", angles[2]) # Yaw
+    # print("#######################\n")
+
+    pub_state_theta_x.publish(euler[0])
+    pub_state_theta_y.publish(euler[1])
+    pub_state_theta_z.publish(euler[2])
 
 def callback_imu_dvl(data):
     p = data.orientation
     q = np.array([p.x, p.y, p.z, p.w])
-    theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
-    theta_y = transformations.euler_from_quaternion(q, 'rxyz')[0]
-    theta_z = transformations.euler_from_quaternion(q, 'rxyz')[0]
+    euler = transformations.euler_from_quaternion(q, 'rxyz')
+    theta_x = euler[0]
+    theta_y = euler[1]
+    theta_z = euler[2]
     pub_state_x.publish(p.x)
     pub_state_y.publish(p.y)
     pub_state_z.publish(p.z)
@@ -112,6 +132,8 @@ if __name__ == '__main__':
     pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
 
+    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=50)
+    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=50)
     pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=50)
     pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=50)
     pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=50)
@@ -136,22 +158,33 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
-    rate = rospy.Rate(10)
+    rospy.spin()
 
-    while True:
-        pub_z_pid.publish(-2.5)
-        pub_theta_z_pid.publish(0.0)
-        pub_theta_x_pid.publish(0.0)
-        pub_theta_y_pid.publish(0)
-        rate.sleep()
-        # break
-        # pubt0.publish(50.0)
-        # pubt1.publish(50.0)
-        # pubt2.publish(10.0)
-        # pubt3.publish(10.0)
+    # rate = rospy.Rate(10)
+
+    # while True:
+        # pub_z_pid.publish(-2.0)
+        # pub_x_pid.publish(0.5)
+        # pub_y_pid.publish(11.0)
+        # pub_x_pid.publish(-0.5)
+        # pub_y_pid.publish(11.0)
+        # pub_z_pid.publish(0.0)
+        # pub_theta_z_pid.publish(-90.0)
+        # pub_theta_x_pid.publish(0.0)
+        # pub_theta_y_pid.publish(0.0)
+        
+        # pubt0.publish(10.0)
+        # pubt1.publish(10.0)
+        # pubt2.publish(1.0)
+        # pubt3.publish(20.0)
         # pubt4.publish(20.0)
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
+        # rate.sleep()
+
+    
+    
+
         
            
