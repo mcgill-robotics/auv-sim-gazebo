@@ -176,5 +176,10 @@
             <pose>0 -3 0 0 0 0</pose>
         </include>
 
+        <include>
+            <uri>assets/common/lane_marker/lane_marker_straight.sdf</uri>
+            <pose>0 -4 -5 0 0 -80</pose>
+        </include>
+
     </world>
 </sdf>

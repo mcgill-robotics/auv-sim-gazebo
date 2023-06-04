@@ -1,19 +1,19 @@
 <?xml version="1.0" ?>
 <sdf version="1.9">
-    <model name="path_marker_45cw">
+    <model name="path_marker_45ccw">
         <static>true</static>
-        <link name="path_marker_to_buoys">
-            <visual name="path_marker_45cw_visual">
+        <link name="path_marker_45ccw">
+            <visual name="lane_marker_straight_visual">
                 <geometry>
                     <mesh>
-                        <uri>path_marker_45cw.dae</uri>
+                        <uri>lane_marker_straight.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
-            <collision name="path_marker_45cw_collision">
+            <collision name="lane_marker_straight_collisision">
                 <geometry>
                     <mesh>
-                        <uri>path_marker_45cw.dae</uri>
+                        <uri>lane_marker_straight.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
