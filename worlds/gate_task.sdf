@@ -161,10 +161,10 @@
             <pose>0 0 0 0 0 0</pose>
         </include>
 
-        <include>
+        <!-- <include>
             <uri>assets/common/ceiling/ceiling.sdf</uri>
             <pose>0 0 0 0 0 0</pose>
-        </include>
+        </include> -->
 
         <include>
             <uri>assets/tasks/gate/gate.sdf</uri>

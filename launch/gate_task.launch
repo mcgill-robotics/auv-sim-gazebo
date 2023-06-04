@@ -1,4 +1,7 @@
 <launch>
+    <include file="$(find controls)/launch/controls.launch">
+        <arg name="sim" value="true" />
+    </include>
 
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
