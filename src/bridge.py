@@ -3,7 +3,7 @@
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import Imu
-from geometry_msgs.msg import Wrench, PoseArray
+from geometry_msgs.msg import Wrench, PoseArray, Pose
 import numpy as np
 from tf import transformations
 import math
@@ -66,6 +66,13 @@ def callback_pose(data):
     pub_state_x.publish(clarke_position.x)
     pub_state_y.publish(clarke_position.y)
     pub_state_z.publish(clarke_position.z)
+    pose = Pose()
+    pose.position.x = clarke_position.x
+    pose.position.y = clarke_position.y
+    pose.position.z = clarke_position.z
+    pose.orientation = clarke_orientation
+    pub_pose.publish(pose)
+
     # print("Pose: ")
     # print("State x = ", clarke_position.x)
     # print("State y = ", clarke_position.y)
@@ -131,6 +138,7 @@ if __name__ == '__main__':
     pub_state_theta_x = rospy.Publisher('state_theta_x', Float64, queue_size=1)
     pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
     pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
+    pub_pose = rospy.Publisher('pose', Pose, queue_size=1)
 
     pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=50)
     pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=50)
@@ -158,18 +166,19 @@ if __name__ == '__main__':
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
+    
     rospy.spin()
+    
+    #rate = rospy.Rate(10)
 
-    # rate = rospy.Rate(10)
-
-    # while True:
+    #while True:
         # pub_z_pid.publish(-2.0)
         # pub_x_pid.publish(0.5)
         # pub_y_pid.publish(11.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
-        # pub_theta_z_pid.publish(-90.0)
+        # pub_theta_z_pid.publish(0.0)
         # pub_theta_x_pid.publish(0.0)
         # pub_theta_y_pid.publish(0.0)
         
@@ -181,7 +190,7 @@ if __name__ == '__main__':
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
-        # rate.sleep()
+        #rate.sleep()
 
     
     

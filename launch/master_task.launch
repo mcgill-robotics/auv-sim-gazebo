@@ -5,7 +5,7 @@
 
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
-	    args="$(find auv-sim)/worlds/gate_task.sdf">
+	    args="$(find auv-sim)/worlds/master_tasks.sdf">
         <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(env HOME)/AUV-2023/catkin_ws/src/auv-sim"/>
     </node>
 

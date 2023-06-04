@@ -3,17 +3,17 @@
     <model name="path_marker_45ccw">
         <static>true</static>
         <link name="path_marker_45ccw">
-            <visual name="path_marker_45ccw_visual">
+            <visual name="lane_marker_45left_visual">
                 <geometry>
                     <mesh>
-                        <uri>path_marker_45ccw.dae</uri>
+                        <uri>lane_marker_45left.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
-            <collision name="path_marker_45ccw_collision">
+            <collision name="lane_marker_45left_collision">
                 <geometry>
                     <mesh>
-                        <uri>path_marker_45ccw.dae</uri>
+                        <uri>lane_marker_45left.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
