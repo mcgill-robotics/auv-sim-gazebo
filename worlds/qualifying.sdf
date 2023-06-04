@@ -178,7 +178,7 @@
 
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>0 -3 0 0 0 0</pose>
+            <pose>0.5 -3 0 0 0 0</pose>
         </include>
 
     </world>
