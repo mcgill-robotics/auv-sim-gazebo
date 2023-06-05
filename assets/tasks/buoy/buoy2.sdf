@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <model name="buoy2">
+        <static>true</static>
+        <link name="link">
+            <visual name="buoy2_visual">
+                <geometry>
+                    <mesh>
+                        <uri>buoy2.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="buoy2_collision">
+                <geometry>
+                    <mesh>
+                        <uri>buoy2.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+    </model>
+</sdf>
