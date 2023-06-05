@@ -168,18 +168,32 @@
 
         <include>
             <uri>assets/tasks/gate/gate.sdf</uri>
-            <pose>-1 0 -1 0 0 0</pose>
+            <pose>3 -12 -1 0 0 -0.785398</pose>
         </include>
 
+        <!-- Tails -->
+        <!-- <include>
+            <uri>assets/clarke/clarke.sdf</uri>
+            <pose>0 -15 0 0 0 1.5708</pose>
+        </include> -->
+
+        <!-- Heads -->
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>1 -4 0 0 0 0</pose>
+            <pose>0 -15 0 0 0 0</pose>
         </include>
 
         <include>
-            <uri>assets/common/lane_marker/lane_marker_45left.sdf</uri>
-            <pose>0 -3.5 -5 0 0 1.5708</pose>
+            <uri>assets/common/lane_marker/lane_marker_45right.sdf</uri>
+            <pose>5.5 -10.5 -5 0 0 1.5708</pose>
         </include>
+
+        <include>
+            <uri>assets/tasks/buoy/buoy1.sdf</uri>
+            <pose>5.5 -6.5 -5 0 0 -1.5708</pose>
+        </include>
+
+
 
     </world>
 </sdf>
