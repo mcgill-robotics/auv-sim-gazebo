@@ -71,14 +71,14 @@
       <!-- Down camera -->
       <sensor name="down_cam" type="camera">
         <pose>0 0 0 3.1415 0 0</pose>
-        <horizontal_fov>1.047</horizontal_fov> 
+        <horizontal_fov>3.83</horizontal_fov> 
         <update_rate>10.0</update_rate>
         <visualize>true</visualize>
         <topic>down_cam</topic>
         <always_on>1</always_on>
         <image>
-          <width>800</width>
-          <height>800</height>
+          <width>1280</width>
+          <height>962</height>
         </image>
       </sensor>
 
@@ -88,11 +88,11 @@
         <always_on>1</always_on>
         <visualize>true</visualize>
         <topic>vision/depth_map</topic>
-        <horizontal_fov>3.83972</horizontal_fov>
+        <horizontal_fov>1.57</horizontal_fov>
         <update_rate>10.0</update_rate>
         <image>
-          <width>800</width>
-          <height>800</height>
+          <width>1280</width>
+          <height>924</height>
           <format>B8G8R8</format>
         </image>
       </sensor>
@@ -101,10 +101,10 @@
       <sensor name="front_cam_rgb" type="camera">
         <pose>0.1 0 -0.05 3.13159 1.5708 0</pose>
         <camera>
-          <horizontal_fov>1.047</horizontal_fov>
+          <horizontal_fov>1.57</horizontal_fov>
           <image>
-            <width>320</width>
-            <height>240</height>
+            <width>1280</width>
+            <height>924</height>
           </image>
         </camera>
         <always_on>1</always_on>
