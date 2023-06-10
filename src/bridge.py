@@ -50,8 +50,8 @@ def callback_thrusters(data):
 
     pubt0.publish(-converted_w[0])
     pubt1.publish(-converted_w[1])
-    pubt2.publish(-converted_w[2])
-    pubt3.publish(converted_w[3])
+    pubt2.publish(converted_w[2])
+    pubt3.publish(-converted_w[3])
     pubt4.publish(-converted_w[4])
     pubt5.publish(-converted_w[5])
     pubt6.publish(-converted_w[6])
@@ -63,12 +63,12 @@ def callback_pose(data):
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
     # print(clarke_poses)
-    pub_state_x.publish(clarke_position.x)
-    pub_state_y.publish(clarke_position.y)
+    pub_state_x.publish(clarke_position.x - 0.5)
+    pub_state_y.publish(clarke_position.y + 3)
     pub_state_z.publish(clarke_position.z)
     pose = Pose()
-    pose.position.x = clarke_position.x
-    pose.position.y = clarke_position.y
+    pose.position.x = clarke_position.x - 0.5
+    pose.position.y = clarke_position.y + 3
     pose.position.z = clarke_position.z
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
@@ -169,16 +169,16 @@ if __name__ == '__main__':
     
     rospy.spin()
     
-    #rate = rospy.Rate(10)
+    # rate = rospy.Rate(10)
 
-    #while True:
-        # pub_z_pid.publish(-2.0)
+    # while True:
+    #     pub_z_pid.publish(0)
         # pub_x_pid.publish(0.5)
-        # pub_y_pid.publish(11.0)
+        # pub_y_pid.publish(10.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
-        # pub_theta_z_pid.publish(0.0)
+        # pub_theta_z_pid.publish(180.0)
         # pub_theta_x_pid.publish(0.0)
         # pub_theta_y_pid.publish(0.0)
         
@@ -190,7 +190,7 @@ if __name__ == '__main__':
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
-        #rate.sleep()
+        # rate.sleep()
 
     
     
