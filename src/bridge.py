@@ -19,7 +19,7 @@ D_2 = 0.5588 #m
 
 T = np.matrix(
         [[-1.,  -1.,   0.,    0.,    0.,       0.,    0.,   0.],
-        [  0.,   0.,   1.,   -1.,    0.,       0.,    0.,   0.],
+        [  0.,   0.,   -1.,   1.,    0.,       0.,    0.,   0.],
         [  0.,   0.,   0.,    0.,   -1.,      -1.,   -1.,  -1.],
         [  0.,   0.,   0.,    0.,   -d/2,     d/2,   d/2,  -d/2],
         [  0.,   0.,   0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
@@ -63,12 +63,12 @@ def callback_pose(data):
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
     # print(clarke_poses)
-    pub_state_x.publish(clarke_position.x - 0.5)
-    pub_state_y.publish(clarke_position.y + 3)
+    pub_state_x.publish(clarke_position.x + 3)
+    pub_state_y.publish(clarke_position.y - 0.5)
     pub_state_z.publish(clarke_position.z)
     pose = Pose()
-    pose.position.x = clarke_position.x - 0.5
-    pose.position.y = clarke_position.y + 3
+    pose.position.x = clarke_position.x + 3
+    pose.position.y = clarke_position.y - 0.5
     pose.position.z = clarke_position.z
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
