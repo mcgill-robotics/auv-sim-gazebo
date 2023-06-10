@@ -158,7 +158,7 @@
 
         <include>
             <uri>assets/common/simple_pool/simple_pool.sdf</uri>
-            <pose>0 0 0 0 0 0</pose>
+            <pose>0 0 0 0 0 1.5708</pose>
         </include>
 
         <!-- <include>
@@ -168,17 +168,17 @@
 
         <include>
             <uri>assets/tasks/gate/gate.sdf</uri>
-            <pose>-1 0 -1 0 0 0</pose>
+            <pose>1 0 -1 0 0 -1.5708</pose>
         </include>
 
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>0 -3 0 0 0 0</pose>
+            <pose>-3 0 0 0 0 0</pose>
         </include>
 
         <include>
             <uri>assets/common/lane_marker/lane_marker_straight.sdf</uri>
-            <pose>0 -4 -5 0 0 -80</pose>
+            <pose>-4 0 -5 0 0 0</pose>
         </include>
 
     </world>
