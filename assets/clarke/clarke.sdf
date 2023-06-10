@@ -10,7 +10,7 @@
       https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors -->
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
 
-      <pose>0 0 0 1.5708 1.5708 0</pose>
+      <pose>0 0 0 1.5708 1.5708 -1.5708</pose>
       <!-- <pose>0 0 0 1.5708 0 0</pose> -->
 
       <!-- <inertial>
@@ -855,7 +855,7 @@
         <zW>-100</zW>
         <kPP>-0</kPP>
         <kP>-0</kP>
-        <mQQ>-0.05</mQQ>
+        <mQQ>0</mQQ>
         <mQ>-100</mQ>
         <nRR>0</nRR>
         <nR>-100</nR>
