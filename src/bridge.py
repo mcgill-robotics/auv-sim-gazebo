@@ -73,12 +73,6 @@ def callback_pose(data):
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
 
-    # print("Pose: ")
-    # print("State x = ", clarke_position.x)
-    # print("State y = ", clarke_position.y)
-    # print("State z = ", clarke_position.z)
-    # print("<====>")
-
     q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
     theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
     theta_y = transformations.euler_from_quaternion(q, 'ryxz')[0]
@@ -94,44 +88,15 @@ def callback_pose(data):
             else:
                 euler[i] = angles[i]
 
-    # DESRIPTION [from initial position]: 
-    # 1. Yaw: right = neg / left = pos, up to |180|
-    # 2. Roll: right = pos / left = neg
-    # 3. Pitch: 
-
-    # print("Angles: ")
-    # print("Theta x = ", angles[0]) # Pitch
-    # print("Theta y = ", angles[1]) # Roll
-    # print("Theta z = ", angles[2]) # Yaw
-    # print("#######################\n")
-
     pub_state_theta_x.publish(euler[0])
     pub_state_theta_y.publish(euler[1])
     pub_state_theta_z.publish(euler[2])
-
-def callback_imu_dvl(data):
-    p = data.orientation
-    q = np.array([p.x, p.y, p.z, p.w])
-    euler = transformations.euler_from_quaternion(q, 'rxyz')
-    theta_x = euler[0]
-    theta_y = euler[1]
-    theta_z = euler[2]
-    pub_state_x.publish(p.x)
-    pub_state_y.publish(p.y)
-    pub_state_z.publish(p.z)
-    pub_state_theta_x.publish(theta_x)
-    pub_state_theta_y.publish(theta_y)
-    pub_state_theta_z.publish(theta_z)
-
-    # pub_dvl_x.publish(p.x)
-    # pub_dvl_y.publish(p.y)
-
+    
 
 if __name__ == '__main__':
 
     rospy.init_node('bridge')
 
-    # IMU + DVL
     pub_state_x = rospy.Publisher('state_x', Float64, queue_size=1)
     pub_state_y = rospy.Publisher('state_y', Float64, queue_size=1)
     pub_state_z = rospy.Publisher('state_z', Float64, queue_size=1)
@@ -149,12 +114,6 @@ if __name__ == '__main__':
 
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
 
-
-    # pub_dvl_x = rospy.Publisher('/[sometopic_x]', Float64, queue_size=1)
-    # pub_dvl_y = rospy.Publisher('/[sometpoic_y]', Float64, queue_size=1)
-    # sub_imu = rospy.Subscriber('/imu', Imu, callback_imu_dvl)
-
-    # Thrusters
     pubt0 = rospy.Publisher('/model/clarke/joint/thruster0_joint/cmd_pos', Float64, queue_size=1)
     pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1) 
     pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=1)
