@@ -84,7 +84,7 @@
 
       <!-- Depth camera -->
       <sensor name="front_cam_depth" type="depth_camera">
-        <pose>0.1 0 0 0 0 0</pose>
+        <pose>0.1 0 -0.05 3.13159 1.5708 0</pose>
         <always_on>1</always_on>
         <visualize>true</visualize>
         <topic>vision/front_cam/depth</topic>
@@ -251,7 +251,7 @@
         </geometry>
       </collision> 
 
-      <visual name= "visual">
+      <!-- <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -279,7 +279,7 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual>
+      </visual> -->
 
     </link>
 
@@ -473,7 +473,7 @@
         </geometry>
       </collision> 
 
-      <visual name= "visual">
+      <!-- <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -500,7 +500,7 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual>
+      </visual> -->
 
     </link>
 
@@ -528,7 +528,7 @@
         </geometry>
       </collision>   
 
-      <visual name= "visual">
+      <!-- <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -556,7 +556,7 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual>
+      </visual> -->
 
     </link>
 
