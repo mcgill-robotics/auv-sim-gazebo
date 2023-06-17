@@ -74,7 +74,7 @@
         <horizontal_fov>3.83</horizontal_fov> 
         <update_rate>10.0</update_rate>
         <visualize>true</visualize>
-        <topic>down_cam</topic>
+        <topic>vision/down_cam/image_raw</topic>
         <always_on>1</always_on>
         <image>
           <width>1280</width>
@@ -87,7 +87,7 @@
         <pose>0.1 0 0 0 0 0</pose>
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <topic>vision/depth_map</topic>
+        <topic>vision/front_cam/depth</topic>
         <horizontal_fov>1.57</horizontal_fov>
         <update_rate>10.0</update_rate>
         <image>
@@ -110,7 +110,7 @@
         <always_on>1</always_on>
         <update_rate>10</update_rate>
         <visualize>true</visualize>
-        <topic>front_cam_rgb</topic>
+        <topic>vision/front_cam/image_rgb</topic>
       </sensor>
 
     </link>

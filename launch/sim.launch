@@ -45,11 +45,16 @@
     </node>
 
     <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/vision/depth_map@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+        args="/vision/front_cam/depth@sensor_msgs/Image@ignition.msgs.Image">
     </node>
 
+    <node name="bridge_front_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/vision/front_cam/image_rgb@sensor_msgs/Image@ignition.msgs.Image">
+    </node>
+
+
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/vision/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+        args="/vision/down_cam/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node> 
  
     <node 
