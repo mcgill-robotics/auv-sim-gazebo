@@ -3,7 +3,8 @@
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import Imu
-from geometry_msgs.msg import Wrench, PoseArray, Pose
+from geometry_msgs.msg import Wrench, PoseArray, Pose, Vector3, Quaternion 
+from sbg_driver.msg import SbgImuData, SbgEkfQuat
 import numpy as np
 from tf import transformations
 import math
@@ -59,25 +60,20 @@ def callback_thrusters(data):
 
 def callback_pose(data):
     global euler
+    
     clarke_poses = data.poses[0]
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
-    # print(clarke_poses)
     pub_state_x.publish(clarke_position.x + 3)
     pub_state_y.publish(clarke_position.y - 0.5)
     pub_state_z.publish(clarke_position.z)
+    
     pose = Pose()
     pose.position.x = clarke_position.x + 3
     pose.position.y = clarke_position.y - 0.5
     pose.position.z = clarke_position.z
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
-
-    # print("Pose: ")
-    # print("State x = ", clarke_position.x)
-    # print("State y = ", clarke_position.y)
-    # print("State z = ", clarke_position.z)
-    # print("<====>")
 
     q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
     theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
@@ -94,44 +90,28 @@ def callback_pose(data):
             else:
                 euler[i] = angles[i]
 
-    # DESRIPTION [from initial position]: 
-    # 1. Yaw: right = neg / left = pos, up to |180|
-    # 2. Roll: right = pos / left = neg
-    # 3. Pitch: 
-
-    # print("Angles: ")
-    # print("Theta x = ", angles[0]) # Pitch
-    # print("Theta y = ", angles[1]) # Roll
-    # print("Theta z = ", angles[2]) # Yaw
-    # print("#######################\n")
-
     pub_state_theta_x.publish(euler[0])
     pub_state_theta_y.publish(euler[1])
     pub_state_theta_z.publish(euler[2])
-
-def callback_imu_dvl(data):
-    p = data.orientation
-    q = np.array([p.x, p.y, p.z, p.w])
-    euler = transformations.euler_from_quaternion(q, 'rxyz')
-    theta_x = euler[0]
-    theta_y = euler[1]
-    theta_z = euler[2]
-    pub_state_x.publish(p.x)
-    pub_state_y.publish(p.y)
-    pub_state_z.publish(p.z)
-    pub_state_theta_x.publish(theta_x)
-    pub_state_theta_y.publish(theta_y)
-    pub_state_theta_z.publish(theta_z)
-
-    # pub_dvl_x.publish(p.x)
-    # pub_dvl_y.publish(p.y)
-
+    
+def callback_imu(data):
+    imu_data_msg = SbgImuData()
+    gyro = Vector3(data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z)
+    imu_data_msg.gyro = gyro
+    # linear_acc = Vector3(data.linear_acceleration.x, data.linear_acceleration.y, data.linear_acceleration.z)
+    # imu_data_msg.delta_vel = linear_acc
+    imu_data_pub.publish(imu_data_msg)
+    
+    imu_ekf_quat_msg = SbgEkfQuat()
+    quat = Quaternion(data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w)
+    imu_ekf_quat_msg.quaternion = quat
+    imu_quat_pub.publish(imu_ekf_quat_msg)
+    
 
 if __name__ == '__main__':
 
     rospy.init_node('bridge')
 
-    # IMU + DVL
     pub_state_x = rospy.Publisher('state_x', Float64, queue_size=1)
     pub_state_y = rospy.Publisher('state_y', Float64, queue_size=1)
     pub_state_z = rospy.Publisher('state_z', Float64, queue_size=1)
@@ -148,13 +128,11 @@ if __name__ == '__main__':
     pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=50)    
 
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
+    
+    imu_sub = rospy.Subscriber('/imu', Imu, callback_imu)
+    imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=50)
+    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=50)
 
-
-    # pub_dvl_x = rospy.Publisher('/[sometopic_x]', Float64, queue_size=1)
-    # pub_dvl_y = rospy.Publisher('/[sometpoic_y]', Float64, queue_size=1)
-    # sub_imu = rospy.Subscriber('/imu', Imu, callback_imu_dvl)
-
-    # Thrusters
     pubt0 = rospy.Publisher('/model/clarke/joint/thruster0_joint/cmd_pos', Float64, queue_size=1)
     pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1) 
     pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=1)
