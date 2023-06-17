@@ -49,7 +49,7 @@
     </node>
 
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="vision/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+        args="/vision/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
     </node> 
  
     <node 

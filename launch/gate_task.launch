@@ -1,60 +1,11 @@
 <launch>
-    <include file="$(find controls)/launch/controls.launch">
-        <arg name="sim" value="true" />
-    </include>
 
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
 	    args="$(find auv-sim)/worlds/gate_task.sdf">
         <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(env HOME)/AUV-2023/catkin_ws/src/auv-sim"/>
     </node>
-
-    <node name="bridge_thruster0" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster0_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-              
-    <node name="bridge_thruster1" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster1_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster2" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster2_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster3" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster3_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster4" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster4_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster5" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster5_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster6" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster6_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_thruster7" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/model/clarke/joint/thruster7_joint/cmd_pos@std_msgs/Float64@ignition.msgs.Double">
-    </node>
-
-    <node name="bridge_imu" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/imu@sensor_msgs/Imu@ignition.msgs.IMU">
-    </node>
-
-    <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/vision/depth_map@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
-    </node>
-
-    <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/down_cam@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
-    </node> 
- 
-    <node 
-        name="bridge_py" pkg="auv-sim" type="bridge.py" output="screen">
-    </node>
+    
+    <include file="$(find auv-sim)/launch/sim.launch"/>
 
 </launch>
