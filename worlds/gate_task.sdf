@@ -177,7 +177,7 @@
         </include>
 
         <include>
-            <uri>assets/common/lane_marker/lane_marker_straight.sdf</uri>
+            <uri>assets/common/lane_marker/lane_marker_45right.sdf</uri>
             <pose>-4 0 -5 0 0 0</pose>
         </include>
 
