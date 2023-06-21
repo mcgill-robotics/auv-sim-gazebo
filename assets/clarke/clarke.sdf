@@ -229,7 +229,7 @@
 
     <!-- Thruster2 -->
     <link name="thruster2">
-      <pose relative_to="base_link">0 -0.1111 -0.4191 0 0 1.5708</pose> 
+      <pose relative_to="base_link">0 -0.1111 -0.4191 0 0 -1.5708</pose> 
 
       <inertial>
         <mass>0.2</mass>
