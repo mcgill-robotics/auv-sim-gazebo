@@ -145,14 +145,14 @@ if __name__ == '__main__':
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
     
-    # rospy.spin()
+    rospy.spin()
     
-    rate = rospy.Rate(10)
+    # rate = rospy.Rate(10)
 
-    while True:
-        pub_z_pid.publish(0)
-        pub_x_pid.publish(0.)
-        pub_y_pid.publish(0.0)
+    # while True:
+    #     pub_z_pid.publish(0)
+    #     pub_x_pid.publish(0.)
+    #     pub_y_pid.publish(0.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
