@@ -167,6 +167,11 @@
         </include>
 
         <include>
+            <uri>assets/tasks/octagon/octagon_table.sdf</uri>
+            <pose>2 0 -5 0 0 0</pose>
+        </include>
+
+        <include>
             <uri>assets/clarke/clarke.sdf</uri>
             <pose>-3 0 0 0 0 0</pose>
         </include>
