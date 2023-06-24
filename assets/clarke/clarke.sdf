@@ -837,7 +837,7 @@
               <cp>0 0 0</cp>
           </plugin> -->
 
-    <plugin
+    <!-- <plugin
         filename="ignition-gazebo-hydrodynamics-system"
         name="ignition::gazebo::systems::Hydrodynamics">
         <link_name>base_link</link_name>
@@ -859,7 +859,7 @@
         <mQ>-100</mQ>
         <nRR>0</nRR>
         <nR>-100</nR>
-    </plugin> 
+    </plugin>  -->
 
   </model>
 </sdf>

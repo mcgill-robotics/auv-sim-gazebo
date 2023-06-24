@@ -96,14 +96,14 @@ def callback_pose(data):
     
 def callback_imu(data):
     imu_data_msg = SbgImuData()
-    gyro = Vector3(data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z)
+    gyro = Vector3(-data.angular_velocity.x, data.angular_velocity.y, -data.angular_velocity.z)
     imu_data_msg.gyro = gyro
     # linear_acc = Vector3(data.linear_acceleration.x, data.linear_acceleration.y, data.linear_acceleration.z)
     # imu_data_msg.delta_vel = linear_acc
     imu_data_pub.publish(imu_data_msg)
     
     imu_ekf_quat_msg = SbgEkfQuat()
-    quat = Quaternion(data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w)
+    quat = Quaternion(-data.orientation.x, data.orientation.y, -data.orientation.z, data.orientation.w)
     imu_ekf_quat_msg.quaternion = quat
     imu_quat_pub.publish(imu_ekf_quat_msg)
     
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     # rate = rospy.Rate(10)
 
     # while True:
-    #     pub_z_pid.publish(0)
+        # pub_z_pid.publish(0)
     #     pub_x_pid.publish(0.)
     #     pub_y_pid.publish(0.0)
         # pub_x_pid.publish(-0.5)
@@ -163,7 +163,7 @@ if __name__ == '__main__':
         # pubt0.publish(10.0)
         # pubt1.publish(10.0)
         # pubt2.publish(1.0)
-        # pubt3.publish(20.0)
+        # pubt3.publish(1.0)
         # pubt4.publish(20.0)
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
