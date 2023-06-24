@@ -37,6 +37,20 @@ ixx = m * r_squared / 2
 iyy = m * (3 * r_squared + h_squared) / 12
 izz = iyy
 
+
+
+rectangle = h * r * 2
+circle = math.pi * r_squared
+fluid_density = 1000
+drag_coefficient = 0.82
+
+X_uu = 0.5 * fluid_density * circle * drag_coefficient
+Y_vv = 0.5 * fluid_density * rectangle * drag_coefficient
+Z_ww = Y_vv
+K_pp = 0
+M_qq = drag_coefficient * fluid_density * rectangle * math.pow(r,3) / 2
+N_rr = M_qq
+
 print("Moment of inertia matrix:\n")
 print("ixx: ", ixx)
 print("iyy: ", iyy)
@@ -50,3 +64,11 @@ print("\nZdotW: ", zw)
 print("\nKdotP : ", 0)
 print("\nNdotR: ", nr)
 print("\nMdotQ: ", mq)
+
+print("\Drag coefficients:\n")
+print("Xuu: ", -X_uu)
+print("\nYvv: ", -Y_vv)
+print("\nZww: ", -Z_ww)
+print("\nKpp: ", -K_pp)
+print("\nMqq: ", -M_qq)
+print("\nNrr: ", -N_rr)
