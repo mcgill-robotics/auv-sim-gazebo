@@ -120,18 +120,18 @@ if __name__ == '__main__':
     pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
     pub_pose = rospy.Publisher('pose', Pose, queue_size=1)
 
-    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=50)
-    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=50)
-    pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=50)
-    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=50)
-    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=50)
-    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=50)    
+    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=1)
+    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=1)
+    pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=1)
+    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=1)
+    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=1)
+    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=1)    
 
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
     
     imu_sub = rospy.Subscriber('/imu', Imu, callback_imu)
-    imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=50)
-    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=50)
+    imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=1)
+    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
 
     pubt0 = rospy.Publisher('/model/clarke/joint/thruster0_joint/cmd_pos', Float64, queue_size=1)
     pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1) 
@@ -150,15 +150,16 @@ if __name__ == '__main__':
     # rate = rospy.Rate(10)
 
     # while True:
-        # pub_z_pid.publish(0)
+    #     pub_z_pid.publish(0)
     #     pub_x_pid.publish(0.)
     #     pub_y_pid.publish(0.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
-        # pub_theta_z_pid.publish(180.0)
+        # pub_theta_z_pid.publish(0.0)
         # pub_theta_x_pid.publish(0.0)
         # pub_theta_y_pid.publish(0.0)
+        # rate.sleep()
         
         # pubt0.publish(10.0)
         # pubt1.publish(10.0)

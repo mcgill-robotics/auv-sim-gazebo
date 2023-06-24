@@ -91,8 +91,8 @@
         <horizontal_fov>1.57</horizontal_fov>
         <update_rate>10.0</update_rate>
         <image>
-          <width>256</width>
-          <height>185</height>
+          <width>512</width>
+          <height>370</height>
           <format>B8G8R8</format>
         </image>
       </sensor>
@@ -103,8 +103,8 @@
         <camera>
           <horizontal_fov>1.57</horizontal_fov>
           <image>
-            <width>1280</width>
-            <height>924</height>
+            <width>512</width>
+            <height>370</height>
           </image>
         </camera>
         <always_on>1</always_on>
