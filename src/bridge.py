@@ -96,7 +96,7 @@ def callback_pose(data):
     
 def callback_imu(data):
     imu_data_msg = SbgImuData()
-    gyro = Vector3(-data.angular_velocity.x, data.angular_velocity.y, -data.angular_velocity.z)
+    gyro = Vector3(-data.angular_velocity.z, -data.angular_velocity.y, -data.angular_velocity.x)
     imu_data_msg.gyro = gyro
     # linear_acc = Vector3(data.linear_acceleration.x, data.linear_acceleration.y, data.linear_acceleration.z)
     # imu_data_msg.delta_vel = linear_acc
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
     
-    rospy.spin()
+    # rospy.spin()
     
     # rate = rospy.Rate(10)
 
