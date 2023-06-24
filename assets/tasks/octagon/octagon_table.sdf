@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <model name="octagon_table">
+        <static>true</static>
+        <link name="octagon_table">
+            <visual name="octagon_table_visual">
+                <geometry>
+                    <mesh>
+                        <uri>octagon_table.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="octagon_table_visual">
+                <geometry>
+                    <mesh>
+                        <uri>octagon_table.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+    </model>
+</sdf>
