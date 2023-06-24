@@ -36,7 +36,7 @@
 
         <scene>
             <ambient>1.0 1.0 1.0</ambient>
-            <background>0.8 0.8 0.8</background>
+            <background>0.3 0.3 0.8</background>
             <grid>true</grid>
         </scene>
 
@@ -53,7 +53,7 @@
                 <engine>ogre</engine>
                 <scene>scene</scene>
                 <ambient_light>0.4 0.4 0.4</ambient_light>
-                <background_color>0.8 0.8 0.8</background_color>
+                <background_color>0.3 0.3 0.8</background_color>
                 <camera_pose>-6 0 6 0 0.5 0</camera_pose>
             </plugin>
 
@@ -156,10 +156,10 @@
             <direction>-0.5 0.1 -0.9</direction>
         </light>
 
-        <include>
+        <!-- <include>
             <uri>assets/common/simple_pool/simple_pool.sdf</uri>
             <pose>0 0 0 0 0 1.5708</pose>
-        </include>
+        </include> -->
 
         <!-- <include>
             <uri>assets/common/ceiling/ceiling.sdf</uri>
@@ -168,7 +168,7 @@
 
         <include>
             <uri>assets/tasks/gate/gate.sdf</uri>
-            <pose>1 0 -1 0 0 -1.5708</pose>
+            <pose>1 0 0 0 0 -1.5708</pose>
         </include>
 
         <include>
