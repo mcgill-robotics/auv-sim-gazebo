@@ -20,7 +20,7 @@ D_2 = 0.5588 #m
 
 T = np.matrix(
         [[-1.,  -1.,   0.,    0.,    0.,       0.,    0.,   0.],
-        [  0.,   0.,   -1.,   1.,    0.,       0.,    0.,   0.],
+        [  0.,   0.,  -1.,   1.,    0.,       0.,    0.,   0.],
         [  0.,   0.,   0.,    0.,   -1.,      -1.,   -1.,  -1.],
         [  0.,   0.,   0.,    0.,   -d/2,     d/2,   d/2,  -d/2],
         [  0.,   0.,   0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
@@ -49,14 +49,14 @@ def callback_thrusters(data):
 
     converted_w = np.matmul(T_inv, a) 
 
-    pubt0.publish(-converted_w[0])
-    pubt1.publish(-converted_w[1])
-    pubt2.publish(converted_w[2])
-    pubt3.publish(-converted_w[3])
-    pubt4.publish(-converted_w[4])
-    pubt5.publish(-converted_w[5])
-    pubt6.publish(-converted_w[6])
-    pubt7.publish(-converted_w[7])
+    pubt1.publish(converted_w[0])
+    pubt2.publish(converted_w[1])
+    pubt3.publish(converted_w[2])
+    pubt4.publish(converted_w[3])
+    pubt5.publish(converted_w[4])
+    pubt6.publish(converted_w[5])
+    pubt7.publish(converted_w[6])
+    pubt8.publish(converted_w[7])
 
 def callback_pose(data):
     global euler
@@ -133,26 +133,26 @@ if __name__ == '__main__':
     imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=1)
     imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
 
-    pubt0 = rospy.Publisher('/model/clarke/joint/thruster0_joint/cmd_pos', Float64, queue_size=1)
-    pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1) 
-    pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=1)
+    pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)
+    pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=1) 
     pubt3 = rospy.Publisher('/model/clarke/joint/thruster3_joint/cmd_pos', Float64, queue_size=1)
     pubt4 = rospy.Publisher('/model/clarke/joint/thruster4_joint/cmd_pos', Float64, queue_size=1)
     pubt5 = rospy.Publisher('/model/clarke/joint/thruster5_joint/cmd_pos', Float64, queue_size=1)
     pubt6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pubt7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
+    pubt8 = rospy.Publisher('/model/clarke/joint/thruster8_joint/cmd_pos', Float64, queue_size=1)
     
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
     
     # rospy.spin()
     
-    # rate = rospy.Rate(10)
+    rate = rospy.Rate(10)
 
-    # while True:
-    #     pub_z_pid.publish(0)
-    #     pub_x_pid.publish(0.)
-    #     pub_y_pid.publish(0.0)
+    while True:
+        # pub_z_pid.publish(0)
+        # pub_x_pid.publish(0.)
+        # pub_y_pid.publish(0.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
@@ -161,15 +161,16 @@ if __name__ == '__main__':
         # pub_theta_y_pid.publish(0.0)
         # rate.sleep()
         
-        # pubt0.publish(10.0)
+        # pubt2.publish(10.0)
         # pubt1.publish(10.0)
         # pubt2.publish(1.0)
-        # pubt3.publish(1.0)
-        # pubt4.publish(20.0)
+        # pubt3.publish(10.0)
+        # pubt4.publish(10.0)
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
-        # rate.sleep()
+        pubt8.publish(90.0)
+        rate.sleep()
 
     
     

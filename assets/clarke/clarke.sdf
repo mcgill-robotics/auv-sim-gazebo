@@ -116,9 +116,9 @@
 
     </link>
 
-    <!-- Thruster0 -->
-    <link name="thruster0">
-      <pose relative_to="base_link">0 -0.2127 0 0 1.5708 0</pose>
+    <!-- Thruster 1 -->
+    <link name="thruster1">
+      <pose relative_to="base_link">0 -0.2127 0 0 -1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -171,9 +171,9 @@
 
     </link>
 
-    <!-- Thruster1 -->
-    <link name="thruster1">  
-      <pose relative_to="base_link">0 0.2127 0 0 1.5708 0</pose>
+    <!-- Thruster2 -->
+    <link name="thruster2">  
+      <pose relative_to="base_link">0 0.2127 0 0 -1.5708 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -228,8 +228,8 @@
 
     </link>
 
-    <!-- Thruster2 -->
-    <link name="thruster2">
+    <!-- Thruster 3 -->
+    <link name="thruster3">
       <pose relative_to="base_link">0 -0.1111 -0.4191 0 0 -1.5708</pose> 
 
       <inertial>
@@ -284,8 +284,8 @@
 
     </link>
 
-    <!-- Thruster3 -->
-    <link name="thruster3">      
+    <!-- Thruster 4 -->
+    <link name="thruster4">      
       <pose relative_to="base_link">0 0.1111 0.4191 0 0 1.5708</pose>
 
       <inertial>
@@ -340,64 +340,9 @@
 
     </link>
 
-    <!-- Thruster4 -->
-    <link name="thruster4">
-      <pose relative_to="base_link">0 -0.2127 0.2794 0 3.1415 0</pose>
-
-      <inertial>
-        <mass>0.2</mass>
-        <inertia>
-          <ixx>0.000143971303</ixx>
-          <ixy>0.000000000008</ixy>
-          <ixz>-0.000000000224</ixz>
-          <iyy>0.000140915448</iyy>
-          <iyz>-0.000025236433</iyz>
-          <izz>0.000033571862</izz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.03 0.1 0.03</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name= "visual">
-        <geometry>
-          <mesh>
-            <uri>model://assets/clarke/meshes/tethys.dae</uri>
-            <submesh>
-              <name>Prop</name>
-              <center>true</center>
-            </submesh>
-          </mesh>
-        </geometry>
-        <material>
-          <diffuse>1.0 1.0 1.0</diffuse>
-          <specular>1.0 1.0 1.0</specular>
-          <pbr>
-            <metal>
-              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
-              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
-              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
-              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
-            </metal>
-          </pbr>
-          <script>
-            <uri>model://assets/clarke/materials/scripts/</uri>
-            <uri>model://assets/clarke/materials/textures/</uri>
-            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
-          </script>
-        </material>
-      </visual>
-
-    </link>
-
-    <!--Thruster5 -->
+    <!-- Thruster 5 -->
     <link name="thruster5">
-      <pose relative_to="base_link">0 0.2127 0.2794 0 3.1415 0</pose>
+      <pose relative_to="base_link">0 -0.2127 -0.2794 0 -3.1415 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -450,9 +395,64 @@
 
     </link>
 
-    <!--Thruster6 -->
+    <!--Thruster 6 -->
     <link name="thruster6">
-      <pose relative_to="base_link">0 0.2127 -0.2794 0 3.1415 0</pose>
+      <pose relative_to="base_link">0 0.2127 -0.2794 0 -3.1415 0</pose>
+
+      <inertial>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.03 0.1 0.03</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name= "visual">
+        <geometry>
+          <mesh>
+            <uri>model://assets/clarke/meshes/tethys.dae</uri>
+            <submesh>
+              <name>Prop</name>
+              <center>true</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>model://assets/clarke/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>model://assets/clarke/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>model://assets/clarke/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>model://assets/clarke/materials/textures/Tethys_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://assets/clarke/materials/scripts/</uri>
+            <uri>model://assets/clarke/materials/textures/</uri>
+            <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+
+    </link>
+
+    <!--Thruster 7 -->
+    <link name="thruster7">
+      <pose relative_to="base_link">0 0.2127 0.2794 0 -3.1415 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -505,9 +505,9 @@
 
     </link>
 
-    <!--Thruster7 -->
-    <link name="thruster7">      
-      <pose relative_to="base_link">0 -0.2127 -0.2794 0 3.1415 0</pose>
+    <!--Thruster 8 -->
+    <link name="thruster8">      
+      <pose relative_to="base_link">0 -0.2127 0.2794 0 -3.1415 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -562,20 +562,6 @@
     </link>
 
     <!-- Joints -->
-    <joint name="thruster0_joint" type="revolute">
-      <parent>base_link</parent>
-      <child>thruster0</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-1e+12</lower>
-          <upper>1e+12</upper>
-          <effort>-1</effort>
-          <velocity>-1</velocity>
-        </limit>
-      </axis>
-    </joint>
-
     <joint name="thruster1_joint" type="revolute">
       <parent>base_link</parent>
       <child>thruster1</child>
@@ -674,6 +660,20 @@
       </axis>
     </joint>
 
+    <joint name="thruster8_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster8</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
     <plugin 
         filename="libignition-gazebo-imu-system.so"
         name="ignition::gazebo::systems::Imu">
@@ -683,16 +683,6 @@
         filename="libignition-gazebo-sensors-system.so"
         name="ignition::gazebo::systems::Sensors">
         <render_engine>ogre2</render_engine>
-    </plugin>
-
-    <plugin
-        filename="ignition-gazebo-thruster-system"
-        name="ignition::gazebo::systems::Thruster">
-        <namespace>clarke</namespace>
-        <joint_name>thruster0_joint</joint_name>
-        <thrust_coefficient>0.004422</thrust_coefficient>
-        <fluid_density>997</fluid_density>
-        <propeller_diameter>0.09</propeller_diameter>
     </plugin>
 
     <plugin
@@ -760,6 +750,16 @@
         name="ignition::gazebo::systems::Thruster">
         <namespace>clarke</namespace>
         <joint_name>thruster7_joint</joint_name>
+        <thrust_coefficient>0.004422</thrust_coefficient>
+        <fluid_density>997</fluid_density>
+        <propeller_diameter>0.09</propeller_diameter>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+        <namespace>clarke</namespace>
+        <joint_name>thruster8_joint</joint_name>
         <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>997</fluid_density>
         <propeller_diameter>0.09</propeller_diameter>
@@ -838,7 +838,7 @@
               <cp>0 0 0</cp>
           </plugin> -->
 
-    <plugin
+    <!-- <plugin
         filename="ignition-gazebo-hydrodynamics-system"
         name="ignition::gazebo::systems::Hydrodynamics">
         <link_name>base_link</link_name>
@@ -860,7 +860,7 @@
         <mQ>0</mQ>
         <nRR>-0.06981142220562829</nRR>
         <nR>0</nR>
-    </plugin> 
+    </plugin>  -->
 
   </model>
 </sdf>
