@@ -169,7 +169,7 @@ if __name__ == '__main__':
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
-        pubt8.publish(90.0)
+        pubt8.publish(10.0)
         rate.sleep()
 
     
