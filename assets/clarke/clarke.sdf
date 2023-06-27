@@ -252,7 +252,7 @@
         </geometry>
       </collision> 
 
-      <!-- <visual name= "visual">
+      <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -280,7 +280,7 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual> -->
+      </visual>
 
     </link>
 
@@ -342,7 +342,7 @@
 
     <!-- Thruster 5 -->
     <link name="thruster5">
-      <pose relative_to="base_link">0 -0.2127 -0.2794 0 -3.1415 0</pose>
+      <pose relative_to="base_link">0 -0.2127 -0.2794 0 0 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -397,7 +397,7 @@
 
     <!--Thruster 6 -->
     <link name="thruster6">
-      <pose relative_to="base_link">0 0.2127 -0.2794 0 -3.1415 0</pose>
+      <pose relative_to="base_link">0 0.2127 -0.2794 0 0 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -452,7 +452,7 @@
 
     <!--Thruster 7 -->
     <link name="thruster7">
-      <pose relative_to="base_link">0 0.2127 0.2794 0 -3.1415 0</pose>
+      <pose relative_to="base_link">0 0.2127 0.2794 0 0 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -474,7 +474,7 @@
         </geometry>
       </collision> 
 
-      <!-- <visual name= "visual">
+      <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -501,13 +501,13 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual> -->
+      </visual>
 
     </link>
 
     <!--Thruster 8 -->
     <link name="thruster8">      
-      <pose relative_to="base_link">0 -0.2127 0.2794 0 -3.1415 0</pose>
+      <pose relative_to="base_link">0 -0.2127 0.2794 0 0 0</pose>
 
       <inertial>
         <mass>0.2</mass>
@@ -529,7 +529,7 @@
         </geometry>
       </collision>   
 
-      <!-- <visual name= "visual">
+      <visual name= "visual">
         <geometry>
           <mesh>
             <uri>model://assets/clarke/meshes/tethys.dae</uri>
@@ -557,7 +557,7 @@
             <name>model://assets/clarke/tethys/Tethys_Diffuse</name>
           </script>
         </material>
-      </visual> -->
+      </visual>
 
     </link>
 

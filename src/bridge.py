@@ -18,13 +18,14 @@ d = 0.2222 #m
 hypot = math.sqrt(math.pow(0.672/2,2) + math.pow(0.258/2,2)) #m
 D_2 = 0.5588 #m
 
+# This one we are using for real clarke
 T = np.matrix(
-        [[-1.,  -1.,   0.,    0.,    0.,       0.,    0.,   0.],
-        [  0.,   0.,  -1.,   1.,    0.,       0.,    0.,   0.],
-        [  0.,   0.,   0.,    0.,   -1.,      -1.,   -1.,  -1.],
-        [  0.,   0.,   0.,    0.,   -d/2,     d/2,   d/2,  -d/2],
-        [  0.,   0.,   0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
-        [  d/2, -d/2, hypot, hypot,  0.,       0.,    0.,   0.]]
+        [[-1.,  -1.,  0.,    0.,    0.,     0.,    0.,    0.],
+        [  0.,   0.,  1.,   -1.,    0.,     0.,    0.,    0.],
+        [  0.,   0.,  0.,    0.,   -1.,    -1.,   -1.,   -1.],
+        [  0.,   0.,  0.,    0.,   -d/2,    d/2,   d/2,  -d/2],
+        [  0.,   0.,  0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
+        [  d/2, -d/2, hypot, hypot, 0.,     0.,    0.,    0.]]
         )
 
 # forces produced by T200 thruster at 14V (N)
@@ -150,9 +151,9 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)
 
     while True:
-        # pub_z_pid.publish(0)
-        # pub_x_pid.publish(0.)
-        # pub_y_pid.publish(0.0)
+        pub_z_pid.publish(0)
+        pub_x_pid.publish(0.)
+        pub_y_pid.publish(1.0)
         # pub_x_pid.publish(-0.5)
         # pub_y_pid.publish(11.0)
         # pub_z_pid.publish(0.0)
@@ -169,8 +170,8 @@ if __name__ == '__main__':
         # pubt5.publish(20.0)
         # pubt6.publish(20.0)
         # pubt7.publish(20.0)
-        pubt8.publish(10.0)
-        rate.sleep()
+        # pubt8.publish(10.0)
+        # rate.sleep()
 
     
     
