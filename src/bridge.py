@@ -24,7 +24,7 @@ T = np.matrix(
         [  0.,   0.,  1.,   -1.,    0.,     0.,    0.,    0.],
         [  0.,   0.,  0.,    0.,   -1.,    -1.,   -1.,   -1.],
         [  0.,   0.,  0.,    0.,   -d/2,    d/2,   d/2,  -d/2],
-        [  0.,   0.,  0.,    0.,   -D_2/2, -D_2/2, D_2/2, D_2/2],
+        [  0.,   0.,  0.,    0.,   D_2/2,  D_2/2, D_2/2, D_2/2],
         [  d/2, -d/2, hypot, hypot, 0.,     0.,    0.,    0.]]
         )
 
@@ -73,13 +73,17 @@ def callback_pose(data):
     pose.position.x = clarke_position.x + 3
     pose.position.y = clarke_position.y - 0.5
     pose.position.z = clarke_position.z
-    pose.orientation = clarke_orientation
+    pose.orientation.w = clarke_orientation.w
+    pose.orientation.x = clarke_orientation.z
+    pose.orientation.y = clarke_orientation.y
+    pose.orientation.z = clarke_orientation.x
     pub_pose.publish(pose)
 
     q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
-    theta_x = transformations.euler_from_quaternion(q, 'rxyz')[0]
-    theta_y = transformations.euler_from_quaternion(q, 'ryxz')[0]
-    theta_z = transformations.euler_from_quaternion(q, 'rzyx')[0]
+    conversion = transformations.euler_from_quaternion(q, 'rxyz')
+    theta_x = conversion[0]
+    theta_y = conversion[1]
+    theta_z = conversion[2]
 
     angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
 
@@ -97,7 +101,7 @@ def callback_pose(data):
     
 def callback_imu(data):
     imu_data_msg = SbgImuData()
-    gyro = Vector3(-data.angular_velocity.z, data.angular_velocity.y, -data.angular_velocity.x)
+    gyro = Vector3(-data.angular_velocity.z, -data.angular_velocity.y, -data.angular_velocity.x)
     imu_data_msg.gyro = gyro
     imu_data_pub.publish(imu_data_msg)
     
@@ -128,9 +132,11 @@ if __name__ == '__main__':
 
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
     
-    imu_sub = rospy.Subscriber('/imu', Imu, callback_imu)
+    
     imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=1)
     imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
+    
+    imu_sub = rospy.Subscriber('/imu', Imu, callback_imu)
 
     pubt1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)
     pubt2 = rospy.Publisher('/model/clarke/joint/thruster2_joint/cmd_pos', Float64, queue_size=1) 
@@ -144,11 +150,11 @@ if __name__ == '__main__':
     sub_effort = rospy.Subscriber('/effort', Wrench, callback_thrusters)    
 
     
-    # rospy.spin()
+    rospy.spin()
     
-    rate = rospy.Rate(10)
+    # rate = rospy.Rate(10)
 
-    while True:
+    # while True:
         # pub_z_pid.publish(0.0)
         # pub_x_pid.publish(0.0)
         # pub_y_pid.publish(0.0)
@@ -165,10 +171,10 @@ if __name__ == '__main__':
         
         # pubt5.publish(-20.0)
         # pubt6.publish(-20.0)
-        pubt7.publish(-20.0)
-        pubt8.publish(-20.0)
+        # pubt7.publish(-20.0)
+        # pubt8.publish(-20.0)
         
-        rate.sleep()
+        # rate.sleep()
 
     
     
