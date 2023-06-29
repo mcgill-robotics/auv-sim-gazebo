@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.82.7 commit date:2020-02-12, commit time:16:20, hash:77d23b0bd76f</authoring_tool>
     </contributor>
-    <created>2023-06-28T21:36:33</created>
-    <modified>2023-06-28T21:36:33</modified>
+    <created>2023-06-28T21:44:01</created>
+    <modified>2023-06-28T21:44:01</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -344,7 +344,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="god" name="god" type="NODE">
-        <matrix sid="transform">0.06700001 0 0 0 0 0.09999993 0 0 0 0 1 0.28 0 0 0 1</matrix>
+        <matrix sid="transform">-2.92866e-9 -0.09999993 0 0 0.06700001 -4.37114e-9 0 0 0 0 1 0.28 0 0 0 1</matrix>
         <instance_geometry url="#god-mesh" name="god">
           <bind_material>
             <technique_common>
@@ -356,7 +356,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_001" name="Cube.001" type="NODE">
-        <matrix sid="transform">0.03613316 -0.03613316 0 0 0.03613316 0.03613316 0 -0.05 0 0 0.0511 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.03613316 -0.03613316 0 -0.05 0.03613316 0.03613316 0 0 0 0 0.0511 -0.2 0 0 0 1</matrix>
         <instance_geometry url="#Cube_002-mesh" name="Cube.001">
           <bind_material>
             <technique_common>
@@ -368,7 +368,7 @@
         </instance_geometry>
       </node>
       <node id="Cube" name="Cube" type="NODE">
-        <matrix sid="transform">0.03613316 -0.03613317 0 0 0.03613316 0.03613317 0 0.05 0 0 0.05110002 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.03613316 -0.03613317 0 0.05 0.03613316 0.03613317 0 0 0 0 0.05110002 -0.2 0 0 0 1</matrix>
         <instance_geometry url="#Cube_001-mesh" name="Cube">
           <bind_material>
             <technique_common>
