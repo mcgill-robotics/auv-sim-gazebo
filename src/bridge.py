@@ -15,8 +15,15 @@ ANGLE_CHANGE_TOL = 90
 euler = np.array([0.0, 0.0, 0.0])
 
 d = 0.2222 #m
-hypot = math.sqrt(math.pow(0.672/2,2) + math.pow(0.258/2,2)) #m
+hypot = math.sqrt(math.pow(0.5588/2,2) + math.pow(0.2222/2,2)) #m
 D_2 = 0.5588 #m
+
+# Thursters positions
+#     3
+#  5         6
+#  1         2
+#  7         8
+#         4  
 
 T = np.matrix(
         [[-1.,  -1.,  0.,    0.,    0.,     0.,     0.,     0.],
@@ -72,10 +79,7 @@ def callback_pose(data):
     pose.position.x = clarke_position.x + 3
     pose.position.y = clarke_position.y - 0.5
     pose.position.z = clarke_position.z
-    pose.orientation.w = clarke_orientation.w
-    pose.orientation.x = clarke_orientation.z
-    pose.orientation.y = clarke_orientation.y
-    pose.orientation.z = clarke_orientation.x
+    pose.orientation = clarke_orientation
     pub_pose.publish(pose)
 
     q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
