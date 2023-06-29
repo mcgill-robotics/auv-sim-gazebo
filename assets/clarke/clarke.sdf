@@ -50,13 +50,9 @@
 
       <visual name="visual">
         <geometry>
-          <cylinder>
-            <radius>0.1111</radius>
-            <length>0.5588</length>
-          </cylinder>
-          <!-- <mesh>
-            <uri>meshes/clarke.dae</uri>
-          </mesh> -->
+          <mesh>
+            <uri>meshes/coloured_clarke.dae</uri>
+          </mesh>
         </geometry>
       </visual>
 
