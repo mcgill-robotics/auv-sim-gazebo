@@ -77,7 +77,7 @@ def callback_pose(data):
     
     pose = Pose()
     pose.position.x = clarke_position.x + 3
-    pose.position.y = clarke_position.y - 0.5
+    pose.position.y = clarke_position.y + 0.5
     pose.position.z = clarke_position.z
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
