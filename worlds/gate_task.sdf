@@ -2,14 +2,14 @@
 <sdf version="1.9">
     <world name="quali">
 
-        <!-- <physics name="1ms" type="ode">
+        <physics name="1ms" type="ode">
             <max_step_size>0.001</max_step_size>
             <real_time_factor>1.0</real_time_factor>
-        </physics> -->
-        <!-- <plugin
+        </physics>
+        <plugin
             filename="ignition-gazebo-physics-system"
             name="ignition::gazebo::systems::Physics">
-        </plugin> -->
+        </plugin>
         <plugin
             filename="ignition-gazebo-user-commands-system"
             name="ignition::gazebo::systems::UserCommands">
@@ -18,21 +18,21 @@
             filename="ignition-gazebo-scene-broadcaster-system"
             name="ignition::gazebo::systems::SceneBroadcaster">
         </plugin>
-        <!-- <plugin
+        <plugin
             filename="ignition-gazebo-contact-system"
             name="ignition::gazebo::systems::Contact">
-        </plugin> -->
+        </plugin>
 
-        <!-- <plugin
+        <plugin
             filename="ignition-gazebo-buoyancy-system"
             name="ignition::gazebo::systems::Buoyancy">
             <uniform_fluid_density>997</uniform_fluid_density>
-        </plugin> -->
-<!-- 
+        </plugin>
+
         <plugin
             filename="ignition-gazebo-particle-emitter2-system"
             name="ignition::gazebo::systems::ParticleEmitter2">
-        </plugin> -->
+        </plugin>
 
         <scene>
             <ambient>1.0 1.0 1.0</ambient>
