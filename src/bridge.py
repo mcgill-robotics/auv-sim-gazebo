@@ -103,10 +103,8 @@ def callback_pose(data):
     pub_state_theta_z.publish(euler[2])
     
 def callback_imu(data):
-    imu_data_msg = SbgImuData()
     gyro = Vector3(-data.angular_velocity.z, -data.angular_velocity.y, -data.angular_velocity.x)
-    imu_data_msg.gyro = gyro
-    imu_data_pub.publish(imu_data_msg)
+    angular_velocity_pub.publish(gyro)
     
     imu_ekf_quat_msg = SbgEkfQuat()
     quat = Quaternion(-data.orientation.z, -data.orientation.y, -data.orientation.x, data.orientation.w)
@@ -136,7 +134,7 @@ if __name__ == '__main__':
     sub_pose = rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, callback_pose)
     
     
-    imu_data_pub = rospy.Publisher('/sbg/imu_data', SbgImuData, queue_size=1)
+    angular_velocity_pub = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
     imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
     
     imu_sub = rospy.Subscriber('/imu', Imu, callback_imu)
