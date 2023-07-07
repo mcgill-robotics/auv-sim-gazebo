@@ -82,7 +82,7 @@
 
       <!-- Depth camera -->
       <sensor name="front_cam_depth" type="depth_camera">
-        <pose>0.1 0 -0.05 3.13159 1.5708 0</pose>
+        <pose>0 0 -0.5 3.13159 1.5708 0</pose>
         <camera>
           <horizontal_fov>1.57</horizontal_fov>
           <image>
@@ -98,7 +98,7 @@
 
       <!-- Front -->
       <sensor name="front_cam_rgb" type="camera">
-        <pose>0.1 0 -0.05 3.13159 1.5708 0</pose>
+        <pose>0 0 -0.5 3.13159 1.5708 0</pose>
         <camera>
           <horizontal_fov>1.57</horizontal_fov>
           <image>
