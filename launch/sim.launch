@@ -56,12 +56,15 @@
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/vision/down_cam/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node> 
+
+    <node name="bridge_front_cam_info" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="vision/front_cam/camera_info@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
+    </node> 
  
     <node 
         name="bridge_py" pkg="auv-sim" type="bridge.py" output="screen">
     </node>
 
-    <node name="point_cloud_sim" pkg="auv-sim" type="point_cloud.py" output="screen" />
 
     <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
     <include file="$(find vision)/launch/sim_object_detection.launch"/>
