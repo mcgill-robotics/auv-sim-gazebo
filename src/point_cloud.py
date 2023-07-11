@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rospy
 from sensor_msgs import PointCloud2, Image
 import numpy as np
@@ -46,8 +48,8 @@ def array_to_pointcloud2(points):
 if __name__ == "__main__":
     rospy.init_node('point_cloud_sim')
 
-    width = 300
-    height = 300
+    width = 512
+    height = 341
     fx = 277
     fy = 277
     cx = 160

@@ -61,6 +61,8 @@
         name="bridge_py" pkg="auv-sim" type="bridge.py" output="screen">
     </node>
 
+    <node name="point_cloud_sim" pkg="auv-sim" type="point_cloud.py" output="screen" />
+
     <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
     <include file="$(find vision)/launch/sim_object_detection.launch"/>
 
