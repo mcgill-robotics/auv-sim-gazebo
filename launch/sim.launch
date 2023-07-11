@@ -62,5 +62,6 @@
     </node>
 
     <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
+    <include file="$(find vision)/launch/sim_object_detection.launch"/>
 
 </launch>
