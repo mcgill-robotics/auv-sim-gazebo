@@ -68,5 +68,6 @@
 
     <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
     <include file="$(find vision)/launch/sim_object_detection.launch"/>
+    <include file="$(find auv-sim)/launch/point_cloud.launch"/>
 
 </launch>

@@ -5,6 +5,6 @@
         args="load depth_image_proc/point_cloud_xyz nodelet_manager">
     <remap from="camera_info" to="/vision/front_cam/camera_info"/>
     <remap from="image_rect" to="/vision/front_cam/depth"/>
-    <remap from="points" to="/vision/front_cam/points"/>
+    <remap from="points" to="/vision/front_cam/point_cloud"/>
   </node>
 </launch>
