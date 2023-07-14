@@ -41,8 +41,11 @@ def cb_sim_pose(data):
     dr_msg.y = clarke_position.y
     dr_msg.z = clarke_position.z
 
+    depth = clarke_position.z # TODO - check with reference to which datum
+
     # TODO - specify roll/pitch/yaw for dvl
     pub_dvl_deadreckon.publish(dr_msg)
+    pub_depth_sensor.publish(depth)
 
 
 def cb_sim_imu(data):
@@ -72,6 +75,7 @@ if __name__ == '__main__':
     rospy.Subscriber('propulsion/thruster_forces', ThrusterForces, cb_thrusters)
 
     # simulate state_estimation sensors
+    pub_depth_sensor = rospy.Publisher('/depth', Float64, queue_size=1)
     pub_imu_quat = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
     # TODO - state_estimation should be responsible for this - SbgImuData
     pub_imu_angular_vel = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
