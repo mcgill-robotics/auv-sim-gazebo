@@ -60,6 +60,11 @@
     <node name="bridge_front_cam_info" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="vision/front_cam/camera_info@sensor_msgs/CameraInfo@ignition.msgs.CameraInfo">
     </node> 
+
+    <node name="bridge_point_cloud" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked">
+        <remap from="vision/front_cam/depth/points" to="vision/front_cam/point_cloud"/>
+    </node> 
  
     <node 
         name="bridge_py" pkg="auv-sim" type="bridge.py" output="screen">
@@ -67,7 +72,6 @@
 
 
     <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
-    <include file="$(find vision)/launch/sim_object_detection.launch"/>
-    <include file="$(find auv-sim)/launch/point_cloud.launch"/>
+    <include file="$(find vision)/launch/sim_object_detection.launch"/>    
 
 </launch>
