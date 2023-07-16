@@ -7,6 +7,7 @@ from sensor_msgs import point_cloud2
 from cv_bridge import CvBridge
 
 def convert_from_uvd(msg):
+    time = rospy.Time(0)
     d = bridge.imgmsg_to_cv2(msg)
     # replace nan with inf
     d = np.nan_to_num(d, nan=np.inf)
@@ -20,7 +21,7 @@ def convert_from_uvd(msg):
     combined = combined.reshape((512*341, 3))
     pub_msg = point_cloud2.create_cloud_xyz32(msg.header, combined)
     pub_msg.header.frame_id = "auv_base"
-    pub_msg.header.stamp = rospy.Time.now()
+    pub_msg.header.stamp = time
     point_cloud_pub.publish(pub_msg)
 
 
