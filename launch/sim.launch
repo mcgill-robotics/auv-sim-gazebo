@@ -65,7 +65,7 @@
         args="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked">
         <remap from="vision/front_cam/depth/points" to="vision/front_cam/point_cloud"/>
     </node>  -->
- 
+
     <node name="point_cloud" pkg="auv-sim" type="point_cloud.py" output="screen"/>
 
     <node 
