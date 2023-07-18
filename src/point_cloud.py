@@ -6,7 +6,25 @@ import numpy as np
 from sensor_msgs import point_cloud2
 from cv_bridge import CvBridge
 
+def camera_info_callback(msg):
+    global fx, fy, cx, cy, width, height, convert_map
+    fx = msg.K[0]
+    fy = msg.K[4]
+    cx = msg.K[2]
+    cy = msg.K[5]
+    width = msg.width
+    height = msg.height
+
+    u_map = np.tile(np.arange(width),(height,1)) +1
+    v_map = np.tile(np.arange(height),(width,1)).T +1
+
+    x_over_z_map = (cx - u_map) / fx
+    y_over_z_map = (cy - v_map) / fy
+
+    convert_map = np.sqrt(1 + x_over_z_map**2 + y_over_z_map**2)
+
 def convert_from_uvd(msg):
+    if convert_map is None: return
     time = rospy.Time(0)
     d = bridge.imgmsg_to_cv2(msg)
     # replace nan with inf
@@ -28,20 +46,19 @@ def convert_from_uvd(msg):
 if __name__ == "__main__":
     rospy.init_node('point_cloud_sim')
     bridge = CvBridge()
-    width = 512
-    height = 341
-    fx = 277
-    fy = 277
-    cx = 160
-    cy = 120
 
-    u_map = np.tile(np.arange(width),(height,1)) +1
-    v_map = np.tile(np.arange(height),(width,1)).T +1
+    camera_info_sub = rospy.Subscriber('vision/front_cam/camera_info', CameraInfo, camera_info_callback, queue_size=1)
+    fx = None
+    fy = None
+    cx = None
+    cy = None
+    width = None
+    height = None
 
-    x_over_z_map = (cx - u_map) / fx
-    y_over_z_map = (cy - v_map) / fy
+    x_over_z_map = None
+    y_over_z_map = None
+    convert_map = None
 
-    convert_map = np.sqrt(1 + x_over_z_map**2 + y_over_z_map**2)
 
     depth_sub = rospy.Subscriber('vision/front_cam/depth', Image, convert_from_uvd, queue_size=1)
     point_cloud_pub = rospy.Publisher('vision/front_cam/point_cloud', PointCloud2, queue_size=1)
