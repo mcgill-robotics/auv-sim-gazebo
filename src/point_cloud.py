@@ -14,12 +14,15 @@ def camera_info_callback(msg):
     global fx, fy, cx, cy, width, height, x_over_z_map, y_over_z_map, convert_map
     fx = msg.K[0]
     fy = msg.K[4]
+    cy = msg.K[2]
+    cx = msg.K[5]
     width = msg.width
     height = msg.height
 
-    
-    cx = int(width/2)
-    cy = int(height/2)
+    # print(cx, cy, width/2, height/2)
+
+    # cx = int(width/2)
+    # cy = int(height/2)
     # print(msg.K[2], msg.K[5])
 
     u_map = np.tile(np.arange(width),(height,1)) +1
@@ -35,7 +38,6 @@ def convert_from_uvd(msg):
         d = bridge.imgmsg_to_cv2(msg)
         # replace nan with inf
         time = rospy.Time.now()
-        start = rospy.get_time()
         z_map = np.nan_to_num(d, nan=np.inf)
         # print amount of np.nan in x_over_z_map and y_over_z_map
         x_map = x_over_z_map * z_map
@@ -45,9 +47,7 @@ def convert_from_uvd(msg):
         xyz_rbg_img = np.zeros((height, width, 3))
         xyz_rbg_img[:, :, 0:3] = combined
         # xyz_rbg_img[:, :, 3:6] = rgb
-        print(xyz_rbg_img.shape)
         done = rospy.get_time()
-        print("Time to convert: ", (done - start))
         combined = combined.reshape((width*height, 3))
         combined = combined.astype(np.float32)
         # fields = [point_cloud2.PointField('x', 0, point_cloud2.PointField.FLOAT32, 1),
