@@ -8,7 +8,8 @@ from cv_bridge import CvBridge
 
 def rbg_callback(msg):
     global rgb
-    rgb = bridge.imgmsg_to_cv2(msg)
+    temp = bridge.imgmsg_to_cv2(msg)
+    rgb = temp/255
 
 def camera_info_callback(msg):
     global fx, fy, cx, cy, width, height, x_over_z_map, y_over_z_map, convert_map
@@ -34,7 +35,7 @@ def camera_info_callback(msg):
     convert_map = np.sqrt(1 + x_over_z_map**2 + y_over_z_map**2)
 
 def convert_from_uvd(msg):
-    if convert_map is not None:
+    if convert_map is not None and rgb is not None:
         d = bridge.imgmsg_to_cv2(msg)
         # replace nan with inf
         time = rospy.Time.now()
@@ -44,17 +45,18 @@ def convert_from_uvd(msg):
         y_map = y_over_z_map * z_map
         combined = np.stack((z_map, x_map, y_map), axis=2)
     
-        xyz_rbg_img = np.zeros((height, width, 3))
+        xyz_rbg_img = np.zeros((height, width, 6))
         xyz_rbg_img[:, :, 0:3] = combined
-        # xyz_rbg_img[:, :, 3:6] = rgb
-        done = rospy.get_time()
-        combined = combined.reshape((width*height, 3))
-        combined = combined.astype(np.float32)
-        # fields = [point_cloud2.PointField('x', 0, point_cloud2.PointField.FLOAT32, 1),
-        #             point_cloud2.PointField('y', 4, point_cloud2.PointField.FLOAT32, 1),
-        #             point_cloud2.PointField('z', 8, point_cloud2.PointField.FLOAT32, 1),
-        #             point_cloud2.PointField('rgb', 12, point_cloud2.PointField.UINT32, 1)]
-        pub_msg = point_cloud2.create_cloud_xyz32(msg.header,combined)
+        xyz_rbg_img[:, :, 3:6] = rgb
+        xyz_rbg_img = xyz_rbg_img.reshape((width*height, 6))
+        xyz_rbg_img = xyz_rbg_img.astype(np.float32)
+        fields = [point_cloud2.PointField('x', 0, point_cloud2.PointField.FLOAT32, 1),
+                    point_cloud2.PointField('y', 4, point_cloud2.PointField.FLOAT32, 1),
+                    point_cloud2.PointField('z', 8, point_cloud2.PointField.FLOAT32, 1),
+                    point_cloud2.PointField('r', 12, point_cloud2.PointField.FLOAT32, 1),
+                    point_cloud2.PointField('g', 16, point_cloud2.PointField.FLOAT32, 1),
+                    point_cloud2.PointField('b', 20, point_cloud2.PointField.FLOAT32, 1)]
+        pub_msg = point_cloud2.create_cloud(msg.header, fields, xyz_rbg_img)
         pub_msg.header.frame_id = "auv_base"
         pub_msg.header.stamp = time
         point_cloud_pub.publish(pub_msg)
