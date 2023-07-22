@@ -9,8 +9,8 @@ rosdep install -r --from-paths src -i -y --rosdistro noetic
 #ROS-IGN BRIDGE
 
 echo "Select an installation method:"
-echo "1: Install using apt (faster)"
-echo "2: Install from source"
+echo "1: Install using apt (faster)" # apt everything except custom ros ign bridge
+echo "2: Install from source" # build all ign packages from source (more reliable if first option causes errors)
 export IGNITION_VERSION=fortress
 auv_sim_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 while true; do
