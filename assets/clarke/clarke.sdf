@@ -97,7 +97,7 @@
             </lens>
           </camera>
           <always_on>1</always_on>
-          <update_rate>2</update_rate>
+          <update_rate>10</update_rate>
           <visualize>true</visualize>
           <topic>vision/front_cam/depth</topic>
         </sensor>
@@ -118,7 +118,7 @@
             </lens>
           </camera>
           <always_on>1</always_on>
-          <update_rate>2</update_rate>
+          <update_rate>10</update_rate>
           <visualize>true</visualize>
           <topic>vision/front_cam/image_rgb</topic>
         </sensor>
