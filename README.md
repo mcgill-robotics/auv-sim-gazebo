@@ -14,16 +14,7 @@ The source code is released under a GPLv3 license.
 
 ## Installation
 
-Follow Ignition Gazebo Fortress [installation instructions](https://gazebosim.org/docs/fortress/install_ubuntu). 
-
-Install the `ros_ign_bridge` package from source
-
-	cd <AUV-202?>/catkin_ws
-	git submodule update
-	export IGNITION_VERSION=fortress
-	rosdep install -r --from-paths src -i -y --rosdistro noetic
-	source /opt/ros/noetic/setup.bash
-	catkin build auv-sim
+run `install_dependencies.sh`
 
 
 ### Running
