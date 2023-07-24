@@ -3,6 +3,9 @@
     <include file="$(find controls)/launch/controls.launch">
         <arg name="sim" value="true" />
     </include>
+    <include file="$(find state_estimation)/launch/no_firmware.launch"/>
+    <include file="$(find propulsion)/launch/no_firmware.launch"/>
+    <include file="$(find vision)/launch/sim_object_detection.launch"/>
 
     <param name="sim" value="true" />
 
@@ -56,7 +59,6 @@
         <remap from="/vision/front_cam/image_rgb" to="/vision/front_cam/color/image_raw"/>
     </node>
 
-
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/vision/down_cam/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node> 
@@ -71,13 +73,8 @@
         <remap from="vision/front_cam/depth/points" to="vision/front_cam/point_cloud"/>
     </node>  -->
 
-
     <node 
         name="bridge_py" pkg="auv-sim" type="bridge.py" output="screen">
-    </node>
-
-
-    <include file="$(find state_estimation)/launch/transform_broadcaster.launch"/>
-    <include file="$(find vision)/launch/sim_object_detection.launch"/>    
+    </node> 
 
 </launch>
