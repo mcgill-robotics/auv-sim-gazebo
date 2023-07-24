@@ -6,11 +6,12 @@ set(MSG_DEP_SET auv_msgs std_msgs geometry_msgs)
 
 find_package(catkin REQUIRED COMPONENTS
 	${MSG_DEP_SET}
-	controls
-	gazebo_ros
-	propulsion
-	ros_ign_bridge
 	ros_ign_gazebo
+	ros_ign_bridge
+	gazebo_ros
+	std_msgs
+	controls
+	propulsion
 	rospy
 	sensor_msgs
 	state_estimation
@@ -21,6 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(	CATKIN_DEPENDS 
 	${MSG_DEP_SET}
+	std_msgs
 	controls
 	gazebo_ros
 	propulsion
