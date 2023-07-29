@@ -6,6 +6,7 @@
     <!--<include file="$(find state_estimation)/launch/no_firmware.launch"/>-->
     <include file="$(find propulsion)/launch/no_firmware.launch"/>
     <include file="$(find vision)/launch/sim_object_detection.launch"/>
+    <node name="transform_broadcaster_sim" pkg="auv-sim" type="transform_broadcaster_sim.py" output="screen"/>
 
     <param name="sim" value="true" />
 
