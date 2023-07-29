@@ -91,8 +91,8 @@
             </image>
             <lens>
               <intrinsics>
-                <cx>170</cx>
-                <cy>256</cy>
+                <cx>360</cx>
+                <cy>640</cy>
               </intrinsics>
             </lens>
           </camera>
@@ -113,8 +113,8 @@
             </image>
             <lens>
               <intrinsics>
-                <cx>170</cx>
-                <cy>256</cy>
+                <cx>360</cx>
+                <cy>640</cy>
               </intrinsics>
             </lens>
           </camera>
