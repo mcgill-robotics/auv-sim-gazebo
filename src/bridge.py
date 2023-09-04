@@ -8,7 +8,7 @@ from geometry_msgs.msg import PoseArray, Vector3, Quaternion
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
-from tf import transformations
+import tf
 
 
 DEG_PER_RAD = 180/np.pi
@@ -39,7 +39,15 @@ def cb_sim_pose(data):
     dr_msg.z = clarke_position.z
 
     depth = clarke_position.z # TODO - check with reference to which datum
-
+    
+    x, y, z, w = clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w
+    
+    roll, pitch, yaw = tf.transformation.euler_from_quaternion([x, y, z, w])
+    
+    dr_msg.roll = roll
+    dr_msg.pitch = pitch
+    dr_msg.yaw = yaw
+    
     # TODO - specify roll/pitch/yaw for dvl
     pub_dvl_deadreckon.publish(dr_msg)
     pub_depth_sensor.publish(depth)
