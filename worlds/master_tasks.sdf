@@ -158,7 +158,7 @@
 
         <include>
             <uri>assets/common/transdec/transdec.sdf</uri>
-            <pose>0 0 0 0 0 1.5708</pose>
+            <pose>29.7 -1 0 0 0 1.5708</pose>
         </include>
 
         <!-- Tails -->
@@ -170,39 +170,39 @@
         <!-- Heads -->
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>-29.7 1 0 0 0 0</pose>
+            <pose>0 0 0 0 0 0</pose>
         </include>
 
         <include>
             <uri>assets/tasks/gate/gate.sdf</uri>
-            <pose>-25 4 -1 0 0 -0.785398</pose>
+            <pose>4.7 3 -1 0 0 -0.785398</pose>
         </include>
 
         <include>
             <name>lane_marker_45left_one</name>
             <uri>assets/common/lane_marker/lane_marker_45left.sdf</uri>
-            <pose>-24.2 5.3 -4.8 0 0 -2.35619</pose>
+            <pose>5.5 4.3 -4.8 0 0 -2.35619</pose>
         </include>
 
         <include>
             <uri>assets/tasks/buoy/buoy1.sdf</uri>
-            <pose>-24.2 15 -4.8 0 0 -1.91986</pose>
+            <pose>5.5 14 -4.8 0 0 -1.91986</pose>
         </include>
 
         <include>
             <name>lane_marker_45left_two</name>
             <uri>assets/common/lane_marker/lane_marker_45left.sdf</uri>
-            <pose>-23 18 -4.8 0 0 0.785398</pose>
+            <pose>6.7 17 -4.8 0 0 0.785398</pose>
         </include>
 
         <include>
             <uri>assets/tasks/octagon/octagon_table.sdf</uri>
-            <pose>-3 40 -4.8 0 0 0</pose>
+            <pose>26.7 39 -4.8 0 0 0</pose>
         </include>
 
         <include>
             <uri>assets/tasks/octagon/octagon.sdf</uri>
-            <pose>-3 40 0 0 0 0</pose>
+            <pose>26.7 39 0 0 0 0</pose>
         </include>
     </world>
 </sdf>

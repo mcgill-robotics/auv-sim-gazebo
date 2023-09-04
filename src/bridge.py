@@ -37,7 +37,7 @@ def cb_sim_pose(data):
     clarke_orientation = clarke_poses.orientation
     
     dr_msg = DeadReckonReport()
-    dr_msg.x = clarke_position.x + 3 # TODO - sketch
+    dr_msg.x = clarke_position.x
     dr_msg.y = clarke_position.y
     dr_msg.z = clarke_position.z
 
