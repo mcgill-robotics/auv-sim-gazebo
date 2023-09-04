@@ -38,17 +38,16 @@ def cb_sim_pose(data):
     dr_msg.y = clarke_position.y
     dr_msg.z = clarke_position.z
 
-    depth = clarke_position.z # TODO - check with reference to which datum
+    depth = clarke_position.z
     
     x, y, z, w = clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w
     
-    roll, pitch, yaw = tf.transformation.euler_from_quaternion([x, y, z, w])
+    roll, pitch, yaw = tf.transformations.euler_from_quaternion([x, y, z, w])
     
     dr_msg.roll = roll
     dr_msg.pitch = pitch
     dr_msg.yaw = yaw
     
-    # TODO - specify roll/pitch/yaw for dvl
     pub_dvl_deadreckon.publish(dr_msg)
     pub_depth_sensor.publish(depth)
 
