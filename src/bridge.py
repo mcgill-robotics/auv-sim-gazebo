@@ -2,20 +2,17 @@
 
 import rospy
 import numpy as np
-import math
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import Wrench, PoseArray, Pose, Vector3, Quaternion 
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion 
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
-from tf import transformations
+import tf
 
 
 DEG_PER_RAD = 180/np.pi
 ANGLE_CHANGE_TOL = 90 
-euler = np.array([0.0, 0.0, 0.0])
-
 euler = np.array([0.0, 0.0, 0.0])
 
 
@@ -65,7 +62,6 @@ def cb_sim_pose(data):
     pub_state_theta_x.publish(euler[0])
     pub_state_theta_y.publish(euler[1])
     pub_state_theta_z.publish(euler[2])
-
 
 def cb_sim_imu(data):
     # TODO - attach imu link to preserve orientation

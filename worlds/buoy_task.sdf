@@ -161,24 +161,19 @@
             <pose>0 0 0 0 0 1.5708</pose>
         </include>
 
-        <!-- <include>
-            <uri>assets/common/ceiling/ceiling.sdf</uri>
-            <pose>0 0 0 0 0 0</pose>
-        </include> -->
-
         <include>
             <uri>assets/tasks/buoy/buoy1.sdf</uri>
-            <pose>1 0 -5 0 0 -3.1415</pose>
+            <pose>4 0 -5 0 0 -3.1415</pose>
         </include>
 
         <include>
             <uri>assets/clarke/clarke.sdf</uri>
-            <pose>-3 0 0 0 0 0</pose>
+            <pose>0 0 0 0 0 0</pose>
         </include>
 
         <include>
             <uri>assets/common/lane_marker/lane_marker_45right.sdf</uri>
-            <pose>-4 0 -5 0 0 0</pose>
+            <pose>-1 0 -5 0 0 0</pose>
         </include>
 
     </world>
