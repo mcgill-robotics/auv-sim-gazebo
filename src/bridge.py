@@ -2,10 +2,9 @@
 
 import rospy
 import numpy as np
-import math
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import Wrench, PoseArray, Pose, Vector3, Quaternion 
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion 
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
@@ -14,8 +13,6 @@ from tf import transformations
 
 DEG_PER_RAD = 180/np.pi
 ANGLE_CHANGE_TOL = 90 
-euler = np.array([0.0, 0.0, 0.0])
-
 euler = np.array([0.0, 0.0, 0.0])
 
 
