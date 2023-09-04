@@ -2,20 +2,17 @@
 
 import rospy
 import numpy as np
-import math
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import Wrench, PoseArray, Pose, Vector3, Quaternion 
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion 
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
-from tf import transformations
+import tf
 
 
 DEG_PER_RAD = 180/np.pi
 ANGLE_CHANGE_TOL = 90 
-euler = np.array([0.0, 0.0, 0.0])
-
 euler = np.array([0.0, 0.0, 0.0])
 
 
@@ -37,13 +34,20 @@ def cb_sim_pose(data):
     clarke_orientation = clarke_poses.orientation
     
     dr_msg = DeadReckonReport()
-    dr_msg.x = clarke_position.x + 3 # TODO - sketch
+    dr_msg.x = clarke_position.x
     dr_msg.y = clarke_position.y
     dr_msg.z = clarke_position.z
 
-    depth = clarke_position.z # TODO - check with reference to which datum
-
-    # TODO - specify roll/pitch/yaw for dvl
+    depth = clarke_position.z
+    
+    x, y, z, w = clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w
+    
+    roll, pitch, yaw = tf.transformations.euler_from_quaternion([x, y, z, w])
+    
+    dr_msg.roll = roll
+    dr_msg.pitch = pitch
+    dr_msg.yaw = yaw
+    
     pub_dvl_deadreckon.publish(dr_msg)
     pub_depth_sensor.publish(depth)
 
