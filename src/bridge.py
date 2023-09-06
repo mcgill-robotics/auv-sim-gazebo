@@ -32,25 +32,36 @@ def cb_sim_pose(data):
     clarke_poses = data.poses[0]
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
-    
-    dr_msg = DeadReckonReport()
-    dr_msg.x = clarke_position.x
-    dr_msg.y = clarke_position.y
-    dr_msg.z = clarke_position.z
+    pub_state_x.publish(clarke_position.x + 3)
+    pub_state_y.publish(clarke_position.y)
+    pub_state_z.publish(clarke_position.z)
 
-    depth = clarke_position.z
-    
-    x, y, z, w = clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w
-    
-    roll, pitch, yaw = tf.transformations.euler_from_quaternion([x, y, z, w])
-    
-    dr_msg.roll = roll
-    dr_msg.pitch = pitch
-    dr_msg.yaw = yaw
-    
-    pub_dvl_deadreckon.publish(dr_msg)
-    pub_depth_sensor.publish(depth)
+    pose = Pose()
+    pose.position.x = clarke_position.x + 3
+    pose.position.y = clarke_position.y
+    pose.position.z = clarke_position.z
+    pose.orientation = clarke_orientation
+    pub_pose.publish(pose)
 
+    q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
+    conversion = transformations.euler_from_quaternion(q, 'rxyz')
+    theta_x = conversion[0]
+    theta_y = conversion[1]
+    theta_z = conversion[2]
+
+    angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
+
+    for i in range(3):
+            if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] - 360
+            elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
+                euler[i] = angles[i] + 360
+            else:
+                euler[i] = angles[i]
+
+    pub_state_theta_x.publish(euler[0])
+    pub_state_theta_y.publish(euler[1])
+    pub_state_theta_z.publish(euler[2])
 
 def cb_sim_imu(data):
     # TODO - attach imu link to preserve orientation
@@ -79,11 +90,26 @@ if __name__ == '__main__':
     rospy.Subscriber('propulsion/thruster_forces', ThrusterForces, cb_thrusters)
 
     # simulate state_estimation sensors
-    pub_depth_sensor = rospy.Publisher('/depth', Float64, queue_size=1)
+    pub_state_x = rospy.Publisher('state_x', Float64, queue_size=1)
+    pub_state_y = rospy.Publisher('state_y', Float64, queue_size=1)
+    pub_state_z = rospy.Publisher('state_z', Float64, queue_size=1)
+    pub_state_theta_x = rospy.Publisher('state_theta_x', Float64, queue_size=1)
+    pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
+    pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
+    pub_pose = rospy.Publisher('pose', Pose, queue_size=1)
+
+    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=1)
+    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=1)
+    pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=1)
+    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=1)
+    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=1)
+    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=1)
+
+    angular_velocity_pub = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
+    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
+
     pub_imu_quat = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
-    # TODO - state_estimation should be responsible for this - SbgImuData
     pub_imu_angular_vel = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
-    pub_dvl_deadreckon = rospy.Publisher('dead_reckon_report', DeadReckonReport, queue_size=1)
 
     rospy.Subscriber('/imu', Imu, cb_sim_imu)
     rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, cb_sim_pose)
