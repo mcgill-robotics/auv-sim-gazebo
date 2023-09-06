@@ -51,13 +51,11 @@
     </node>
 
     <node name="bridge_depth_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/vision/front_cam/depth@sensor_msgs/Image@ignition.msgs.Image">
-        <remap from="/vision/front_cam/depth" to="/vision/front_cam/aligned_depth_to_color/image_raw"/>
+        args="/vision/front_cam/aligned_depth_to_color/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node>
 
     <node name="bridge_front_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="/vision/front_cam/image_rgb@sensor_msgs/Image@ignition.msgs.Image">
-        <remap from="/vision/front_cam/image_rgb" to="/vision/front_cam/color/image_raw"/>
+        args="/vision/front_cam/color/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node>
 
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
