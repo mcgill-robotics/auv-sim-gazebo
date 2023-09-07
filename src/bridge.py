@@ -69,7 +69,7 @@ def cb_sim_imu(data):
     pub_imu_angular_vel.publish(gyro)
     
     sbg_quat = SbgEkfQuat()
-    quat = Quaternion(-data.orientation.z, data.orientation.y, data.orientation.x, data.orientation.w) # TODO - incorrect?
+    quat = Quaternion(-data.orientation.z, data.orientation.y, data.orientation.x, data.orientation.w)
     sbg_quat.quaternion = quat
     pub_imu_quat.publish(sbg_quat)
     
