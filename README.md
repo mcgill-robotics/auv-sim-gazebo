@@ -22,7 +22,7 @@ run `install_dependencies.sh`
 Run gazebo simulation of quali task with Clarke AUV
 
 	cd <AUV-202?>/catkin_ws/src
-	roslaunch auv-sim qualifying.sdf
+	roslaunch auv-sim-gazebo qualifying.sdf
 
 ### Usage
 

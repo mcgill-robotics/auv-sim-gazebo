@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(auv-sim)
+project(auv-sim-gazebo)
 
 # TODO - set enc fortress
 set(MSG_DEP_SET auv_msgs std_msgs geometry_msgs)
