@@ -99,7 +99,7 @@
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
-          <topic>vision/front_cam/depth</topic>
+          <topic>vision/front_cam/aligned_depth_to_color/image_raw</topic>
         </sensor>
 
         <!-- Front -->
@@ -121,7 +121,7 @@
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
-          <topic>vision/front_cam/image_rgb</topic>
+          <topic>vision/front_cam/color/image_raw</topic>
         </sensor>
 
     </link>

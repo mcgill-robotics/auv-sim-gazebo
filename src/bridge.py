@@ -4,7 +4,7 @@ import rospy
 import numpy as np
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import PoseArray, Vector3, Quaternion 
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion, Pose
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
@@ -32,19 +32,19 @@ def cb_sim_pose(data):
     clarke_poses = data.poses[0]
     clarke_position = clarke_poses.position
     clarke_orientation = clarke_poses.orientation
-    pub_state_x.publish(clarke_position.x + 3)
+    pub_state_x.publish(clarke_position.x)
     pub_state_y.publish(clarke_position.y)
     pub_state_z.publish(clarke_position.z)
 
     pose = Pose()
-    pose.position.x = clarke_position.x + 3
+    pose.position.x = clarke_position.x
     pose.position.y = clarke_position.y
     pose.position.z = clarke_position.z
     pose.orientation = clarke_orientation
     pub_pose.publish(pose)
 
     q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
-    conversion = transformations.euler_from_quaternion(q, 'rxyz')
+    conversion = tf.transformations.euler_from_quaternion(q, 'rxyz')
     theta_x = conversion[0]
     theta_y = conversion[1]
     theta_z = conversion[2]
