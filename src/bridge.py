@@ -65,11 +65,11 @@ def cb_sim_pose(data):
 
 def cb_sim_imu(data):
     # TODO - attach imu link to preserve orientation
-    gyro = Vector3(-data.angular_velocity.z, -data.angular_velocity.y, -data.angular_velocity.x)
+    gyro = Vector3(-data.angular_velocity.z, data.angular_velocity.y, data.angular_velocity.x)
     pub_imu_angular_vel.publish(gyro)
     
     sbg_quat = SbgEkfQuat()
-    quat = Quaternion(-data.orientation.z, -data.orientation.y, -data.orientation.x, data.orientation.w) # TODO - incorrect?
+    quat = Quaternion(-data.orientation.z, data.orientation.y, data.orientation.x, data.orientation.w)
     sbg_quat.quaternion = quat
     pub_imu_quat.publish(sbg_quat)
     
@@ -104,9 +104,6 @@ if __name__ == '__main__':
     pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=1)
     pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=1)
     pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=1)
-
-    angular_velocity_pub = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
-    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
 
     pub_imu_quat = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
     pub_imu_angular_vel = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
