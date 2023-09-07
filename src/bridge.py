@@ -105,9 +105,6 @@ if __name__ == '__main__':
     pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=1)
     pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=1)
 
-    angular_velocity_pub = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
-    imu_quat_pub = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
-
     pub_imu_quat = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
     pub_imu_angular_vel = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
 
