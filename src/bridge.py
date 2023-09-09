@@ -9,6 +9,7 @@ from sbg_driver.msg import SbgImuData, SbgEkfQuat, SbgImuStatus
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64, UInt32, Float32
 import tf
+import quaternion
 
 
 DEG_PER_RAD = 180/np.pi
@@ -29,22 +30,28 @@ def cb_thrusters(data):
 
 
 def cb_sim_dvl_depth(data):
-    dvl_sim = data.poses[2]
+    dvl_sim = data.poses[0]
     
-    dvl_sim_position = dvl_sim.position
-    dvl_sim_orientation = dvl_sim.orientation
+    clarke_sim_position = dvl_sim.position
+    clarke_sim_orientation = dvl_sim.orientation
+    
+    clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
+    auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
 
     dvl_msg = DeadReckonReport()
     
-    dvl_msg.x = dvl_sim_position.x
-    dvl_msg.y = dvl_sim_position.y
-    dvl_msg.z = dvl_sim_position.z
+    dvl_auv_offset_rotated = quaternion.rotate_vectors(clarke_np_quat.inverse(), np.array([0.0, 0.0, -.3])) 
+    auv_np_position += dvl_auv_offset_rotated
+    
+    dvl_msg.x = auv_np_position[0]
+    dvl_msg.y = auv_np_position[1]
+    dvl_msg.z = auv_np_position[2]
     
     dvl_msg.std = 0.0
     
     dvl_msg.status = 1
     
-    q = np.array([dvl_sim_orientation.x, dvl_sim_orientation.y, dvl_sim_orientation.z, dvl_sim_orientation.w])
+    q = np.array([clarke_np_quat.x, clarke_np_quat.y, clarke_np_quat.z, clarke_np_quat.w])
     angles = np.asarray(tf.transformations.euler_from_quaternion(q, 'rxyz')) * DEG_PER_RAD
 
     dvl_msg.roll = angles[0]

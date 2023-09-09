@@ -233,15 +233,5 @@
             <pose>0 0 0 0 0 0</pose>
         </include>
 
-        <include>
-            <uri>assets/common/dvl/dvl.sdf</uri>
-            <pose>0 0 -2 0 0 0</pose>
-        </include>
-
-        <!-- <joint name="dvl_joint" type="fixed">
-            <child>dvl</child>
-            <parent>clarke</parent>
-        </joint> -->
-
     </world>
 </sdf>
