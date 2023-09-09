@@ -62,7 +62,7 @@ def cb_sim_dvl_depth(data):
     
     clarke_msg = data.poses[0]
 
-    depth_msg = -clarke_msg.position.z
+    depth_msg = clarke_msg.position.z
     pub_depth_sensor.publish(depth_msg)
 
 def cb_sim_imu(data):
