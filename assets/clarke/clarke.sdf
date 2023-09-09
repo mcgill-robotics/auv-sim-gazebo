@@ -11,19 +11,6 @@
       <!-- https://classic.gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
 
       <pose>0 0 0 1.5708 1.5708 -1.5708</pose>
-      <!-- <pose>0 0 0 1.5708 0 0</pose> -->
-
-      <!-- <inertial>
-        <mass>147.8671</mass>
-        <inertia>
-          <ixx>3.000000</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>41.980233</iyy>
-          <iyz>0</iyz>
-          <izz>41.980233</izz>
-        </inertia>
-      </inertial> -->
 
       <inertial>
         <mass>22.3</mass>
@@ -124,31 +111,6 @@
           <topic>vision/front_cam/color/image_raw</topic>
         </sensor>
 
-    </link>
-
-    <!-- DVL -->
-    <link name="dvl">
-      <pose relative_to="base_link">0.15 0 0 0 1.5708 3.1415</pose>
-
-      <inertial>
-        <mass>0.2</mass>
-        <inertia>
-          <ixx>0.000143971303</ixx>
-          <ixy>0.000000000008</ixy>
-          <ixz>-0.000000000224</ixz>
-          <iyy>0.000140915448</iyy>
-          <iyz>-0.000025236433</iyz>
-          <izz>0.000033571862</izz>
-        </inertia>
-      </inertial>    
-
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.03 0.1 0.03</size>
-          </box>
-        </geometry>
-      </collision> 
     </link>
 
     <!-- Thruster 1 -->
@@ -596,11 +558,6 @@
     </link>
 
     <!-- Joints -->
-    <joint name="dvl_joint" type="fixed">
-      <parent>base_link</parent>
-      <child>dvl</child>
-    </joint>
-
     <joint name="thruster1_joint" type="revolute">
       <parent>base_link</parent>
       <child>thruster1</child>
