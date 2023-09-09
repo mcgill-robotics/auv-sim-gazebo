@@ -44,8 +44,8 @@ def cb_sim_dvl_depth(data):
     auv_np_position += dvl_auv_offset_rotated
     
     dvl_msg.x = auv_np_position[0]
-    dvl_msg.y = auv_np_position[1]
-    dvl_msg.z = auv_np_position[2]
+    dvl_msg.y = -auv_np_position[1]
+    dvl_msg.z = -auv_np_position[2]
     
     dvl_msg.std = 0.0
     
@@ -55,14 +55,14 @@ def cb_sim_dvl_depth(data):
     angles = np.asarray(tf.transformations.euler_from_quaternion(q, 'rxyz')) * DEG_PER_RAD
 
     dvl_msg.roll = angles[0]
-    dvl_msg.pitch = angles[1]
-    dvl_msg.yaw = angles[2]
+    dvl_msg.pitch = -angles[1]
+    dvl_msg.yaw = -angles[2]
     
     pub_dvl_sensor.publish(dvl_msg)
     
     clarke_msg = data.poses[0]
 
-    depth_msg = clarke_msg.position.z
+    depth_msg = -clarke_msg.position.z
     pub_depth_sensor.publish(depth_msg)
 
 def cb_sim_imu(data):
