@@ -2,7 +2,6 @@
     <include file="$(find bringup)/launch/bringup.launch">
         <arg name="sim" value="true" />
     </include>
-    <node name="transform_broadcaster_sim" pkg="auv-sim-gazebo" type="transform_broadcaster_sim.py" output="screen"/>
 
     <param name="sim" value="true" />
 
