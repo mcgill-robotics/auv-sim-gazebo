@@ -12,9 +12,19 @@ import tf
 import quaternion
 
 
-DEG_PER_RAD = 180/np.pi
-ANGLE_CHANGE_TOL = 90 
-euler = np.array([0.0, 0.0, 0.0])
+DEG_PER_RAD = (180 / np.pi)
+
+
+NWU_to_NED = np.quaternion(0, 1, 0, 0)
+
+imu_gazebo_to_NWU = np.quaternion(0.7071068, 0, 0.7071068, 0)
+NED_to_imu_mount_offset = np.quaternion(0, 0, 0, 1)
+gazebo_to_imu = imu_gazebo_to_NWU * NWU_to_NED * NED_to_imu_mount_offset
+
+dvl_gazebo_to_NWU = np.quaternion(0.7071068, 0, 0, 0.7071068)
+NED_to_dvl_mount_offset = np.quaternion(0, 0, 0, 1)
+gazebo_to_dvl = dvl_gazebo_to_NWU * NWU_to_NED * NED_to_dvl_mount_offset
+
 
 
 def cb_thrusters(data):
@@ -34,29 +44,32 @@ def cb_sim_dvl_depth(data):
     
     clarke_sim_position = dvl_sim.position
     clarke_sim_orientation = dvl_sim.orientation
-    
+        
     clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
+    
+    dvl_quat = clarke_np_quat * gazebo_to_dvl
+    
     auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
+    
+    dvl_auv_offset_rotated = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), np.array([0.0, 0.0, -.3])) 
+    
+    dvl_position = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), auv_np_position) + dvl_auv_offset_rotated
 
     dvl_msg = DeadReckonReport()
-    
-    dvl_auv_offset_rotated = quaternion.rotate_vectors(clarke_np_quat.inverse(), np.array([0.0, 0.0, -.3])) 
-    auv_np_position += dvl_auv_offset_rotated
-    
-    dvl_msg.x = auv_np_position[0]
-    dvl_msg.y = -auv_np_position[1]
-    dvl_msg.z = -auv_np_position[2]
+
+    dvl_msg.x = dvl_position[0]
+    dvl_msg.y = dvl_position[1]
+    dvl_msg.z = dvl_position[2]
     
     dvl_msg.std = 0.0
     
     dvl_msg.status = 1
-    
-    q = np.array([clarke_np_quat.x, clarke_np_quat.y, clarke_np_quat.z, clarke_np_quat.w])
-    angles = np.asarray(tf.transformations.euler_from_quaternion(q, 'rxyz')) * DEG_PER_RAD
+
+    angles = np.asarray(tf.transformations.euler_from_quaternion([dvl_quat.x, dvl_quat.y, dvl_quat.z, dvl_quat.w], 'rxyz')) * DEG_PER_RAD
 
     dvl_msg.roll = angles[0]
-    dvl_msg.pitch = -angles[1]
-    dvl_msg.yaw = -angles[2]
+    dvl_msg.pitch = angles[1]
+    dvl_msg.yaw = angles[2]
     
     pub_dvl_sensor.publish(dvl_msg)
     
@@ -67,10 +80,18 @@ def cb_sim_dvl_depth(data):
 
 def cb_sim_imu(data):
     sbg_quat_msg = SbgEkfQuat()
-    sbg_quat_msg.quaternion = Quaternion(-data.orientation.z, data.orientation.y, data.orientation.x, data.orientation.w)    
+    
+    clarke_np_quat = np.quaternion(data.orientation.w, data.orientation.x, data.orientation.y, data.orientation.z)
+    euler = np.asarray(tf.transformations.euler_from_quaternion([clarke_np_quat.x, clarke_np_quat.y, clarke_np_quat.z, clarke_np_quat.w], 'rxyz'))
+    clarke_tf_quat = tf.transformations.quaternion_from_euler(-euler[0], euler[1], euler[2])
+    clarke_np_quat = np.quaternion(clarke_tf_quat[3], clarke_tf_quat[0], clarke_tf_quat[1], clarke_tf_quat[2])
+
+    imu_quat = clarke_np_quat * gazebo_to_imu
+    sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w)    
     
     sbg_data_msg = SbgImuData()
-    sbg_data_msg.gyro = Vector3(-data.angular_velocity.z, data.angular_velocity.y, data.angular_velocity.x)
+    ang_vel = quaternion.rotate_vectors(gazebo_to_imu.inverse(), np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
+    sbg_data_msg.gyro = Vector3(ang_vel[0], ang_vel[1], ang_vel[2])
 
     pub_imu_quat_sensor.publish(sbg_quat_msg)
     pub_imu_data_sensor.publish(sbg_data_msg)
