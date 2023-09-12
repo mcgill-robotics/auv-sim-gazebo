@@ -4,10 +4,10 @@ import rospy
 import numpy as np
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import PoseArray, Vector3, Quaternion, Pose
-from sbg_driver.msg import SbgImuData, SbgEkfQuat, SbgImuStatus
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion
+from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
-from std_msgs.msg import Float64, UInt32, Float32
+from std_msgs.msg import Float64
 import tf
 import quaternion
 
