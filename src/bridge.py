@@ -87,6 +87,7 @@ def cb_sim_imu(data):
     clarke_np_quat = np.quaternion(clarke_tf_quat[3], clarke_tf_quat[0], clarke_tf_quat[1], clarke_tf_quat[2])
 
     imu_quat = clarke_np_quat * gazebo_to_imu
+    
     sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w)    
     
     sbg_data_msg = SbgImuData()
@@ -99,6 +100,20 @@ def cb_sim_imu(data):
 if __name__ == '__main__':
 
     rospy.init_node('bridge')
+    
+    q_dvl_auv_w = rospy.get_param("~q_dvl_auv_w")
+    q_dvl_auv_x = rospy.get_param("~q_dvl_auv_x")
+    q_dvl_auv_y = rospy.get_param("~q_dvl_auv_y")
+    q_dvl_auv_z = rospy.get_param("~q_dvl_auv_z")
+    
+    auv_dvl_offset_x = rospy.get_param("~auv_dvl_offset_x")
+    auv_dvl_offset_y = rospy.get_param("~auv_dvl_offset_y")
+    auv_dvl_offset_z = rospy.get_param("~auv_dvl_offset_z")
+    
+    q_imu_auv_w = rospy.get_param("~q_imu_auv_w")
+    q_imu_auv_x = rospy.get_param("~q_imu_auv_x")
+    q_imu_auv_y = rospy.get_param("~q_imu_auv_y")
+    q_imu_auv_z = rospy.get_param("~q_imu_auv_z")
 
     # simulate propulsion thrusters
     pub_t1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)
