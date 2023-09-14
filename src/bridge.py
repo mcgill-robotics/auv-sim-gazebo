@@ -65,7 +65,7 @@ def cb_sim_pose(data):
 
 def cb_sim_imu(data):
     # TODO - attach imu link to preserve orientation
-    gyro = Vector3(-data.angular_velocity.z, data.angular_velocity.y, data.angular_velocity.x)
+    gyro = Vector3(-data.angular_velocity.z, -data.angular_velocity.y, -data.angular_velocity.x)
     pub_imu_angular_vel.publish(gyro)
     
     sbg_quat = SbgEkfQuat()
