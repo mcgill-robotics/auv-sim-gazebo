@@ -28,14 +28,16 @@ def cb_thrusters(data):
 
 def cb_sim_dvl_depth(data):
     dvl_sim = data.poses[0]
+    
+    # DVL FRAME: NWU
 
-    #POSITION
+    #DVL POSITION
     clarke_sim_position = dvl_sim.position
     auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
     dvl_auv_offset_rotated = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), np.array([auv_dvl_offset_x, auv_dvl_offset_y, auv_dvl_offset_z])) 
     dvl_position = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), auv_np_position) + dvl_auv_offset_rotated
 
-    #QUATERNION
+    #DVL QUATERNION
     clarke_sim_orientation = dvl_sim.orientation
     clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
     dvl_quat = gazebo_to_dvl * clarke_np_quat
@@ -54,24 +56,25 @@ def cb_sim_dvl_depth(data):
     dvl_msg.yaw = angles[2]
     pub_dvl_sensor.publish(dvl_msg)
     
+    # DEPTH FRAME: NWU
     # DEPTH SENSOR
     clarke_msg = data.poses[0]
     depth_msg = clarke_msg.position.z
     pub_depth_sensor.publish(depth_msg)
 
 def cb_sim_imu(data):
+    # IMU FRAME:
+    #   x: down
+    #   y: east
+    #   z: south
     sbg_quat_msg = SbgEkfQuat()
     
     clarke_np_quat = np.quaternion(data.orientation.w, data.orientation.x, data.orientation.y, data.orientation.z)
-    euler = np.asarray(tf.transformations.euler_from_quaternion([clarke_np_quat.x, clarke_np_quat.y, clarke_np_quat.z, clarke_np_quat.w], 'rxyz'))
-    clarke_tf_quat = tf.transformations.quaternion_from_euler(-euler[0], euler[1], euler[2])
-    clarke_np_quat = np.quaternion(clarke_tf_quat[3], clarke_tf_quat[0], clarke_tf_quat[1], clarke_tf_quat[2])
-
-    imu_quat = clarke_np_quat * gazebo_to_imu
-    
-    sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w)    
+    imu_quat = gazebo_to_imu * clarke_np_quat * NWU_to_NED.inverse()
+    sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w) 
     
     sbg_data_msg = SbgImuData()
+    
     ang_vel = quaternion.rotate_vectors(gazebo_to_imu.inverse(), np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
     sbg_data_msg.gyro = Vector3(ang_vel[0], ang_vel[1], ang_vel[2])
 
@@ -96,11 +99,13 @@ if __name__ == '__main__':
     q_imu_auv_y = rospy.get_param("~q_imu_auv_y")
     q_imu_auv_z = rospy.get_param("~q_imu_auv_z")
     
+    # REFERENCE FRAME DEFINITIONS
+    
     NWU_to_NED = np.quaternion(0, 1, 0, 0)
 
-    imu_gazebo_to_NWU = np.quaternion(0.7071068, 0, 0.7071068, 0)
-    NED_to_imu_mount_offset = np.quaternion(0, 0, 0, 1)
-    gazebo_to_imu = imu_gazebo_to_NWU * NWU_to_NED * NED_to_imu_mount_offset
+    q_imu_auv = np.quaternion(q_imu_auv_w, q_imu_auv_x, q_imu_auv_y, q_imu_auv_z)
+    imu_gazebo_to_NWU = np.quaternion(0.7071068, 0, -0.7071068, 0)
+    gazebo_to_imu = q_imu_auv * imu_gazebo_to_NWU * NWU_to_NED
 
     q_dvl_auv = np.quaternion(q_dvl_auv_w, q_dvl_auv_x, q_dvl_auv_y, q_dvl_auv_z)
     gazebo_to_dvl = q_dvl_auv * NWU_to_NED
