@@ -28,41 +28,34 @@ def cb_thrusters(data):
 
 def cb_sim_dvl_depth(data):
     dvl_sim = data.poses[0]
-    
-    clarke_sim_position = dvl_sim.position
-    
-    clarke_sim_orientation = dvl_sim.orientation
 
-    clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
-    
-    dvl_quat = clarke_np_quat * gazebo_to_dvl
-    
+    #POSITION
+    clarke_sim_position = dvl_sim.position
     auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
-    
     dvl_auv_offset_rotated = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), np.array([auv_dvl_offset_x, auv_dvl_offset_y, auv_dvl_offset_z])) 
-    
     dvl_position = quaternion.rotate_vectors(gazebo_to_dvl.inverse(), auv_np_position) + dvl_auv_offset_rotated
+
+    #QUATERNION
+    clarke_sim_orientation = dvl_sim.orientation
+    clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
+    dvl_quat = gazebo_to_dvl * clarke_np_quat
+    dvl_quat = dvl_quat * gazebo_to_dvl.inverse()
+    angles = np.asarray(tf.transformations.euler_from_quaternion([dvl_quat.x, dvl_quat.y, dvl_quat.z, dvl_quat.w], 'rxyz')) * DEG_PER_RAD
 
     dvl_msg = DeadReckonReport()
 
     dvl_msg.x = dvl_position[0]
     dvl_msg.y = dvl_position[1]
     dvl_msg.z = dvl_position[2]
-    
     dvl_msg.std = 0.0
-    
     dvl_msg.status = 1
-
-    angles = np.asarray(tf.transformations.euler_from_quaternion([dvl_quat.x, dvl_quat.y, dvl_quat.z, dvl_quat.w], 'rxyz')) * DEG_PER_RAD
-
     dvl_msg.roll = angles[0]
     dvl_msg.pitch = angles[1]
     dvl_msg.yaw = angles[2]
-    
     pub_dvl_sensor.publish(dvl_msg)
     
+    # DEPTH SENSOR
     clarke_msg = data.poses[0]
-
     depth_msg = clarke_msg.position.z
     pub_depth_sensor.publish(depth_msg)
 
