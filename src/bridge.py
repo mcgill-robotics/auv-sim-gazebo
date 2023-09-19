@@ -4,17 +4,15 @@ import rospy
 import numpy as np
 
 from auv_msgs.msg import ThrusterForces, DeadReckonReport
-from geometry_msgs.msg import PoseArray, Vector3, Quaternion, Pose
+from geometry_msgs.msg import PoseArray, Vector3, Quaternion
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
 import tf
+import quaternion
 
 
-DEG_PER_RAD = 180/np.pi
-ANGLE_CHANGE_TOL = 90 
-euler = np.array([0.0, 0.0, 0.0])
-
+DEG_PER_RAD = (180 / np.pi)
 
 def cb_thrusters(data):
     # TODO - this needs to be N/N*m not us - publish from propulsion
@@ -28,55 +26,93 @@ def cb_thrusters(data):
     pub_t8.publish(data.HEAVE_STERN_PORT)
 
 
-def cb_sim_pose(data):
-    clarke_poses = data.poses[0]
-    clarke_position = clarke_poses.position
-    clarke_orientation = clarke_poses.orientation
-    pub_state_x.publish(clarke_position.x)
-    pub_state_y.publish(clarke_position.y)
-    pub_state_z.publish(clarke_position.z)
+def cb_sim_dvl_depth(data):
+    dvl_sim = data.poses[0]
+    
+    # DVL FRAME: NWU
 
-    pose = Pose()
-    pose.position.x = clarke_position.x
-    pose.position.y = clarke_position.y
-    pose.position.z = clarke_position.z
-    pose.orientation = clarke_orientation
-    pub_pose.publish(pose)
+    #DVL POSITION
+    clarke_sim_position = dvl_sim.position
+    auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
+    dvl_auv_offset_rotated = quaternion.rotate_vectors(gazebo_to_NED_dvl.inverse(), np.array([auv_dvl_offset_x, auv_dvl_offset_y, auv_dvl_offset_z])) 
+    dvl_position = quaternion.rotate_vectors(gazebo_to_NED_dvl.inverse(), auv_np_position) + dvl_auv_offset_rotated
 
-    q = np.array([clarke_orientation.x, clarke_orientation.y, clarke_orientation.z, clarke_orientation.w])
-    conversion = tf.transformations.euler_from_quaternion(q, 'rxyz')
-    theta_x = conversion[0]
-    theta_y = conversion[1]
-    theta_z = conversion[2]
+    #DVL QUATERNION
+    clarke_sim_orientation = dvl_sim.orientation
+    clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
+    dvl_quat = gazebo_to_NED_dvl * clarke_np_quat
+    dvl_quat = dvl_quat * gazebo_to_NED_dvl.inverse()
+    angles = np.asarray(tf.transformations.euler_from_quaternion([dvl_quat.x, dvl_quat.y, dvl_quat.z, dvl_quat.w], 'rxyz')) * DEG_PER_RAD
 
-    angles = np.array([theta_x, theta_y, theta_z])*DEG_PER_RAD
+    dvl_msg = DeadReckonReport()
 
-    for i in range(3):
-            if angles[i] - euler[i] > ANGLE_CHANGE_TOL:
-                euler[i] = angles[i] - 360
-            elif euler[i] - angles[i] > ANGLE_CHANGE_TOL:
-                euler[i] = angles[i] + 360
-            else:
-                euler[i] = angles[i]
-
-    pub_state_theta_x.publish(euler[0])
-    pub_state_theta_y.publish(euler[1])
-    pub_state_theta_z.publish(euler[2])
+    dvl_msg.x = dvl_position[0]
+    dvl_msg.y = dvl_position[1]
+    dvl_msg.z = dvl_position[2]
+    dvl_msg.std = 0.0
+    dvl_msg.status = 1
+    dvl_msg.roll = angles[0]
+    dvl_msg.pitch = angles[1]
+    dvl_msg.yaw = angles[2]
+    pub_dvl_sensor.publish(dvl_msg)
+    
+    # DEPTH FRAME: NWU
+    # DEPTH SENSOR
+    clarke_msg = data.poses[0]
+    depth_msg = clarke_msg.position.z
+    pub_depth_sensor.publish(depth_msg)
 
 def cb_sim_imu(data):
-    # TODO - attach imu link to preserve orientation
-    gyro = Vector3(-data.angular_velocity.z, data.angular_velocity.y, data.angular_velocity.x)
-    pub_imu_angular_vel.publish(gyro)
+    # IMU FRAME:
+    #   x: down
+    #   y: east
+    #   z: south
+    sbg_quat_msg = SbgEkfQuat()
     
-    sbg_quat = SbgEkfQuat()
-    quat = Quaternion(-data.orientation.z, data.orientation.y, data.orientation.x, data.orientation.w)
-    sbg_quat.quaternion = quat
-    pub_imu_quat.publish(sbg_quat)
+    clarke_np_quat = np.quaternion(data.orientation.w, data.orientation.x, data.orientation.y, data.orientation.z)
+
+    imu_quat = gazebo_to_NED_imu * clarke_np_quat * gazebo_to_NED_imu.inverse()
+    angles = np.asarray(tf.transformations.euler_from_quaternion([imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w], 'rxyz'))
+    imu_quat_tf = tf.transformations.quaternion_from_euler(-angles[0], angles[1], -angles[2])
+    imu_quat = np.quaternion(imu_quat_tf[3], imu_quat_tf[0], imu_quat_tf[1], imu_quat_tf[2])
+    sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w) 
     
+    sbg_data_msg = SbgImuData()
+    
+    ang_vel = quaternion.rotate_vectors(gazebo_to_NED_imu.inverse(), np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
+    sbg_data_msg.gyro = Vector3(ang_vel[0], ang_vel[1], ang_vel[2])
+
+    pub_imu_quat_sensor.publish(sbg_quat_msg)
+    pub_imu_data_sensor.publish(sbg_data_msg)
 
 if __name__ == '__main__':
 
     rospy.init_node('bridge')
+    
+    q_dvl_auv_w = rospy.get_param("~q_dvl_auv_w")
+    q_dvl_auv_x = rospy.get_param("~q_dvl_auv_x")
+    q_dvl_auv_y = rospy.get_param("~q_dvl_auv_y")
+    q_dvl_auv_z = rospy.get_param("~q_dvl_auv_z")
+    
+    auv_dvl_offset_x = rospy.get_param("~auv_dvl_offset_x")
+    auv_dvl_offset_y = rospy.get_param("~auv_dvl_offset_y")
+    auv_dvl_offset_z = rospy.get_param("~auv_dvl_offset_z")
+    
+    q_imu_auv_w = rospy.get_param("~q_imu_auv_w")
+    q_imu_auv_x = rospy.get_param("~q_imu_auv_x")
+    q_imu_auv_y = rospy.get_param("~q_imu_auv_y")
+    q_imu_auv_z = rospy.get_param("~q_imu_auv_z")
+    
+    # REFERENCE FRAME DEFINITIONS
+    
+    NWU_to_NED = np.quaternion(0, 1, 0, 0)
+
+    q_imu_auv = np.quaternion(q_imu_auv_w, q_imu_auv_x, q_imu_auv_y, q_imu_auv_z)
+    imu_gazebo_to_NWU = np.quaternion(0, -0.7071068, 0, 0.7071068)
+    gazebo_to_NED_imu = imu_gazebo_to_NWU * q_imu_auv * NWU_to_NED
+
+    q_dvl_auv = np.quaternion(q_dvl_auv_w, q_dvl_auv_x, q_dvl_auv_y, q_dvl_auv_z)
+    gazebo_to_NED_dvl = q_dvl_auv * NWU_to_NED
 
     # simulate propulsion thrusters
     pub_t1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)
@@ -88,27 +124,15 @@ if __name__ == '__main__':
     pub_t7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     pub_t8 = rospy.Publisher('/model/clarke/joint/thruster8_joint/cmd_pos', Float64, queue_size=1)
     rospy.Subscriber('propulsion/thruster_forces', ThrusterForces, cb_thrusters)
+    
+    pub_dvl_sensor = rospy.Publisher('dead_reckon_report', DeadReckonReport, queue_size=1)
 
-    # simulate state_estimation sensors
-    pub_state_x = rospy.Publisher('state_x', Float64, queue_size=1)
-    pub_state_y = rospy.Publisher('state_y', Float64, queue_size=1)
-    pub_state_z = rospy.Publisher('state_z', Float64, queue_size=1)
-    pub_state_theta_x = rospy.Publisher('state_theta_x', Float64, queue_size=1)
-    pub_state_theta_y = rospy.Publisher('state_theta_y', Float64, queue_size=1)
-    pub_state_theta_z = rospy.Publisher('state_theta_z', Float64, queue_size=1)
-    pub_pose = rospy.Publisher('pose', Pose, queue_size=1)
+    pub_depth_sensor = rospy.Publisher('depth', Float64, queue_size=1)
 
-    pub_y_pid = rospy.Publisher('y_setpoint', Float64, queue_size=1)
-    pub_x_pid = rospy.Publisher('x_setpoint', Float64, queue_size=1)
-    pub_z_pid = rospy.Publisher('z_setpoint', Float64, queue_size=1)
-    pub_theta_x_pid = rospy.Publisher('theta_x_setpoint', Float64, queue_size=1)
-    pub_theta_y_pid = rospy.Publisher('theta_y_setpoint', Float64, queue_size=1)
-    pub_theta_z_pid = rospy.Publisher('theta_z_setpoint', Float64, queue_size=1)
-
-    pub_imu_quat = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
-    pub_imu_angular_vel = rospy.Publisher('angular_velocity', Vector3, queue_size=1)
+    pub_imu_quat_sensor = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
+    pub_imu_data_sensor = rospy.Publisher('sbg/imu_data', SbgImuData, queue_size=1)
 
     rospy.Subscriber('/imu', Imu, cb_sim_imu)
-    rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, cb_sim_pose)
+    rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, cb_sim_dvl_depth)
 
     rospy.spin()
