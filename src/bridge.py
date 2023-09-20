@@ -74,14 +74,12 @@ def cb_sim_imu(data):
     q_gazeboImuRef_imu = q_gazeboImuRef_gazeboImu * q_gazeboImu_imu
     q_NED_imu = q_NED_NWU * q_NWU_gazeboImuRef * q_gazeboImuRef_imu
 
-    print(q_NED_imu)
-
     sbg_quat_msg.quaternion = Quaternion(q_NED_imu.x, q_NED_imu.y, q_NED_imu.z, q_NED_imu.w)
 
 
     sbg_data_msg = SbgImuData()
     
-    ang_vel = quaternion.rotate_vectors(q_gazeboImu_imu, np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
+    ang_vel = quaternion.rotate_vectors(q_gazeboImu_imu.inverse(), np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
     sbg_data_msg.gyro = Vector3(ang_vel[0], ang_vel[1], ang_vel[2])
 
     pub_imu_quat_sensor.publish(sbg_quat_msg)
