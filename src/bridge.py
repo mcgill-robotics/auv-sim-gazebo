@@ -27,6 +27,7 @@ def cb_thrusters(data):
 
 
 def cb_sim_dvl_depth(data):
+    return
     dvl_sim = data.poses[0]
     
     # DVL FRAME: NWU
@@ -68,18 +69,19 @@ def cb_sim_imu(data):
     #   y: east
     #   z: south
     sbg_quat_msg = SbgEkfQuat()
-    
-    clarke_np_quat = np.quaternion(data.orientation.w, data.orientation.x, data.orientation.y, data.orientation.z)
 
-    imu_quat = q_gazebo_imu_NED * clarke_np_quat * q_gazebo_imu_NED.inverse()
-    angles = np.asarray(tf.transformations.euler_from_quaternion([imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w], 'rxyz'))
-    imu_quat_tf = tf.transformations.quaternion_from_euler(-angles[0], angles[1], -angles[2])
-    imu_quat = np.quaternion(imu_quat_tf[3], imu_quat_tf[0], imu_quat_tf[1], imu_quat_tf[2])
-    sbg_quat_msg.quaternion = Quaternion(imu_quat.x, imu_quat.y, imu_quat.z, imu_quat.w) 
-    
+    q_gazeboImuRef_gazeboImu = np.quaternion(data.orientation.w, data.orientation.x, data.orientation.y, data.orientation.z)
+    q_gazeboImuRef_imu = q_gazeboImuRef_gazeboImu * q_gazeboImu_imu
+    q_NED_imu = q_NED_NWU * q_NWU_gazeboImuRef * q_gazeboImuRef_imu
+
+    print(q_NED_imu)
+
+    sbg_quat_msg.quaternion = Quaternion(q_NED_imu.x, q_NED_imu.y, q_NED_imu.z, q_NED_imu.w)
+
+
     sbg_data_msg = SbgImuData()
     
-    ang_vel = quaternion.rotate_vectors(q_gazebo_imu_NED.inverse(), np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
+    ang_vel = quaternion.rotate_vectors(q_gazeboImu_imu, np.array([data.angular_velocity.x, data.angular_velocity.y, data.angular_velocity.z]))
     sbg_data_msg.gyro = Vector3(ang_vel[0], ang_vel[1], ang_vel[2])
 
     pub_imu_quat_sensor.publish(sbg_quat_msg)
@@ -105,14 +107,16 @@ if __name__ == '__main__':
     
     # REFERENCE FRAME DEFINITIONS
     
-    q_NWU_NED = np.quaternion(0, 1, 0, 0)
+    q_NED_NWU = np.quaternion(0, 1, 0, 0)
 
     q_imu_auv = np.quaternion(q_imu_auv_w, q_imu_auv_x, q_imu_auv_y, q_imu_auv_z)
-    q_gazebo_imu_NWU = np.quaternion(0, -0.7071068, 0, 0.7071068)
-    q_gazebo_imu_NED = q_gazebo_imu_NWU * q_imu_auv * q_NWU_NED
+
+    q_auv_gazeboImu = np.quaternion(0, -0.70710678, 0, 0.70710678)
+    q_NWU_gazeboImuRef = np.quaternion(0, -0.70710678, 0, 0.70710678)
+    q_NED_NWU = np.quaternion(0,1,0,0)
+    q_gazeboImu_imu = q_auv_gazeboImu.inverse() * q_imu_auv.inverse()
 
     q_dvl_auv = np.quaternion(q_dvl_auv_w, q_dvl_auv_x, q_dvl_auv_y, q_dvl_auv_z)
-    q_gazebo_dvl_NED = q_dvl_auv * q_NWU_NED
 
     # simulate propulsion thrusters
     pub_t1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)

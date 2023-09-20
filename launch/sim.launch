@@ -1,6 +1,6 @@
 <launch>
-    <arg name="q_imu_auv_w" default="1.0" />
-	<arg name="q_imu_auv_x" default="0.0" />
+    <arg name="q_imu_auv_w" default="0.0" />
+	<arg name="q_imu_auv_x" default="1.0" />
 	<arg name="q_imu_auv_y" default="0.0" />
 	<arg name="q_imu_auv_z" default="0.0" />
 
