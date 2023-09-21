@@ -27,40 +27,37 @@ def cb_thrusters(data):
 
 
 def cb_sim_dvl_depth(data):
-    return
-    dvl_sim = data.poses[0]
     
-    # DVL FRAME: NWU
+    pose_NWU_auv = data.poses[0]
+    # Convert to an NED pose for testing sake
 
     #DVL POSITION
-    clarke_sim_position = dvl_sim.position
-    auv_np_position = np.array([clarke_sim_position.x, clarke_sim_position.y, clarke_sim_position.z])
-    dvl_auv_offset_rotated = quaternion.rotate_vectors(q_gazebo_dvl_NED.inverse(), np.array([auv_dvl_offset_x, auv_dvl_offset_y, auv_dvl_offset_z])) 
-    dvl_position = quaternion.rotate_vectors(q_gazebo_dvl_NED.inverse(), auv_np_position) + dvl_auv_offset_rotated
+    position_NWU_auv = np.array([pose_NWU_auv.position.x, pose_NWU_auv.position.y, pose_NWU_auv.position.z])
+    position_auv_dvlref = quaternion.rotate_vectors(q_NWU_dvlref.inverse(), position_NWU_auv)
+    dvl_offset_NWU = quaternion.rotate_vectors(q_NWU_dvlref, np.array([auv_dvl_offset_x, auv_dvl_offset_y, auv_dvl_offset_z]))
+    position_dvl_dvlref = position_auv_dvlref + dvl_offset_NWU
 
     #DVL QUATERNION
-    clarke_sim_orientation = dvl_sim.orientation
-    clarke_np_quat = np.quaternion(clarke_sim_orientation.w, clarke_sim_orientation.x, clarke_sim_orientation.y, clarke_sim_orientation.z)
-    dvl_quat = q_gazebo_dvl_NED * clarke_np_quat
-    dvl_quat = dvl_quat * q_gazebo_dvl_NED.inverse()
-    angles = np.asarray(tf.transformations.euler_from_quaternion([dvl_quat.x, dvl_quat.y, dvl_quat.z, dvl_quat.w], 'rxyz')) * DEG_PER_RAD
+    q_NWU_auv = np.quaternion(pose_NWU_auv.orientation.w, pose_NWU_auv.orientation.x, pose_NWU_auv.orientation.y, pose_NWU_auv.orientation.z)
+    q_dvlref_dvl = q_NWU_dvlref.inverse() * q_NWU_auv * q_dvl_auv.inverse()
+    euler_dvlref_auv = quaternion.as_euler_angles(q_dvlref_dvl)
+
 
     dvl_msg = DeadReckonReport()
 
-    dvl_msg.x = dvl_position[0]
-    dvl_msg.y = dvl_position[1]
-    dvl_msg.z = dvl_position[2]
+    dvl_msg.x = position_dvl_dvlref[0]
+    dvl_msg.y = position_dvl_dvlref[1]
+    dvl_msg.z = position_dvl_dvlref[2]
     dvl_msg.std = 0.0
     dvl_msg.status = 1
-    dvl_msg.roll = angles[0]
-    dvl_msg.pitch = angles[1]
-    dvl_msg.yaw = angles[2]
+    dvl_msg.roll = euler_dvlref_auv[0]
+    dvl_msg.pitch = euler_dvlref_auv[1]
+    dvl_msg.yaw = euler_dvlref_auv[2]
     pub_dvl_sensor.publish(dvl_msg)
     
-    # DEPTH FRAME: NWU
-    # DEPTH SENSOR
-    clarke_msg = data.poses[0]
-    depth_msg = clarke_msg.position.z
+    # # DEPTH FRAME: NWU
+    # # DEPTH SENSOR
+    depth_msg = pose_NWU_auv.position.z
     pub_depth_sensor.publish(depth_msg)
 
 def cb_sim_imu(data):
@@ -106,12 +103,12 @@ if __name__ == '__main__':
     # REFERENCE FRAME DEFINITIONS
     
     q_NED_NWU = np.quaternion(0, 1, 0, 0)
+    q_NWU_dvlref = np.quaternion(0,1,0,0)
 
     q_imu_auv = np.quaternion(q_imu_auv_w, q_imu_auv_x, q_imu_auv_y, q_imu_auv_z)
 
     q_auv_gazeboImu = np.quaternion(0, -0.70710678, 0, 0.70710678)
     q_NWU_gazeboImuRef = np.quaternion(0, -0.70710678, 0, 0.70710678)
-    q_NED_NWU = np.quaternion(0,1,0,0)
     q_gazeboImu_imu = q_auv_gazeboImu.inverse() * q_imu_auv.inverse()
 
     q_dvl_auv = np.quaternion(q_dvl_auv_w, q_dvl_auv_x, q_dvl_auv_y, q_dvl_auv_z)
