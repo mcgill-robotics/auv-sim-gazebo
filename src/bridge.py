@@ -50,9 +50,9 @@ def cb_sim_dvl_depth(data):
     dvl_msg.z = position_dvl_dvlref[2]
     dvl_msg.std = 0.0
     dvl_msg.status = 1
-    dvl_msg.roll = euler_dvlref_auv[0]
-    dvl_msg.pitch = euler_dvlref_auv[1]
-    dvl_msg.yaw = euler_dvlref_auv[2]
+    dvl_msg.roll = euler_dvlref_auv[0] * DEG_PER_RAD
+    dvl_msg.pitch = euler_dvlref_auv[1] * DEG_PER_RAD
+    dvl_msg.yaw = euler_dvlref_auv[2] * DEG_PER_RAD
     pub_dvl_sensor.publish(dvl_msg)
     
     # # DEPTH FRAME: NWU
@@ -86,6 +86,8 @@ if __name__ == '__main__':
 
     rospy.init_node('bridge')
     
+    DEG_PER_RAD = 180 / np.pi
+
     q_dvl_auv_w = rospy.get_param("~q_dvl_auv_w")
     q_dvl_auv_x = rospy.get_param("~q_dvl_auv_x")
     q_dvl_auv_y = rospy.get_param("~q_dvl_auv_y")
