@@ -8,7 +8,7 @@ from geometry_msgs.msg import PoseArray, Vector3, Quaternion
 from sbg_driver.msg import SbgImuData, SbgEkfQuat
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
-import tf
+from tf import transformations
 import quaternion
 
 
@@ -40,7 +40,8 @@ def cb_sim_dvl_depth(data):
     #DVL QUATERNION
     q_NWU_auv = np.quaternion(pose_NWU_auv.orientation.w, pose_NWU_auv.orientation.x, pose_NWU_auv.orientation.y, pose_NWU_auv.orientation.z)
     q_dvlref_dvl = q_NWU_dvlref.inverse() * q_NWU_auv * q_dvl_auv.inverse()
-    euler_dvlref_auv = quaternion.as_euler_angles(q_dvlref_dvl)
+    # euler_dvlref_auv = quaternion.as_euler_angles(q_dvlref_dvl)
+    euler_dvlref_dvl = transformations.euler_from_quaternion([q_dvlref_dvl.x, q_dvlref_dvl.y, q_dvlref_dvl.z, q_dvlref_dvl.w])
 
 
     dvl_msg = DeadReckonReport()
@@ -50,9 +51,9 @@ def cb_sim_dvl_depth(data):
     dvl_msg.z = position_dvl_dvlref[2]
     dvl_msg.std = 0.0
     dvl_msg.status = 1
-    dvl_msg.roll = euler_dvlref_auv[0] * DEG_PER_RAD
-    dvl_msg.pitch = euler_dvlref_auv[1] * DEG_PER_RAD
-    dvl_msg.yaw = euler_dvlref_auv[2] * DEG_PER_RAD
+    dvl_msg.roll = euler_dvlref_dvl[0] * DEG_PER_RAD
+    dvl_msg.pitch = euler_dvlref_dvl[1] * DEG_PER_RAD
+    dvl_msg.yaw = euler_dvlref_dvl[2] * DEG_PER_RAD
     pub_dvl_sensor.publish(dvl_msg)
     
     # # DEPTH FRAME: NWU
