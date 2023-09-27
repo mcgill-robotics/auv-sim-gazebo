@@ -1,6 +1,4 @@
 <launch>
-
-
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
 	    args="-s -r $(find auv-sim-gazebo)/worlds/qualifying.sdf">
@@ -8,5 +6,4 @@
     </node>
 
     <include file="$(find auv-sim-gazebo)/launch/sim.launch"/>
-
 </launch>
