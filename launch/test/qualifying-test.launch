@@ -5,5 +5,12 @@
         <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(find auv-sim-gazebo)"/>
     </node>
 
+    <node name="bridge_clock" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="world/quali/clock@rosgraph_msgs/Clock@ignition.msgs.Clock">
+        <remap from="world/quali/clock" to="/clock"/>
+    </node>
+
+    <param name="/use_sim_time" value="true" />
+
     <include file="$(find auv-sim-gazebo)/launch/sim.launch"/>
 </launch>
