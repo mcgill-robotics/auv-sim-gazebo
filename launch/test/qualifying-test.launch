@@ -12,5 +12,7 @@
 
     <param name="/use_sim_time" value="true" />
 
-    <include file="$(find auv-sim-gazebo)/launch/sim.launch"/>
+    <include file="$(find auv-sim-gazebo)/launch/sim.launch">
+        <arg name="vision" value="false" />
+    </include>
 </launch>
