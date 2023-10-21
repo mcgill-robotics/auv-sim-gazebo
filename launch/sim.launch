@@ -111,11 +111,11 @@
 
 
     <!-- <node name="rostopic" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-	 agrs="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked">
+	 agrs="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked"> -->
 
 
-   <! -- <node name=ros_ign_bridge" pkg="rostopic" type="parameter_bridge" output="screen"
-	 agrs="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked">
+   <!-- <node name=ros_ign_bridge" pkg="rostopic" type="parameter_bridge" output="screen"
+	 agrs="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked"> -->
 	
     <node 
         name="bridge_py" pkg="auv-sim-gazebo" type="bridge.py" output="screen">
