@@ -82,14 +82,10 @@
         args="/vision/front_cam/color/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node>
 
-     	<node name="ign_to_ros" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-   	args="/Clock@rosgraph_msgs/Clock@ignition.msgs.Clock">
+    <node name="ign_to_ros" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
+        args="/clock@rosgraph_msgs/Clock[ignition.msgs.Clock">
 	</node>
-<!--
-	<node name="ros_to_ign" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-   	args="/Clock@ignition.msgs.Clock@rosgraph_msgs/Clock">
-	</node>
--->
+    
     <node name="bridge_down_cam" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
         args="/vision/down_cam/image_raw@sensor_msgs/Image@ignition.msgs.Image">
     </node> 
