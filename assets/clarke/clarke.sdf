@@ -71,13 +71,14 @@
         <sensor name="front_cam_depth" type="depth_camera">
           <pose>0 0 -0.2 3.13159 1.5708 0</pose>
           <camera>
-            <horizontal_fov>1.52</horizontal_fov> <!-- 87 degrees -->
             <image>
               <width>1280</width>
               <height>720</height>
             </image>
             <lens>
               <intrinsics>
+                <fx>673.36</fx>
+                <fy>673.36</fy>
                 <cx>360</cx>
                 <cy>640</cy>
               </intrinsics>
@@ -93,13 +94,14 @@
         <sensor name="front_cam_rgb" type="camera">
           <pose>0 0 -0.2 3.13159 1.5708 0</pose>
           <camera>
-            <horizontal_fov>1.52</horizontal_fov> <!-- 87 degrees -->
             <image>
               <width>1280</width>
               <height>720</height>
             </image>
             <lens>
               <intrinsics>
+                <fx>673.36</fx>
+                <fy>673.36</fy>
                 <cx>360</cx>
                 <cy>640</cy>
               </intrinsics>
