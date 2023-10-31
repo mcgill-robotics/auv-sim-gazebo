@@ -77,6 +77,8 @@
             </image>
             <lens>
               <intrinsics>
+                <!-- Focal length - overrides horizontal FOV -->
+                <!-- 0.5 * (width/(tan(FOV/2))) -->
                 <fx>673.36</fx>
                 <fy>673.36</fy>
                 <cx>180</cx>
@@ -100,6 +102,8 @@
             </image>
             <lens>
               <intrinsics>
+                <!-- Focal length - overrides horizontal FOV -->
+                <!-- 0.5 * (width/(tan(FOV/2))) -->
                 <fx>673.36</fx>
                 <fy>673.36</fy>
                 <cx>180</cx>
