@@ -95,11 +95,6 @@
         <remap from="vision/front_cam/color/camera_info" to="/vision/front_cam/aligned_depth_to_color/camera_info"/>
     </node> 
 
-    <!-- <node name="bridge_point_cloud" pkg="ros_ign_bridge" type="parameter_bridge" output="screen"
-        args="vision/front_cam/depth/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked">
-        <remap from="vision/front_cam/depth/points" to="vision/front_cam/point_cloud"/>
-    </node>  -->
-
     <node 
         name="bridge_py" pkg="auv-sim-gazebo" type="bridge.py" output="screen">
 		<param name="q_imu_auv_w" value="$(arg q_imu_auv_w)" />
