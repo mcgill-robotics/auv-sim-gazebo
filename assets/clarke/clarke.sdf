@@ -72,19 +72,15 @@
           <pose>0 0 -0.2 3.13159 1.5708 0</pose>
           <camera>
             <image>
-              <width>640</width>
-              <height>360</height>
-            </image>
-            <lens>
-              <intrinsics>
-                <!-- Focal length - overrides horizontal FOV -->
-                <!-- (width/2)/(tan(FOV/2)) -->
-                <fx>673.36</fx>
-                <fy>673.36</fy>
-                <cx>180</cx>
-                <cy>320</cy>
-              </intrinsics>
-            </lens>
+              <width>512</width>
+              <height>341</height>
+             </image>
+             <lens>
+               <intrinsics>
+                 <cx>170</cx>
+                 <cy>256</cy>
+               </intrinsics>
+             </lens>
           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
@@ -97,20 +93,16 @@
           <pose>0 0 -0.2 3.13159 1.5708 0</pose>
           <camera>
             <image>
-              <width>640</width>
-              <height>360</height>
-            </image>
-            <lens>
-              <intrinsics>
-                <!-- Focal length - overrides horizontal FOV -->
-                <!-- (width/2)/(tan(FOV/2)) -->
-                <fx>673.36</fx>
-                <fy>673.36</fy>
-                <cx>180</cx>
-                <cy>320</cy>
-              </intrinsics>
-            </lens>
-          </camera>
+              <width>512</width>
+              <height>341</height>
+             </image>
+             <lens>
+               <intrinsics>
+                 <cx>170</cx>
+                 <cy>256</cy>
+               </intrinsics>
+             </lens>
+           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
