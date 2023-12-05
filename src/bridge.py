@@ -125,7 +125,7 @@ if __name__ == '__main__':
     pub_t6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pub_t7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     pub_t8 = rospy.Publisher('/model/clarke/joint/thruster8_joint/cmd_pos', Float64, queue_size=1)
-    rospy.Subscriber('propulsion/thruster_forces', ThrusterForces, cb_thrusters)
+    rospy.Subscriber('/propulsion/forces', ThrusterForces, cb_thrusters)
     
     pub_dvl_sensor = rospy.Publisher('/sensors/dvl/pose', DeadReckonReport, queue_size=1)
 
