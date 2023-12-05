@@ -129,7 +129,7 @@ if __name__ == '__main__':
     
     pub_dvl_sensor = rospy.Publisher('/sensors/dvl/pose', DeadReckonReport, queue_size=1)
 
-    pub_depth_sensor = rospy.Publisher('/sensors/depth_sensor/z', Float64, queue_size=1)
+    pub_depth_sensor = rospy.Publisher('/sensors/depth/z', Float64, queue_size=1)
 
     pub_imu_quat_sensor = rospy.Publisher('/sensors/imu/quaternion', SbgEkfQuat, queue_size=1)
     pub_imu_data_sensor = rospy.Publisher('/sensors/imu/data', SbgImuData, queue_size=1)
