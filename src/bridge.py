@@ -132,7 +132,7 @@ if __name__ == '__main__':
     pub_depth_sensor = rospy.Publisher('/sensors/depth/z', Float64, queue_size=1)
 
     pub_imu_quat_sensor = rospy.Publisher('/sensors/imu/quaternion', SbgEkfQuat, queue_size=1)
-    pub_imu_data_sensor = rospy.Publisher('/sensors/imu/data', SbgImuData, queue_size=1)
+    pub_imu_data_sensor = rospy.Publisher('/sensors/imu/angular_velocity', SbgImuData, queue_size=1)
 
     rospy.Subscriber('/imu', Imu, cb_sim_imu)
     rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, cb_sim_dvl_depth)
