@@ -125,14 +125,14 @@ if __name__ == '__main__':
     pub_t6 = rospy.Publisher('/model/clarke/joint/thruster6_joint/cmd_pos', Float64, queue_size=1)
     pub_t7 = rospy.Publisher('/model/clarke/joint/thruster7_joint/cmd_pos', Float64, queue_size=1)
     pub_t8 = rospy.Publisher('/model/clarke/joint/thruster8_joint/cmd_pos', Float64, queue_size=1)
-    rospy.Subscriber('propulsion/thruster_forces', ThrusterForces, cb_thrusters)
+    rospy.Subscriber('/propulsion/forces', ThrusterForces, cb_thrusters)
     
-    pub_dvl_sensor = rospy.Publisher('dead_reckon_report', DeadReckonReport, queue_size=1)
+    pub_dvl_sensor = rospy.Publisher('/sensors/dvl/pose', DeadReckonReport, queue_size=1)
 
-    pub_depth_sensor = rospy.Publisher('depth', Float64, queue_size=1)
+    pub_depth_sensor = rospy.Publisher('/sensors/depth/z', Float64, queue_size=1)
 
-    pub_imu_quat_sensor = rospy.Publisher('sbg/ekf_quat', SbgEkfQuat, queue_size=1)
-    pub_imu_data_sensor = rospy.Publisher('sbg/imu_data', SbgImuData, queue_size=1)
+    pub_imu_quat_sensor = rospy.Publisher('/sensors/imu/quaternion', SbgEkfQuat, queue_size=1)
+    pub_imu_data_sensor = rospy.Publisher('/sensors/imu/angular_velocity', SbgImuData, queue_size=1)
 
     rospy.Subscriber('/imu', Imu, cb_sim_imu)
     rospy.Subscriber('/world/quali/dynamic_pose/info', PoseArray, cb_sim_dvl_depth)
