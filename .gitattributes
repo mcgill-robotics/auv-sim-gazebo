@@ -1,1 +1,6 @@
 * text eol=lf
+*.png binary
+*.blend binary
+*.pt binary
+*.blend1 binary
+*.material binary
