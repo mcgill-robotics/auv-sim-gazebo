@@ -88,27 +88,29 @@ if __name__ == '__main__':
     rospy.init_node('bridge')
     
     DEG_PER_RAD = 180 / np.pi
+    Q_IMUNOMINAL_AUV = np.quaternion(0, 1, 0, 0)
 
-    q_dvl_auv_w = rospy.get_param("~q_dvl_auv_w")
-    q_dvl_auv_x = rospy.get_param("~q_dvl_auv_x")
-    q_dvl_auv_y = rospy.get_param("~q_dvl_auv_y")
-    q_dvl_auv_z = rospy.get_param("~q_dvl_auv_z")
+    q_dvl_auv_w = rospy.get_param("q_dvl_auv_w")
+    q_dvl_auv_x = rospy.get_param("q_dvl_auv_x")
+    q_dvl_auv_y = rospy.get_param("q_dvl_auv_y")
+    q_dvl_auv_z = rospy.get_param("q_dvl_auv_z")
     
-    auv_dvl_offset_x = rospy.get_param("~auv_dvl_offset_x")
-    auv_dvl_offset_y = rospy.get_param("~auv_dvl_offset_y")
-    auv_dvl_offset_z = rospy.get_param("~auv_dvl_offset_z")
+    auv_dvl_offset_x = rospy.get_param("auv_dvl_offset_x")
+    auv_dvl_offset_y = rospy.get_param("auv_dvl_offset_y")
+    auv_dvl_offset_z = rospy.get_param("auv_dvl_offset_z")
     
-    q_imu_auv_w = rospy.get_param("~q_imu_auv_w")
-    q_imu_auv_x = rospy.get_param("~q_imu_auv_x")
-    q_imu_auv_y = rospy.get_param("~q_imu_auv_y")
-    q_imu_auv_z = rospy.get_param("~q_imu_auv_z")
+    q_imunominal_imu_w = rospy.get_param("q_imunominal_imu_w")
+    q_imunominal_imu_x = rospy.get_param("q_imunominal_imu_x")
+    q_imunominal_imu_y = rospy.get_param("q_imunominal_imu_y")
+    q_imunominal_imu_z = rospy.get_param("q_imunominal_imu_z")
     
     # REFERENCE FRAME DEFINITIONS
     
     q_NED_NWU = np.quaternion(0, 1, 0, 0)
     q_NWU_dvlref = np.quaternion(0,1,0,0)
 
-    q_imu_auv = np.quaternion(q_imu_auv_w, q_imu_auv_x, q_imu_auv_y, q_imu_auv_z)
+    q_imunominal_imu = np.quaternion(q_imunominal_imu_w, q_imunominal_imu_x, q_imunominal_imu_y, q_imunominal_imu_z)
+    q_imu_auv = q_imunominal_imu.inverse() * Q_IMUNOMINAL_AUV
 
     q_auv_gazeboImu = np.quaternion(0, -0.70710678, 0, 0.70710678)
     q_NWU_gazeboImuRef = np.quaternion(0, -0.70710678, 0, 0.70710678)
