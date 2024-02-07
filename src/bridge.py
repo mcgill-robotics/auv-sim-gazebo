@@ -90,11 +90,13 @@ if __name__ == '__main__':
     DEG_PER_RAD = 180 / np.pi
     Q_IMUNOMINAL_AUV = np.quaternion(0, 1, 0, 0)
 
-    q_dvl_auv_w = rospy.get_param("q_dvl_auv_w")
-    q_dvl_auv_x = rospy.get_param("q_dvl_auv_x")
-    q_dvl_auv_y = rospy.get_param("q_dvl_auv_y")
-    q_dvl_auv_z = rospy.get_param("q_dvl_auv_z")
-    
+    q_dvlnominal_dvl_w = rospy.get_param("q_dvlnominal_dvl_w")
+    q_dvlnominal_dvl_x = rospy.get_param("q_dvlnominal_dvl_x")
+    q_dvlnominal_dvl_y = rospy.get_param("q_dvlnominal_dvl_y")
+    q_dvlnominal_dvl_z = rospy.get_param("q_dvlnominal_dvl_z")
+    q_dvlnominal_dvl = np.quaternion(q_dvlnominal_dvl_w,q_dvlnominal_dvl_x,q_dvlnominal_dvl_y,q_dvlnominal_dvl_z)  
+    q_dvlnominal_auv = np.quaternion(0,1,0,0)
+
     auv_dvl_offset_x = rospy.get_param("auv_dvl_offset_x")
     auv_dvl_offset_y = rospy.get_param("auv_dvl_offset_y")
     auv_dvl_offset_z = rospy.get_param("auv_dvl_offset_z")
@@ -116,7 +118,7 @@ if __name__ == '__main__':
     q_NWU_gazeboImuRef = np.quaternion(0, -0.70710678, 0, 0.70710678)
     q_gazeboImu_imu = q_auv_gazeboImu.inverse() * q_imu_auv.inverse()
 
-    q_dvl_auv = np.quaternion(q_dvl_auv_w, q_dvl_auv_x, q_dvl_auv_y, q_dvl_auv_z)
+    q_dvl_auv = q_dvlnominal_dvl.conjugate() * q_dvlnominal_auv
 
     # simulate propulsion thrusters
     pub_t1 = rospy.Publisher('/model/clarke/joint/thruster1_joint/cmd_pos', Float64, queue_size=1)
