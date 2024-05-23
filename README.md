@@ -39,7 +39,7 @@ Control the thruster 0 of Clarke to make it go forward/backwards:
 
 ### Known Issues
 
-#### Ogre2 Requires OpenGL > 3.3
+#### ogre Requires OpenGL > 3.3
 
 After fresh installation, trying to run gazebo (as below) may result in an error containing:
 
@@ -47,7 +47,7 @@ After fresh installation, trying to run gazebo (as below) may result in an error
 Unable to create the rendering window: OGRE EXCEPTION(3:RenderingAPIException): OpenGL 3.3 is not supported.
 ```
 
-It seems Ignition Fortress is using Ogre2 (rendering engine) which requires OpenGL > 3.3, 
+It seems Ignition Fortress is using ogre (rendering engine) which requires OpenGL > 3.3, 
 see [forum post](https://answers.gazebosim.org/question/27597/ignition-crashes-directly-after-start/). 
 
 ##### Sol. 1 - Use Ogre1 as render engine
