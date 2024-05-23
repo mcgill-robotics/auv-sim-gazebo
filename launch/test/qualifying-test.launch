@@ -1,7 +1,7 @@
 <launch>
     <node
 	    name="ign_gazebo" pkg="ros_ign_gazebo" type="ign_gazebo" output="screen" required="true"
-	    args="-s -r $(find auv-sim-gazebo)/worlds/qualifying.sdf">
+	    args="-s -r -v $(find auv-sim-gazebo)/worlds/qualifying.sdf">
         <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(find auv-sim-gazebo)"/>
     </node>
 
